@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Over.module.css';
 
-export default function Home() {
+export default function Over() {
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +10,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <h1>Launch screen</h1>
+        <h1>Game over screen</h1>
       </main>
     </div>
   );
