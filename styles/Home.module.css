@@ -1,0 +1,62 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: 1;
+}
+
+.bgIcons {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: 2;
+}
+
+.container main {
+  position: relative;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+}
+
+.container main * {
+  margin-bottom: 50px;
+}
+
+.container main h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.container main h3:first-of-type {
+  margin-bottom: 10px;
+}
+
+.container main h3:last-of-type {
+  margin-bottom: 0;
+}
+
+.samsung {
+  width: 400px;
+}
+
+.arcade {
+  width: 1400px;
+}
+
+.play {
+  width: 600px;
+}

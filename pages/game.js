@@ -5,6 +5,7 @@ import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
 
 export default function Game() {
+  const [timer, setTimer] = useState(60 * 1000);
   useEffect(() => {
     const tileSize = 32;
     const velocity = 2;
@@ -68,6 +69,9 @@ export default function Game() {
         ctx.fillText(text, 10, canvas.height / 2);
       }
     }
+    function decrementTimer() {
+      setTimer(timer - 1 * 1000);
+    }
     tileMap.setCanvasSize(canvas);
     setInterval(gameLoop, 1000 / 75);
   }, []);
@@ -79,7 +83,20 @@ export default function Game() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
+        <div className={styles.time}>
+          <h4>TIME REMAINING</h4>
+          <h1>47.07</h1>
+          {/* <h1>{timer}</h1> */}
+        </div>
         <canvas id='gameCanvas'></canvas>
+        <div className={styles.score}>
+          <h4>SCORE</h4>
+          <h1>10000</h1>
+          <br />
+          <br />
+          <h4>HIGH SCORE</h4>
+          <h1>18350</h1>
+        </div>
       </main>
     </div>
   );
