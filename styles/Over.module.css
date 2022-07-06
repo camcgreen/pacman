@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 2rem;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: 1;
+}
+
+.bgIcons {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: 2;
+}
+
+.container main {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container main * {
+  margin-bottom: 20px;
+}
+
+.container main h2 {
+  font-weight: 400;
+}
+
+.container main p {
+  font-size: 1rem;
+}
+
+.container main input {
+  width: 750px;
+  height: 100px;
+  border: none;
+  outline: none;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+  font-size: 3rem;
+  color: var(--colNavy);
+}
+
+.container main input:focus {
+  border: hotpink;
+}
+
+.inputs input {
+  width: 100px !important;
+  /* height: 100px; */
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+
+.inputs input:first-of-type {
+  color: var(--colPink);
+}
+
+.inputs input:nth-of-type(2) {
+  color: var(--colNavy);
+}
+
+.inputs input:last-of-type {
+  color: var(--colBlue);
+}
+
+.submit {
+  background-color: var(--colBlue);
+  color: white !important;
+  width: 325px !important;
+  font-size: 2rem !important;
+  height: 100px !important;
+}
+
+.over {
+  width: 90%;
+  margin-bottom: 80px !important;
+}

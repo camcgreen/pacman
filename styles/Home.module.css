@@ -50,13 +50,16 @@
 }
 
 .samsung {
-  width: 400px;
+  /* width: 400px; */
+  width: 25%;
 }
 
 .arcade {
-  width: 1400px;
+  /* width: 1400px; */
+  width: 90%;
 }
 
 .play {
-  width: 600px;
+  /* width: 600px; */
+  width: 50%;
 }
