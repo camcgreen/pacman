@@ -1,14 +1,46 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { router } from 'next/router';
+import Fullscreen from '../components/fullscreen';
 import styles from '../styles/Home.module.css';
+
+function handleJoystickInput() {
+  const gamepads = navigator.getGamepads();
+  if (gamepads[0]) {
+    const joystick = gamepads[0];
+    const buttonPressed =
+      joystick.buttons[0].pressed ||
+      joystick.buttons[1].pressed ||
+      joystick.buttons[2].pressed ||
+      joystick.buttons[3].pressed;
+    if (buttonPressed) {
+      router.push('/game');
+    }
+    window.requestAnimationFrame(handleJoystickInput);
+  }
+}
 
 export default function Home() {
   useEffect(() => {
-    // Update this to joystick controls once have a joystick to test with
-    document.onkeydown = (e) => {
-      router.push('/game');
-    };
+    window.addEventListener('gamepadconnected', function (e) {
+      //   if (
+      //     // e.gamepad.axes[0] !== 0 ||
+      //     // e.gamepad.axes[1] !== 0 ||
+      //     e.gamepad.buttons[0].pressed ||
+      //     e.gamepad.buttons[1].pressed ||
+      //     e.gamepad.buttons[2].pressed ||
+      //     e.gamepad.buttons[3].pressed
+      //   ) {
+      //     router.push('/game');
+      //   }
+      window.requestAnimationFrame(handleJoystickInput);
+    });
+    // remove this
+    // function moveToNext() {
+    //   router.push('/game');
+    //   window.removeEventListener('keydown', moveToNext);
+    // }
+    // window.addEventListener('keydown', moveToNext);
   }, []);
   return (
     <div className={styles.container}>
@@ -24,12 +56,14 @@ export default function Home() {
         <img src='/samsung.png' className={styles.samsung} />
         <img src='/arcade.png' className={styles.arcade} />
         <img src='/play.png' className={styles.play} />
-        <h3>MOVE JOYSTICK TO START PLAYING</h3>
+        {/* <h3>MOVE JOYSTICK TO START PLAYING</h3> */}
+        <h3>PRESS ANY BUTTON TO START PLAYING</h3>
         {/* <p>
           PLAYERS MUST BE 18 YEARS OLD OR OVER TO BE ELIGIBLE TO WIN A SAMSUNG
           HANDSET
         </p> */}
       </main>
+      <Fullscreen />
     </div>
   );
 }

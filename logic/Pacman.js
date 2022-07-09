@@ -1,5 +1,19 @@
 import MovingDirection from './MovingDirection.js';
 
+let gameWon = false;
+
+// window.addEventListener('gamepadconnected', (e) => {
+//   console.log('gamepad connected:');
+//   console.log(console.log(e.gamepad));
+// });
+
+// window.addEventListener('gamepaddisconnected', (e) => {
+//   console.log('gamepad disconnected:');
+//   console.log(console.log(e.gamepad));
+// });
+
+// function handleJoystickMovement(gamepads) {
+
 export default class Pacman {
   constructor(x, y, tileSize, velocity, tileMap) {
     this.x = x;
@@ -17,6 +31,8 @@ export default class Pacman {
     this.pacmanRotation = this.Rotation.right;
     // this.wakaSound = new Audio('sounds/waka.wav');
     this.wakaSound = new Audio('/sounds/waka.wav');
+    this.dotsEaten = 0;
+    // this.monstersEaten = 0;
 
     // this.powerDotSound = new Audio('sounds/power_dot.wav');
     this.powerDotSound = new Audio('/sounds/power_dot.wav');
@@ -30,6 +46,7 @@ export default class Pacman {
     this.madeFirstMove = false;
 
     document.addEventListener('keydown', this.#keydown);
+    window.requestAnimationFrame(this.handleJoystickMovement);
 
     this.#loadPacmanImages();
   }
@@ -44,7 +61,8 @@ export default class Pacman {
   draw(ctx, pause, enemies) {
     if (!pause) {
       this.#move();
-      this.#animate();
+      // this.#animate();
+      this.#changeSpriteDirection();
     }
     this.#eatDot();
     this.#eatPowerDot();
@@ -54,7 +72,7 @@ export default class Pacman {
 
     ctx.save();
     ctx.translate(this.x + size, this.y + size);
-    ctx.rotate((this.pacmanRotation * 90 * Math.PI) / 180);
+    // ctx.rotate((this.pacmanRotation * 90 * Math.PI) / 180);
     ctx.drawImage(
       this.pacmanImages[this.pacmanImageIndex],
       -size,
@@ -77,19 +95,20 @@ export default class Pacman {
   #loadPacmanImages() {
     const pacmanImage1 = new Image();
     // pacmanImage1.src = "images/pac0.png";
-    pacmanImage1.src = '/pac0.png';
+    // pacmanImage1.src = '/pac0.png';
+    pacmanImage1.src = '/pacman-new-right.png';
 
     const pacmanImage2 = new Image();
     // pacmanImage2.src = "images/pac1.png";
-    pacmanImage2.src = '/pac1.png';
+    pacmanImage2.src = '/pacman-new-left.png';
 
     const pacmanImage3 = new Image();
     // pacmanImage3.src = "images/pac2.png";
-    pacmanImage3.src = '/pac2.png';
+    pacmanImage3.src = '/pacman-new-up.png';
 
     const pacmanImage4 = new Image();
     // pacmanImage4.src = "images/pac1.png";
-    pacmanImage4.src = '/pac1.png';
+    pacmanImage4.src = '/pacman-new-down.png';
 
     this.pacmanImages = [
       pacmanImage1,
@@ -131,6 +150,48 @@ export default class Pacman {
       this.madeFirstMove = true;
     }
   };
+
+  handleJoystickMovement() {
+    const gamepads = navigator.getGamepads();
+    if (gamepads[0]) {
+      const joystick = gamepads[0];
+      const left = joystick.axes[0] === -1;
+      const right = joystick.axes[0] === 1;
+      const up = joystick.axes[1] === -1;
+      const down = joystick.axes[1] === 1;
+      if (joystick) {
+        //up
+        if (up) {
+          if (this.currentMovingDirection == MovingDirection.down)
+            this.currentMovingDirection = MovingDirection.up;
+          this.requestedMovingDirection = MovingDirection.up;
+          this.madeFirstMove = true;
+        }
+        //down
+        if (down) {
+          if (this.currentMovingDirection == MovingDirection.up)
+            this.currentMovingDirection = MovingDirection.down;
+          this.requestedMovingDirection = MovingDirection.down;
+          this.madeFirstMove = true;
+        }
+        //left
+        if (left) {
+          if (this.currentMovingDirection == MovingDirection.right)
+            this.currentMovingDirection = MovingDirection.left;
+          this.requestedMovingDirection = MovingDirection.left;
+          this.madeFirstMove = true;
+        }
+        //right
+        if (right) {
+          if (this.currentMovingDirection == MovingDirection.left)
+            this.currentMovingDirection = MovingDirection.right;
+          this.requestedMovingDirection = MovingDirection.right;
+          this.madeFirstMove = true;
+        }
+      }
+    }
+    // window.requestAnimationFrame(this.handleJoystickMovement);
+  }
 
   #move() {
     if (this.currentMovingDirection !== this.requestedMovingDirection) {
@@ -186,22 +247,35 @@ export default class Pacman {
     }
   }
 
-  #animate() {
-    if (this.pacmanAnimationTimer == null) {
-      return;
-    }
-    this.pacmanAnimationTimer--;
-    if (this.pacmanAnimationTimer == 0) {
-      this.pacmanAnimationTimer = this.pacmanAnimationTimerDefault;
-      this.pacmanImageIndex++;
-      if (this.pacmanImageIndex == this.pacmanImages.length)
-        this.pacmanImageIndex = 0;
+  #changeSpriteDirection() {
+    if (this.pacmanRotation === this.Rotation.right) {
+      this.pacmanImageIndex = 0;
+    } else if (this.pacmanRotation === this.Rotation.left) {
+      this.pacmanImageIndex = 1;
+    } else if (this.pacmanRotation === this.Rotation.up) {
+      this.pacmanImageIndex = 2;
+    } else if (this.pacmanRotation === this.Rotation.down) {
+      this.pacmanImageIndex = 3;
     }
   }
+
+  // #animate() {
+  //   if (this.pacmanAnimationTimer == null) {
+  //     return;
+  //   }
+  //   this.pacmanAnimationTimer--;
+  //   if (this.pacmanAnimationTimer == 0) {
+  //     this.pacmanAnimationTimer = this.pacmanAnimationTimerDefault;
+  //     this.pacmanImageIndex++;
+  //     if (this.pacmanImageIndex == this.pacmanImages.length)
+  //       this.pacmanImageIndex = 0;
+  //   }
+  // }
 
   #eatDot() {
     if (this.tileMap.eatDot(this.x, this.y) && this.madeFirstMove) {
       this.wakaSound.play();
+      this.dotsEaten++;
     }
   }
 

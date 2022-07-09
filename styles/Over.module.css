@@ -54,15 +54,16 @@
   align-items: center; */
   text-align: center;
   font-size: 3rem;
+  font-weight: bold;
   color: var(--colNavy);
 }
 
 .container main input:focus {
-  border: hotpink;
+  border: var(--colPink);
 }
 
 .inputs input {
-  width: 100px !important;
+  width: 60px !important;
   /* height: 100px; */
   margin-right: 20px;
   text-transform: uppercase;

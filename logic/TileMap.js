@@ -8,18 +8,48 @@ export default class TileMap {
 
     this.yellowDot = new Image();
     // this.yellowDot.src = "images/yellowDot.png";
-    this.yellowDot.src = '/yellowDot.png';
+    // this.yellowDot.src = '/yellowDot.png';
+    this.yellowDot.src = '/whiteDot.png';
+    // this.yellowDot.src = '/yellowDot1.png';
 
     this.pinkDot = new Image();
     // this.pinkDot.src = "images/pinkDot.png";
     this.pinkDot.src = '/pinkDot.png';
+    // this.pinkDot.src = '/pinkDot1.png';
 
     this.wall = new Image();
     // this.wall.src = "images/wall.png";
     this.wall.src = '/wall.png';
 
+    this.wallHorizontal = new Image();
+    this.wallHorizontal.src = '/wall-horizontal.png';
+
+    this.wallVertical = new Image();
+    this.wallVertical.src = '/wall-vertical.png';
+
+    this.wallTopEnd = new Image();
+    this.wallTopEnd.src = '/wall-top-end.png';
+
+    this.wallBottomEnd = new Image();
+    this.wallBottomEnd.src = '/wall-bottom-end.png';
+
+    this.wallTopRightCorner = new Image();
+    this.wallTopRightCorner.src = '/wall-top-right-corner.png';
+
+    this.wallTopLeftCorner = new Image();
+    this.wallTopLeftCorner.src = '/wall-top-left-corner.png';
+
+    this.wallBottomRightCorner = new Image();
+    this.wallBottomRightCorner.src = '/wall-bottom-right-corner.png';
+
+    this.wallBottomLeftCorner = new Image();
+    this.wallBottomLeftCorner.src = '/wall-bottom-left-corner.png';
+
+    this.wallRightEnd = new Image();
+    this.wallRightEnd.src = '/wall-right-end.png';
+
     this.powerDot = this.pinkDot;
-    this.powerDotAnmationTimerDefault = 30;
+    this.powerDotAnmationTimerDefault = 45;
     this.powerDotAnmationTimer = this.powerDotAnmationTimerDefault;
   }
 
@@ -29,30 +59,98 @@ export default class TileMap {
   //5 - empty space
   //6 - enemy
   //7 - power dot
+  //ADDTIONS
+  //8 - wall horizontal
+  //9 - wall vertical
+  //10 - wall top end
+  //11 - wall bottom end
+  //12 - wall top right corner
+  //13 - wall top left corner
+  //14 - wall bottom right corner
+  //15 - wall bottom left corner
+  //16 - wall right end
+
   map = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 1, 6, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 7, 1, 1, 1, 0, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1],
-    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [13, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12],
+    [9, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 9],
+    [9, 0, 13, 8, 8, 8, 8, 8, 16, 0, 10, 0, 9],
+    [9, 0, 9, 6, 0, 0, 0, 0, 0, 0, 9, 0, 9],
+    [9, 0, 9, 7, 13, 8, 16, 0, 10, 0, 9, 0, 9],
+    [9, 0, 9, 0, 9, 0, 0, 0, 9, 0, 9, 0, 9],
+    [9, 0, 9, 0, 9, 0, 10, 0, 9, 0, 9, 0, 9],
+    [9, 0, 9, 0, 9, 0, 9, 0, 11, 0, 9, 0, 9],
+    [9, 0, 11, 0, 11, 0, 11, 0, 0, 0, 11, 0, 9],
+    [9, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9],
+    [15, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14],
   ];
+
+  // map = [
+  //   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  //   [1, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 1],
+  //   [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+  //   [1, 0, 1, 6, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+  //   [1, 0, 1, 7, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+  //   [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
+  //   [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  //   [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  //   [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+  //   [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+  //   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  // ];
 
   draw(ctx) {
     for (let row = 0; row < this.map.length; row++) {
       for (let column = 0; column < this.map[row].length; column++) {
         let tile = this.map[row][column];
         if (tile === 1) {
-          this.#drawWall(ctx, column, row, this.tileSize);
+          // this.#drawWall(ctx, column, row, this.tileSize);
+          this.#drawWall(ctx, this.wall, column, row, this.tileSize);
         } else if (tile === 0) {
           this.#drawDot(ctx, column, row, this.tileSize);
         } else if (tile == 7) {
           this.#drawPowerDot(ctx, column, row, this.tileSize);
+        } else if (tile === 8) {
+          this.#drawWall(ctx, this.wallHorizontal, column, row, this.tileSize);
+        } else if (tile === 9) {
+          this.#drawWall(ctx, this.wallVertical, column, row, this.tileSize);
+        } else if (tile === 10) {
+          this.#drawWall(ctx, this.wallTopEnd, column, row, this.tileSize);
+        } else if (tile === 11) {
+          this.#drawWall(ctx, this.wallBottomEnd, column, row, this.tileSize);
+        } else if (tile === 12) {
+          this.#drawWall(
+            ctx,
+            this.wallTopRightCorner,
+            column,
+            row,
+            this.tileSize
+          );
+        } else if (tile === 13) {
+          this.#drawWall(
+            ctx,
+            this.wallTopLeftCorner,
+            column,
+            row,
+            this.tileSize
+          );
+        } else if (tile === 14) {
+          this.#drawWall(
+            ctx,
+            this.wallBottomRightCorner,
+            column,
+            row,
+            this.tileSize
+          );
+        } else if (tile === 15) {
+          this.#drawWall(
+            ctx,
+            this.wallBottomLeftCorner,
+            column,
+            row,
+            this.tileSize
+          );
+        } else if (tile === 16) {
+          this.#drawWall(ctx, this.wallRightEnd, column, row, this.tileSize);
         } else {
           this.#drawBlank(ctx, column, row, this.tileSize);
         }
@@ -91,9 +189,10 @@ export default class TileMap {
     ctx.drawImage(this.powerDot, column * size, row * size, size, size);
   }
 
-  #drawWall(ctx, column, row, size) {
+  #drawWall(ctx, spr, column, row, size) {
     ctx.drawImage(
-      this.wall,
+      // this.wall,
+      spr,
       column * this.tileSize,
       row * this.tileSize,
       size,
@@ -189,7 +288,19 @@ export default class TileMap {
           break;
       }
       const tile = this.map[row][column];
-      if (tile === 1) {
+      // if (tile === 1) {
+      if (
+        tile === 1 ||
+        tile === 8 ||
+        tile === 9 ||
+        tile === 10 ||
+        tile === 11 ||
+        tile === 12 ||
+        tile === 13 ||
+        tile === 14 ||
+        tile === 15 ||
+        tile === 16
+      ) {
         return true;
       }
     }
@@ -223,6 +334,9 @@ export default class TileMap {
       const tile = this.map[row][column];
       if (tile === 7) {
         this.map[row][column] = 5;
+        setTimeout(() => {
+          this.map[row][column] = 7;
+        }, 5000);
         return true;
       }
     }
