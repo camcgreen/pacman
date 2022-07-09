@@ -41,9 +41,9 @@ export default function Over() {
         <form onSubmit={(e) => submitForm(e, score)}>
           <h2>PLEASE ENTER YOUR INTITIALS</h2>
           <div className={styles.inputs}>
-            <input type='text' id='initial0' />
-            <input type='text' id='initial1' />
-            <input type='text' id='initial2' />
+            <input type='text' id='initial0' maxlength='1' />
+            <input type='text' id='initial1' maxlength='1' />
+            <input type='text' id='initial2' maxlength='1' />
           </div>
           <h2>PLEASE ENTER YOUR EMAIL</h2>
           <input type='email' id='email' />

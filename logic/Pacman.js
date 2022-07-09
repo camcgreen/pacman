@@ -276,21 +276,21 @@ export default class Pacman {
 
   #eatDot() {
     if (this.tileMap.eatDot(this.x, this.y) && this.madeFirstMove) {
-      this.wakaSound.play();
+      // this.wakaSound.play();
       this.dotsEaten++;
     }
   }
 
   #eatIcon() {
     if (this.tileMap.eatIcon(this.x, this.y) && this.madeFirstMove) {
-      this.wakaSound.play();
+      // this.wakaSound.play();
       this.iconsEaten++;
     }
   }
 
   #eatPowerDot() {
     if (this.tileMap.eatPowerDot(this.x, this.y)) {
-      this.powerDotSound.play();
+      // this.powerDotSound.play();
       this.powerDotActive = true;
       this.powerDotAboutToExpire = false;
       this.timers.forEach((timer) => clearTimeout(timer));
@@ -316,7 +316,7 @@ export default class Pacman {
       const collideEnemies = enemies.filter((enemy) => enemy.collideWith(this));
       collideEnemies.forEach((enemy) => {
         enemies.splice(enemies.indexOf(enemy), 1);
-        this.eatGhostSound.play();
+        // this.eatGhostSound.play();
       });
     }
   }
