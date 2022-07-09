@@ -13,6 +13,7 @@ export default function Game() {
   const [timer, setTimer] = useState(null);
   const [score, setScore] = useState(0);
   const [gameWon, setGameWon] = useState(false);
+  // const [countdownToStart, setCountdownToStart] = useState(5);
   useEffect(() => {
     const tileSize = 64;
     const velocity = 4;
@@ -33,7 +34,10 @@ export default function Game() {
         gameStarted = true;
       }
       pacman.handleJoystickMovement();
-      const rawScore = pacman.dotsEaten * 555 * (hiddenTimer / 100000);
+      // console.log(pacman.iconsEaten);
+      const rawScore =
+        (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) *
+        (hiddenTimer / 100000);
       roundedScore = Math.ceil(rawScore / 5) * 5;
       setScore(roundedScore);
       tileMap.draw(ctx);
@@ -43,9 +47,16 @@ export default function Game() {
         const overlay = document.getElementById('overlay');
         if (loseTime) {
           loseTime = false;
-          hiddenTimer -= 5000;
-          overlay.style.opacity = 0.2;
-          setTimeout(() => (overlay.style.opacity = 0), 400);
+          const timeToRemove = 5000;
+          if (hiddenTimer - timeToRemove <= 0) {
+            hiddenTimer = 0;
+          } else {
+            hiddenTimer -= timeToRemove;
+          }
+          if (overlay) {
+            overlay.style.opacity = 0.2;
+            setTimeout(() => (overlay.style.opacity = 0), 400);
+          }
         }
         setTimeout(() => (loseTime = true), 2000);
       }
@@ -57,14 +68,20 @@ export default function Game() {
         gameWin = enemies.length === 0;
         if (gameWin) {
           // gameWinSound.play();
+          const finishOverlay = document.getElementById('finish-overlay');
+          const winPopup = document.getElementById('win-popup');
+          if (finishOverlay) finishOverlay.style.opacity = 0.8;
+          if (winPopup) winPopup.style.opacity = 1;
+          // setTimeout(() => winPopup)
           localStorage.setItem('score', roundedScore);
           clearInterval(gameInterval);
           setGameWon(true);
           // alert('You win!');
           // setTimeout(() => router.push('/over'), 1500);
-          console.log('win');
-          router.push('/over');
+          // console.log('win');
+          // router.push('/over');
           // setTimeout(() => router.push('/over'), 5000);
+          setTimeout(() => router.push('/over'), 2500);
         }
       }
     }
@@ -74,9 +91,14 @@ export default function Game() {
         if (gameOver) {
           // gameOverSound.play();
           // alert('You lose.');
+          const finishOverlay = document.getElementById('finish-overlay');
+          const losePopup = document.getElementById('lose-popup');
+          if (finishOverlay) finishOverlay.style.opacity = 0.8;
+          if (losePopup) losePopup.style.opacity = 1;
           localStorage.setItem('score', null);
-          router.push('/');
+          // router.push('/');
           // setTimeout(() => router.push('/'), 4000);
+          setTimeout(() => router.push('/'), 2500);
         }
       }
     }
@@ -89,7 +111,11 @@ export default function Game() {
       );
     }
     function pause() {
-      return !pacman.madeFirstMove || gameOver || gameWin;
+      // return !pacman.madeFirstMove || gameOver || gameWin;
+      return (
+        !pacman.madeFirstMove || gameOver || gameWin
+        // gameOver || gameWin || !gameStarted
+      );
     }
     // function drawGameEnd() {
     //   if (gameOver || gameWin) {
@@ -110,17 +136,30 @@ export default function Game() {
     // }
     tileMap.setCanvasSize(canvas);
     const gameInterval = setInterval(gameLoop, 1000 / 75);
+    // setTimeout(() => (pacman.madeFirstMove = true), 2000);
+    // setTimeout(() => (gameStarted = true), 2000);
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer && !gameWon) {
         // setTimer(timer - 10);
+        if (hiddenTimer - 10 <= 0) {
+          hiddenTimer = 0;
+          setTimer(hiddenTimer);
+        } else {
+        }
         setTimer(hiddenTimer - 10);
         hiddenTimer -= 10;
       }
     }, 10);
     return () => clearInterval(interval);
   }, [timer]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCountdownToStart(countdownToStart - 1);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [countdownToStart]);
   return (
     <div className={styles.container}>
       <Head>
@@ -146,9 +185,15 @@ export default function Game() {
         </div>
       </main>
       <div className={styles.overlay} id='overlay'></div>
-      {/* <div style={styles.popup}>
-
-      </div> */}
+      <div className={styles.finishOverlay} id='finish-overlay'></div>
+      {/* <div className={styles.countdownToStart}>{countdownToStart}</div> */}
+      <div className={`${styles.popup} ${styles.winPopup}`} id='win-popup'>
+        <h1>YOU WON</h1>
+        <p>{`Score: ${score}`}</p>
+      </div>
+      <div className={`${styles.popup} ${styles.losePopup}`} id='lose-popup'>
+        <h1>YOU LOST</h1>
+      </div>
     </div>
   );
 }

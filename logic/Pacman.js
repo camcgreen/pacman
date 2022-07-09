@@ -32,6 +32,7 @@ export default class Pacman {
     // this.wakaSound = new Audio('sounds/waka.wav');
     this.wakaSound = new Audio('/sounds/waka.wav');
     this.dotsEaten = 0;
+    this.iconsEaten = 0;
     // this.monstersEaten = 0;
 
     // this.powerDotSound = new Audio('sounds/power_dot.wav');
@@ -65,6 +66,7 @@ export default class Pacman {
       this.#changeSpriteDirection();
     }
     this.#eatDot();
+    this.#eatIcon();
     this.#eatPowerDot();
     this.#eatGhost(enemies);
 
@@ -276,6 +278,13 @@ export default class Pacman {
     if (this.tileMap.eatDot(this.x, this.y) && this.madeFirstMove) {
       this.wakaSound.play();
       this.dotsEaten++;
+    }
+  }
+
+  #eatIcon() {
+    if (this.tileMap.eatIcon(this.x, this.y) && this.madeFirstMove) {
+      this.wakaSound.play();
+      this.iconsEaten++;
     }
   }
 

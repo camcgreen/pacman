@@ -48,6 +48,18 @@ export default class TileMap {
     this.wallRightEnd = new Image();
     this.wallRightEnd.src = '/wall-right-end.png';
 
+    this.iconPhone = new Image();
+    this.iconPhone.src = '/icon-phone.png';
+
+    this.iconTablet = new Image();
+    this.iconTablet.src = '/icon-tablet.png';
+
+    this.iconLaptop = new Image();
+    this.iconLaptop.src = '/icon-laptop.png';
+
+    this.iconHeadphones = new Image();
+    this.iconHeadphones.src = '/icon-headphones.png';
+
     this.powerDot = this.pinkDot;
     this.powerDotAnmationTimerDefault = 45;
     this.powerDotAnmationTimer = this.powerDotAnmationTimerDefault;
@@ -69,18 +81,22 @@ export default class TileMap {
   //14 - wall bottom right corner
   //15 - wall bottom left corner
   //16 - wall right end
+  //17 - phone
+  //18 - tablet
+  //19 - laptop
+  //20 - headphones
 
   map = [
     [13, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12],
-    [9, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 9],
+    [9, 7, 0, 17, 4, 0, 0, 0, 0, 19, 0, 7, 9],
     [9, 0, 13, 8, 8, 8, 8, 8, 16, 0, 10, 0, 9],
     [9, 0, 9, 6, 0, 0, 0, 0, 0, 0, 9, 0, 9],
     [9, 0, 9, 7, 13, 8, 16, 0, 10, 0, 9, 0, 9],
     [9, 0, 9, 0, 9, 0, 0, 0, 9, 0, 9, 0, 9],
-    [9, 0, 9, 0, 9, 0, 10, 0, 9, 0, 9, 0, 9],
+    [9, 0, 9, 17, 9, 0, 10, 0, 9, 18, 9, 0, 9],
     [9, 0, 9, 0, 9, 0, 9, 0, 11, 0, 9, 0, 9],
     [9, 0, 11, 0, 11, 0, 11, 0, 0, 0, 11, 0, 9],
-    [9, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9],
+    [9, 6, 0, 18, 0, 0, 0, 0, 0, 0, 20, 6, 9],
     [15, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14],
   ];
 
@@ -151,6 +167,14 @@ export default class TileMap {
           );
         } else if (tile === 16) {
           this.#drawWall(ctx, this.wallRightEnd, column, row, this.tileSize);
+        } else if (tile === 17) {
+          this.#drawIcon(ctx, this.iconPhone, column, row, this.tileSize);
+        } else if (tile === 18) {
+          this.#drawIcon(ctx, this.iconTablet, column, row, this.tileSize);
+        } else if (tile === 19) {
+          this.#drawIcon(ctx, this.iconLaptop, column, row, this.tileSize);
+        } else if (tile === 20) {
+          this.#drawIcon(ctx, this.iconHeadphones, column, row, this.tileSize);
         } else {
           this.#drawBlank(ctx, column, row, this.tileSize);
         }
@@ -169,6 +193,17 @@ export default class TileMap {
   #drawDot(ctx, column, row, size) {
     ctx.drawImage(
       this.yellowDot,
+      column * this.tileSize,
+      row * this.tileSize,
+      size,
+      size
+    );
+  }
+
+  #drawIcon(ctx, spr, column, row, size) {
+    ctx.drawImage(
+      // this.yellowDot,
+      spr,
       column * this.tileSize,
       row * this.tileSize,
       size,
@@ -320,6 +355,24 @@ export default class TileMap {
     const column = x / this.tileSize;
     if (Number.isInteger(row) && Number.isInteger(column)) {
       if (this.map[row][column] === 0) {
+        this.map[row][column] = 5;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  eatIcon(x, y) {
+    const row = y / this.tileSize;
+    const column = x / this.tileSize;
+    if (Number.isInteger(row) && Number.isInteger(column)) {
+      // if (this.map[row][column] === 0) {
+      if (
+        this.map[row][column] === 17 ||
+        this.map[row][column] === 18 ||
+        this.map[row][column] === 19 ||
+        this.map[row][column] === 20
+      ) {
         this.map[row][column] = 5;
         return true;
       }
