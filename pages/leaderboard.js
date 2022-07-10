@@ -10,7 +10,7 @@ import {
   getMainLeaderboard,
   BuildLeaderboard,
   tableData,
-} from '../Components/firebaseComponent';
+} from '../components/firebaseComponent';
 import Head from 'next/head';
 import styles from '../styles/Leaderboard.module.css';
 
