@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { router } from 'next/router';
 import Fullscreen from '../components/fullscreen';
 import styles from '../styles/Home.module.css';
+import SetDeviceInput from '../components/setDeviceInput';
 
 function handleJoystickInput() {
   const gamepads = navigator.getGamepads();
@@ -64,6 +65,7 @@ export default function Home() {
         </p> */}
       </main>
       <Fullscreen />
+      <SetDeviceInput />
     </div>
   );
 }

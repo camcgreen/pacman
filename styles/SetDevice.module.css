@@ -1,0 +1,6 @@
+.container {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  z-index: 7;
+}
