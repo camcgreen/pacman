@@ -7,9 +7,11 @@ import SetDeviceInput from '../components/setDeviceInput';
 
 function handleJoystickInput() {
   const gamepads = navigator.getGamepads();
-  if (gamepads[0]) {
-    const joystick = gamepads[0];
+  const joystick = gamepads[0];
+  if (joystick) {
     const buttonPressed =
+      // joystick.axes[0] !== 0 ||
+      // joystick.axes[1] !== 0 ||
       joystick.buttons[0].pressed ||
       joystick.buttons[1].pressed ||
       joystick.buttons[2].pressed ||
@@ -25,8 +27,8 @@ export default function Home() {
   useEffect(() => {
     window.addEventListener('gamepadconnected', function (e) {
       //   if (
-      //     // e.gamepad.axes[0] !== 0 ||
-      //     // e.gamepad.axes[1] !== 0 ||
+      // e.gamepad.axes[0] !== 0 ||
+      //   e.gamepad.axes[1] !== 0 ||
       //     e.gamepad.buttons[0].pressed ||
       //     e.gamepad.buttons[1].pressed ||
       //     e.gamepad.buttons[2].pressed ||
