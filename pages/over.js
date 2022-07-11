@@ -59,7 +59,7 @@ export default function Over() {
           <input type='email' id='email' className={styles.marginBelow} />
           <br />
           <div className={styles.checkboxRow}>
-            <label for='comms'>
+            <label htmlFor='comms'>
               CHECK THE BOX TO SIGN-UP FOR PRS/SES COMMUNICATIONS
             </label>
             <input
@@ -72,7 +72,7 @@ export default function Over() {
           </div>
           {/* <br /> */}
           <div className={styles.checkboxRow}>
-            <label for='privacy'>
+            <label htmlFor='privacy'>
               BY CHECKING THE BOX, I AGREE TO PRS PRIVACY POLICY
             </label>
             <input
