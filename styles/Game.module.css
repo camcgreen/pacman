@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .bg {
@@ -34,7 +34,9 @@
   transition: opacity 0.1s ease-in-out;
 }
 
-
+.container main h4 {
+  font-weight: 400;
+}
 
 /* 
 .time h4, .score h4 {
@@ -46,7 +48,7 @@
 } */
 
 .time {
-  /* text-align: right; */
+  text-align: right;
   width: 261px;
 }
 

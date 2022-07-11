@@ -25,5 +25,13 @@ a {
 
 #gameCanvas {
   /* width: 850px; */
-  margin: 0 120px;
+  margin: 0 80px;
+}
+
+.progressButton {
+  position: fixed;
+  z-index: 7;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import router from 'next/router';
 import {
   getDatabase,
   fireBaseStartApp,
@@ -115,6 +116,9 @@ export default function Leaderboard() {
           </div>
         </div>
       </main>
+      <button className='progressButton' onClick={() => router.push('/')}>
+        Progress
+      </button>
     </div>
   );
 }

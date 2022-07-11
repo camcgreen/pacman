@@ -186,6 +186,9 @@ export default function Game() {
       </main>
       <div className={styles.overlay} id='overlay'></div>
       <div className={styles.finishOverlay} id='finish-overlay'></div>
+      <button className='progressButton' onClick={() => router.push('/over')}>
+        Progress
+      </button>
       {/* <div className={styles.countdownToStart}>{countdownToStart}</div> */}
       <div className={`${styles.popup} ${styles.winPopup}`} id='win-popup'>
         <h1>YOU WON</h1>

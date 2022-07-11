@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 
 .bg {
@@ -33,7 +33,7 @@
 }
 
 .container main * {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .container main h2 {
@@ -45,17 +45,32 @@
 }
 
 .container main input {
-  width: 750px;
-  height: 100px;
+  /* width: 750px; */
+  width: 500px;
+  height: 60px;
   border: none;
   outline: none;
   /* display: flex;
   justify-content: center;
   align-items: center; */
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--colNavy);
+}
+
+.checkbox {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.checkboxRow {
+  display: flex; 
+  align-items: center;
+}
+
+.checkboxRow label {
+  margin-right: 20px;
 }
 
 .container main input:focus {
@@ -63,7 +78,7 @@
 }
 
 .inputs input {
-  width: 60px !important;
+  width: 40px !important;
   /* height: 100px; */
   margin-right: 20px;
   text-transform: uppercase;
@@ -85,11 +100,17 @@
   background-color: var(--colBlue);
   color: white !important;
   width: 325px !important;
-  font-size: 2rem !important;
-  height: 100px !important;
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
+  height: 40px !important;
 }
 
 .over {
-  width: 90%;
-  margin-bottom: 80px !important;
+  /* width: 90%; */
+  width: 70%;
+  margin-bottom: 20px !important;
+}
+
+.marginBelow {
+  margin-bottom: 20px !important;
 }

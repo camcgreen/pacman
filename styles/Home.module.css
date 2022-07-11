@@ -36,7 +36,7 @@
 }
 
 .container main h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.05em;
 }
@@ -56,10 +56,12 @@
 
 .arcade {
   /* width: 1400px; */
-  width: 90%;
+  /* width: 90%; */
+  width: 70%;
 }
 
 .play {
   /* width: 600px; */
-  width: 50%;
+  /* width: 50%; */
+  width: 30%;
 }

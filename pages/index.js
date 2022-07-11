@@ -44,6 +44,7 @@ export default function Home() {
     //   window.removeEventListener('keydown', moveToNext);
     // }
     // window.addEventListener('keydown', moveToNext);
+    // window.addEventListener('click', router.push('/game'));
   }, []);
   return (
     <div className={styles.container}>
@@ -68,6 +69,9 @@ export default function Home() {
       </main>
       <Fullscreen />
       <SetDeviceInput />
+      <button className='progressButton' onClick={() => router.push('/game')}>
+        Progress
+      </button>
     </div>
   );
 }

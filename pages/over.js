@@ -47,18 +47,49 @@ export default function Over() {
         <img src='/over.png' className={styles.over} />
         <h3>SCORE</h3>
         {/* <h2>13770</h2> */}
-        <h2>{score}</h2>
+        <h2 className={styles.marginBelow}>{score}</h2>
         <form onSubmit={(e) => submitForm(e, score)}>
           <h2>PLEASE ENTER YOUR INTITIALS</h2>
-          <div className={styles.inputs}>
+          <div className={`${styles.inputs} ${styles.marginBelow}`}>
             <input type='text' id='initial0' maxLength='1' />
             <input type='text' id='initial1' maxLength='1' />
             <input type='text' id='initial2' maxLength='1' />
           </div>
           <h2>PLEASE ENTER YOUR EMAIL</h2>
-          <input type='email' id='email' />
+          <input type='email' id='email' className={styles.marginBelow} />
           <br />
-          <input className={styles.submit} type='submit' value='SUBMIT' />
+          <div className={styles.checkboxRow}>
+            <label for='comms'>
+              CHECK THE BOX TO SIGN-UP FOR PRS/SES COMMUNICATIONS
+            </label>
+            <input
+              type='checkbox'
+              id='comms'
+              name='comms'
+              // value='Bike'
+              className={styles.checkbox}
+            />
+          </div>
+          {/* <br /> */}
+          <div className={styles.checkboxRow}>
+            <label for='privacy'>
+              BY CHECKING THE BOX, I AGREE TO PRS PRIVACY POLICY
+            </label>
+            <input
+              type='checkbox'
+              id='privacy'
+              name='privacy'
+              // value='Bike'
+              className={styles.checkbox}
+              required
+            />
+          </div>
+          <br />
+          <input
+            className={`${styles.submit} ${styles.marginBelow}`}
+            type='submit'
+            value='SUBMIT'
+          />
         </form>
         <h2>COLLECT YOUR TOKENS BELOW</h2>
         <p>
@@ -66,6 +97,12 @@ export default function Over() {
           HANDSET
         </p>
       </main>
+      <button
+        className='progressButton'
+        onClick={() => router.push('/leaderboard')}
+      >
+        Progress
+      </button>
     </div>
   );
 }
