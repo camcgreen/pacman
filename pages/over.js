@@ -13,11 +13,9 @@ const submitForm = (e, score) => {
   const initials =
     `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
   const email = e.target[3].value;
-  console.log(initials);
-  console.log(email);
-  console.log(score);
+  const communications = e.target[4].checked;
   if (score) {
-    addDataToLeaderboard(initials, score, email);
+    addDataToLeaderboard(initials, score, email, communications);
     localStorage.setItem('initials', initials);
   }
   router.push('/');
