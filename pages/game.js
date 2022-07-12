@@ -15,10 +15,11 @@ export default function Game() {
   const [gameWon, setGameWon] = useState(false);
   // const [countdownToStart, setCountdownToStart] = useState(5);
   useEffect(() => {
-    const tileSize = 64;
-    const velocity = 4;
+    const tileSize = 32;
+    const velocity = 2;
     const canvas = document.getElementById('gameCanvas');
-    canvas.style.width = `${window.innerWidth / 2}px`;
+    // canvas.style.width = `${window.innerWidth / 2}px`;
+    canvas.style.height = `${window.innerHeight * 0.85}px`;
     const ctx = canvas.getContext('2d');
     const tileMap = new TileMap(tileSize);
     const pacman = tileMap.getPacman(velocity);

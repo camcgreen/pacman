@@ -60,8 +60,11 @@ export default class TileMap {
     this.iconHeadphones = new Image();
     this.iconHeadphones.src = '/icon-headphones.png';
 
+    this.wallLeftEnd = new Image();
+    this.wallLeftEnd.src = '/wall-left-end.png';
+
     this.powerDot = this.pinkDot;
-    this.powerDotAnmationTimerDefault = 45;
+    this.powerDotAnmationTimerDefault = 120;
     this.powerDotAnmationTimer = this.powerDotAnmationTimerDefault;
   }
 
@@ -69,7 +72,6 @@ export default class TileMap {
   //0 - dots
   //4 - pacman
   //5 - empty space
-  //6 - enemy
   //7 - power dot
   //ADDTIONS
   //8 - wall horizontal
@@ -85,20 +87,44 @@ export default class TileMap {
   //18 - tablet
   //19 - laptop
   //20 - headphones
+  //21 - wall left end
+  //22 - enemy
 
   map = [
-    [13, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12],
-    [9, 7, 0, 17, 4, 0, 0, 0, 0, 19, 0, 7, 9],
-    [9, 0, 13, 8, 8, 8, 8, 8, 16, 0, 10, 0, 9],
-    [9, 0, 9, 6, 0, 0, 0, 0, 0, 0, 9, 0, 9],
-    [9, 0, 9, 7, 13, 8, 16, 0, 10, 0, 9, 0, 9],
-    [9, 0, 9, 0, 9, 0, 0, 0, 9, 0, 9, 0, 9],
-    [9, 0, 9, 17, 9, 0, 10, 0, 9, 18, 9, 0, 9],
-    [9, 0, 9, 0, 9, 0, 9, 0, 11, 0, 9, 0, 9],
-    [9, 0, 11, 0, 11, 0, 11, 0, 0, 0, 11, 0, 9],
-    [9, 6, 0, 18, 0, 0, 0, 0, 0, 0, 20, 6, 9],
-    [15, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14],
+    [5, 5, 5, 5, 5, 13, 8, 12, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 9, 7, 9, 5, 5, 5, 5, 5],
+    [13, 8, 8, 8, 8, 14, 0, 15, 8, 8, 8, 8, 12],
+    [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9],
+    [9, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 9],
+    [9, 0, 11, 7, 10, 0, 4, 0, 10, 7, 11, 0, 9],
+    [9, 0, 0, 0, 15, 8, 8, 8, 14, 0, 0, 0, 9],
+    [9, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 9],
+    [15, 8, 12, 0, 0, 21, 8, 16, 0, 0, 13, 8, 14],
+    [5, 5, 9, 22, 0, 0, 7, 0, 0, 22, 9, 5, 5],
+    [13, 8, 14, 0, 0, 21, 8, 16, 0, 0, 15, 8, 12],
+    [9, 19, 0, 0, 0, 0, 22, 0, 0, 0, 0, 18, 9],
+    [9, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 9],
+    [9, 0, 9, 7, 0, 0, 11, 0, 0, 7, 9, 0, 9],
+    [9, 0, 15, 8, 16, 0, 0, 0, 21, 8, 14, 0, 9],
+    [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9],
+    [15, 8, 8, 8, 8, 12, 0, 13, 8, 8, 8, 8, 14],
+    [5, 5, 5, 5, 5, 9, 7, 9, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 15, 8, 14, 5, 5, 5, 5, 5],
   ];
+
+  // map = [
+  //   [13, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12],
+  //   [9, 7, 0, 17, 4, 0, 0, 0, 0, 19, 0, 7, 9],
+  //   [9, 0, 13, 8, 8, 8, 8, 8, 16, 0, 10, 0, 9],
+  //   [9, 0, 9, 6, 0, 0, 0, 0, 0, 0, 9, 0, 9],
+  //   [9, 0, 9, 7, 13, 8, 16, 0, 10, 0, 9, 0, 9],
+  //   [9, 0, 9, 0, 9, 0, 0, 0, 9, 0, 9, 0, 9],
+  //   [9, 0, 9, 17, 9, 0, 10, 0, 9, 18, 9, 0, 9],
+  //   [9, 0, 9, 0, 9, 0, 9, 0, 11, 0, 9, 0, 9],
+  //   [9, 0, 11, 0, 11, 0, 11, 0, 0, 0, 11, 0, 9],
+  //   [9, 6, 0, 18, 0, 0, 0, 0, 0, 0, 20, 6, 9],
+  //   [15, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14],
+  // ];
 
   // map = [
   //   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -165,6 +191,8 @@ export default class TileMap {
             row,
             this.tileSize
           );
+        } else if (tile === 21) {
+          this.#drawWall(ctx, this.wallLeftEnd, column, row, this.tileSize);
         } else if (tile === 16) {
           this.#drawWall(ctx, this.wallRightEnd, column, row, this.tileSize);
         } else if (tile === 17) {
@@ -264,7 +292,7 @@ export default class TileMap {
     for (let row = 0; row < this.map.length; row++) {
       for (let column = 0; column < this.map[row].length; column++) {
         const tile = this.map[row][column];
-        if (tile == 6) {
+        if (tile == 22) {
           this.map[row][column] = 0;
           enemies.push(
             new Enemy(
@@ -334,7 +362,8 @@ export default class TileMap {
         tile === 13 ||
         tile === 14 ||
         tile === 15 ||
-        tile === 16
+        tile === 16 ||
+        tile === 21
       ) {
         return true;
       }

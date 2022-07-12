@@ -53,7 +53,8 @@
 }
 
 .score {
-  width: 195px;
+  /* width: 195px; */
+  width: 261px;
 }
 
 .finishOverlay {
