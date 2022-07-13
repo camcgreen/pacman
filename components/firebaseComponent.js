@@ -109,7 +109,7 @@ function ListenDatabaseAndGetLeaderboard() {
 
 //With the data given from the database build an array with the 10 biggest values ordered by score
 function BuildLeaderboard({ type }) {
-  console.log('building leaderboard');
+  // console.log('building leaderboard');
   fireBaseStartApp();
   const db = getFirestore(app);
   const [Table, setTable] = useState([]);
