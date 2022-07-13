@@ -1,4 +1,5 @@
 import MovingDirection from './MovingDirection.js';
+import Enemy from './Enemy.js';
 
 let gameWon = false;
 
@@ -320,6 +321,20 @@ export default class Pacman {
         setTimeout(() => {
           // enemies.push(enemy);
           // this.tileMap.addEnemy();
+          enemies.push(
+            new Enemy(
+              // column * this.tileSize,
+              6 * 32,
+              // row * this.tileSize,
+              Math.random() >= 0.5 ? 15 * 32 : 3 * 32,
+              // 15 * 32,
+              // this.tileSize,
+              32,
+              // velocity,
+              2,
+              this.tileMap
+            )
+          );
         }, 1000);
       });
     }

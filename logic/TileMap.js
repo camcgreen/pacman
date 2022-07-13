@@ -285,7 +285,6 @@ export default class TileMap {
       }
     }
   }
-
   getEnemies(velocity) {
     const enemies = [];
 
@@ -311,16 +310,20 @@ export default class TileMap {
 
   addEnemy() {
     console.log('adding enemy');
-    // this.map[15][1] = 22;
-    // enemies.push(
-    //   new Enemy(
-    //     1 * this.tileSize,
-    //     15 * this.tileSize,
-    //     this.tileSize,
-    //     velocity,
-    //     this
-    //   )
-    // );
+    this.map[15][1] = 22;
+    const enemies = this.getEnemies(2);
+    console.log(enemies);
+    enemies.push(
+      new Enemy(
+        1 * this.tileSize,
+        15 * this.tileSize,
+        this.tileSize,
+        // velocity,
+        2,
+        this
+      )
+    );
+    console.log(enemies);
   }
 
   setCanvasSize(canvas) {
