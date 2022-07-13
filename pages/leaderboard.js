@@ -89,7 +89,7 @@ export default function Leaderboard() {
             {/* <h1>13770</h1> */}
             <h1>{yourInfo && yourInfo[1]}</h1>
           </div>
-          <BuildLeaderboard />
+          <BuildLeaderboard type='leaderboard' />
           {/* <ul className={styles.leaderboard}>
             {scoreItems &&
               scoreItems.map((scoreItem, i) => {
@@ -104,15 +104,14 @@ export default function Leaderboard() {
           </ul> */}
           <div className={`${styles.score} ${styles.right}`}>
             <div className={styles.initials}>
-              {/* <div>{scoreItems[0].user.split('')[0]}</div>
-              <div>{scoreItems[0].user.split('')[1]}</div>
-              <div>{scoreItems[0].user.split('')[2]}</div> */}
-              <div>{scoreItems && scoreItems[0].Alias.split('')[0]}</div>
+              {/* <div>{scoreItems && scoreItems[0].Alias.split('')[0]}</div>
               <div>{scoreItems && scoreItems[0].Alias.split('')[1]}</div>
-              <div>{scoreItems && scoreItems[0].Alias.split('')[2]}</div>
+              <div>{scoreItems && scoreItems[0].Alias.split('')[2]}</div> */}
+              <BuildLeaderboard type='highInitials' />
             </div>
             <h2>HIGH SCORE</h2>
-            <h1>{scoreItems && scoreItems[0].score}</h1>
+            {/* <h1>{scoreItems && scoreItems[0].score}</h1> */}
+            <BuildLeaderboard type='highScore' />
           </div>
         </div>
       </main>

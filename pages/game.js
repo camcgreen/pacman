@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import { router } from 'next/router';
 import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
+import {
+  // fireBaseStartApp,
+  // ListenDatabaseAndGetLeaderboard,
+  // HighScoreComp,
+  BuildLeaderboard,
+} from '../components/firebaseComponent';
 
 // let hiddenTimer = 90 * 1000;
 // let hiddenTimer = 10;
@@ -21,11 +27,26 @@ export default function Game() {
   const [timer, setTimer] = useState(null);
   const [score, setScore] = useState(0);
   const [gameWon, setGameWon] = useState(false);
+  const [highScore, setHighScore] = useState(null);
   // const [countdownToStart, setCountdownToStart] = useState(5);
+
+  // const [HighScoreInComponent, setHighScoreInComponent] = useState(null);
+
+  // useEffect(() => {
+  //   setHighScoreInComponent(HighScore);
+  // }, [HighScore]);
+
   useEffect(() => {
+    // fireBaseStartApp();
+    // const getHighScore = async () => {
+    //   const highScoreVal = await ListenDatabaseAndGetLeaderboard();
+    //   console.log(highScoreVal.HighScore);
+    //   setHighScore(highScoreVal.HighScore);
+    // };
+    // getHighScore();
     hiddenTimer = 90;
     roundedScore = 0;
-    console.log(hiddenTimer);
+    // console.log(hiddenTimer);
     // const top = firebase.firestore().collection
     const tileSize = 32;
     const velocity = 2;
@@ -213,7 +234,10 @@ export default function Game() {
           <br />
           <br />
           <h4>HIGH SCORE</h4>
-          <h1>18355</h1>
+          {/* <h1>18355</h1> */}
+          {/* <h1>{highScore}</h1> */}
+          <BuildLeaderboard type='highScore' />
+          {/* <HighScoreComp /> */}
         </div>
       </main>
       <div className={styles.overlay} id='overlay'></div>
