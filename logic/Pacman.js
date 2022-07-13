@@ -34,7 +34,7 @@ export default class Pacman {
     this.wakaSound = new Audio('/sounds/waka.wav');
     this.dotsEaten = 0;
     this.iconsEaten = 0;
-    // this.monstersEaten = 0;
+    this.monstersEaten = 0;
 
     // this.powerDotSound = new Audio('sounds/power_dot.wav');
     this.powerDotSound = new Audio('/sounds/power_dot.wav');
@@ -300,13 +300,15 @@ export default class Pacman {
       let powerDotTimer = setTimeout(() => {
         this.powerDotActive = false;
         this.powerDotAboutToExpire = false;
-      }, 1000 * 6);
+        // }, 1000 * 6);
+      }, 1000 * 3);
 
       this.timers.push(powerDotTimer);
 
       let powerDotAboutToExpireTimer = setTimeout(() => {
         this.powerDotAboutToExpire = true;
-      }, 1000 * 3);
+        // }, 1000 * 3);
+      }, 1000 * 2);
 
       this.timers.push(powerDotAboutToExpireTimer);
     }
@@ -317,6 +319,7 @@ export default class Pacman {
       const collideEnemies = enemies.filter((enemy) => enemy.collideWith(this));
       collideEnemies.forEach((enemy) => {
         enemies.splice(enemies.indexOf(enemy), 1);
+        this.monstersEaten++;
         // this.eatGhostSound.play();
         setTimeout(() => {
           // enemies.push(enemy);

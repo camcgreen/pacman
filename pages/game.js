@@ -5,10 +5,17 @@ import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
 
 // let hiddenTimer = 90 * 1000;
-let hiddenTimer = 90;
-let roundedScore = 0;
+// let hiddenTimer = 10;
+// let roundedScore = 0;
+let hiddenTimer;
+let roundedScore;
 
 let loseTime = true;
+let loseTimeout;
+
+function mapRange(value, low1, high1, low2, high2) {
+  return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
+}
 
 export default function Game() {
   const [timer, setTimer] = useState(null);
@@ -16,6 +23,9 @@ export default function Game() {
   const [gameWon, setGameWon] = useState(false);
   // const [countdownToStart, setCountdownToStart] = useState(5);
   useEffect(() => {
+    hiddenTimer = 90;
+    roundedScore = 0;
+    console.log(hiddenTimer);
     // const top = firebase.firestore().collection
     const tileSize = 32;
     const velocity = 2;
@@ -44,7 +54,10 @@ export default function Game() {
       //   (hiddenTimer / 100000);
       // const rawScore =
       //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) * (hiddenTimer / 100);
-      const rawScore = pacman.dotsEaten * 555 + pacman.iconsEaten * 55;
+      const rawScore =
+        pacman.dotsEaten * 5 +
+        pacman.iconsEaten * 50 +
+        pacman.monstersEaten * 150;
       roundedScore = Math.ceil(rawScore / 5) * 5;
       setScore(roundedScore);
       tileMap.draw(ctx);
@@ -55,7 +68,7 @@ export default function Game() {
         if (loseTime) {
           loseTime = false;
           // const timeToRemove = 5000;
-          const timeToRemove = 5;
+          const timeToRemove = 20;
           if (hiddenTimer - timeToRemove <= 0) {
             hiddenTimer = 0;
           } else {
@@ -66,7 +79,8 @@ export default function Game() {
             setTimeout(() => (overlay.style.opacity = 0), 400);
           }
         }
-        setTimeout(() => (loseTime = true), 2000);
+        // setTimeout(() => (loseTime = true), 2000);
+        loseTimeout = setTimeout(() => (loseTime = true), 2000);
       }
       checkGameOver();
       checkGameWin();
@@ -148,6 +162,9 @@ export default function Game() {
     const gameInterval = setInterval(gameLoop, 1000 / 75);
     // setTimeout(() => (pacman.madeFirstMove = true), 2000);
     // setTimeout(() => (gameStarted = true), 2000);
+    return () => {
+      clearTimeout(loseTimeout);
+    };
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {
