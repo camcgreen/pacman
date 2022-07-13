@@ -309,6 +309,20 @@ export default class TileMap {
     return enemies;
   }
 
+  addEnemy() {
+    console.log('adding enemy');
+    // this.map[15][1] = 22;
+    // enemies.push(
+    //   new Enemy(
+    //     1 * this.tileSize,
+    //     15 * this.tileSize,
+    //     this.tileSize,
+    //     velocity,
+    //     this
+    //   )
+    // );
+  }
+
   setCanvasSize(canvas) {
     canvas.width = this.map[0].length * this.tileSize;
     canvas.height = this.map.length * this.tileSize;
@@ -385,10 +399,19 @@ export default class TileMap {
     if (Number.isInteger(row) && Number.isInteger(column)) {
       if (this.map[row][column] === 0) {
         this.map[row][column] = 5;
+        setTimeout(() => {
+          this.map[row][column] = 0;
+        }, 5000);
         return true;
       }
     }
     return false;
+  }
+
+  randomRange(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   eatIcon(x, y) {
@@ -403,6 +426,10 @@ export default class TileMap {
         this.map[row][column] === 20
       ) {
         this.map[row][column] = 5;
+        setTimeout(() => {
+          // this.map[row][column] = 7;
+          this.map[row][column] = this.randomRange(17, 20);
+        }, 10000);
         return true;
       }
     }

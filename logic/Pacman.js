@@ -317,6 +317,10 @@ export default class Pacman {
       collideEnemies.forEach((enemy) => {
         enemies.splice(enemies.indexOf(enemy), 1);
         // this.eatGhostSound.play();
+        setTimeout(() => {
+          // enemies.push(enemy);
+          // this.tileMap.addEnemy();
+        }, 1000);
       });
     }
   }

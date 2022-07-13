@@ -4,7 +4,8 @@ import { router } from 'next/router';
 import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
 
-let hiddenTimer = 90 * 1000;
+// let hiddenTimer = 90 * 1000;
+let hiddenTimer = 90;
 let roundedScore = 0;
 
 let loseTime = true;
@@ -15,6 +16,7 @@ export default function Game() {
   const [gameWon, setGameWon] = useState(false);
   // const [countdownToStart, setCountdownToStart] = useState(5);
   useEffect(() => {
+    // const top = firebase.firestore().collection
     const tileSize = 32;
     const velocity = 2;
     const canvas = document.getElementById('gameCanvas');
@@ -31,14 +33,18 @@ export default function Game() {
     let gameStarted = false;
     function gameLoop() {
       if (pacman.madeFirstMove && !gameStarted) {
-        setTimer(90 * 1000);
+        // setTimer(90 * 1000);
+        setTimer(90);
         gameStarted = true;
       }
       pacman.handleJoystickMovement();
       // console.log(pacman.iconsEaten);
-      const rawScore =
-        (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) *
-        (hiddenTimer / 100000);
+      // const rawScore =
+      //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) *
+      //   (hiddenTimer / 100000);
+      // const rawScore =
+      //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) * (hiddenTimer / 100);
+      const rawScore = pacman.dotsEaten * 555 + pacman.iconsEaten * 55;
       roundedScore = Math.ceil(rawScore / 5) * 5;
       setScore(roundedScore);
       tileMap.draw(ctx);
@@ -48,7 +54,8 @@ export default function Game() {
         const overlay = document.getElementById('overlay');
         if (loseTime) {
           loseTime = false;
-          const timeToRemove = 5000;
+          // const timeToRemove = 5000;
+          const timeToRemove = 5;
           if (hiddenTimer - timeToRemove <= 0) {
             hiddenTimer = 0;
           } else {
@@ -66,7 +73,8 @@ export default function Game() {
     }
     function checkGameWin() {
       if (!gameWin) {
-        gameWin = enemies.length === 0;
+        // gameWin = enemies.length === 0;
+        gameWin = hiddenTimer <= 0;
         if (gameWin) {
           // gameWinSound.play();
           const finishOverlay = document.getElementById('finish-overlay');
@@ -104,7 +112,8 @@ export default function Game() {
       }
     }
     function isGameOver() {
-      return hiddenTimer <= 0;
+      return false;
+      // return hiddenTimer <= 0;
     }
     function isHit() {
       return enemies.some(
@@ -144,15 +153,19 @@ export default function Game() {
     const interval = setInterval(() => {
       if (timer && !gameWon) {
         // setTimer(timer - 10);
-        if (hiddenTimer - 10 <= 0) {
+        // if (hiddenTimer - 10 <= 0) {
+        if (hiddenTimer - 1 <= 0) {
           hiddenTimer = 0;
           setTimer(hiddenTimer);
         } else {
+          // setTimer(hiddenTimer - 10);
+          setTimer(hiddenTimer - 1);
+          // hiddenTimer -= 10;
+          hiddenTimer -= 1;
         }
-        setTimer(hiddenTimer - 10);
-        hiddenTimer -= 10;
       }
-    }, 10);
+      // }, 10);
+    }, 1000);
     return () => clearInterval(interval);
   }, [timer]);
   // useEffect(() => {
@@ -173,7 +186,8 @@ export default function Game() {
         <div className={styles.time}>
           <h4>TIME REMAINING</h4>
           {/* <h1>47.07</h1> */}
-          <h1>{timer ? timer / 1000 : '90.00'}</h1>
+          {/* <h1>{timer ? timer / 1000 : '90.00'}</h1> */}
+          <h1>{timer ? timer : '90'}</h1>
         </div>
         <canvas id='gameCanvas'></canvas>
         <div className={styles.score}>
@@ -192,7 +206,8 @@ export default function Game() {
       </button>
       {/* <div className={styles.countdownToStart}>{countdownToStart}</div> */}
       <div className={`${styles.popup} ${styles.winPopup}`} id='win-popup'>
-        <h1>YOU WON</h1>
+        {/* <h1>YOU WON</h1> */}
+        <h1>GAME OVER</h1>
         <p>{`Score: ${score}`}</p>
       </div>
       <div className={`${styles.popup} ${styles.losePopup}`} id='lose-popup'>

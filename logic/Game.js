@@ -23,7 +23,8 @@ export const initGame = () => {
   const ctx = canvas.getContext('2d');
   const tileMap = new TileMap(tileSize);
   const pacman = tileMap.getPacman(velocity);
-  const enemies = tileMap.getEnemies(velocity);
+  // const enemies = tileMap.getEnemies(velocity);
+  let enemies;
 
   let gameOver = false;
   let gameWin = false;
@@ -31,6 +32,7 @@ export const initGame = () => {
   const gameWinSound = new Audio('/sounds/gameWin.wav');
 
   function gameLoop() {
+    enemies = tileMap.getEnemies(velocity);
     tileMap.draw(ctx);
     drawGameEnd();
     pacman.draw(ctx, pause(), enemies);
