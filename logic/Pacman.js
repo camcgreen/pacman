@@ -335,7 +335,7 @@ export default class Pacman {
               this.tileMap
             )
           );
-        }, 1000);
+        }, 5000);
       });
     }
   }
