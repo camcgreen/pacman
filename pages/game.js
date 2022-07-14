@@ -46,6 +46,7 @@ export default function Game() {
     // getHighScore();
     hiddenTimer = 90;
     roundedScore = 0;
+    const themeAudio = document.getElementById('theme-audio');
     // console.log(hiddenTimer);
     // const top = firebase.firestore().collection
     const tileSize = 32;
@@ -67,6 +68,7 @@ export default function Game() {
         // setTimer(90 * 1000);
         setTimer(90);
         gameStarted = true;
+        themeAudio.play();
       }
       pacman.handleJoystickMovement();
       // console.log(pacman.iconsEaten);
@@ -254,6 +256,9 @@ export default function Game() {
       <div className={`${styles.popup} ${styles.losePopup}`} id='lose-popup'>
         <h1>YOU LOST</h1>
       </div>
+      <audio loop style={{ display: 'none' }} id='theme-audio'>
+        <source src='/sounds/theme.mp3' type='audio/mpeg' />
+      </audio>
     </div>
   );
 }
