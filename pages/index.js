@@ -17,7 +17,7 @@ function handleJoystickInput() {
       joystick.buttons[2].pressed ||
       joystick.buttons[3].pressed;
     if (buttonPressed) {
-      router.push('/game');
+      if (router.pathname === '/') router.push('/game');
     }
     window.requestAnimationFrame(handleJoystickInput);
   }
@@ -45,6 +45,11 @@ export default function Home() {
     // }
     // window.addEventListener('keydown', moveToNext);
     // window.addEventListener('click', router.push('/game'));
+
+    return () => {
+      console.log('unmounting');
+      window.cancelAnimationFrame(handleJoystickInput);
+    };
   }, []);
   return (
     <div className={styles.container}>
