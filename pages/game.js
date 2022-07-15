@@ -78,9 +78,9 @@ export default function Game() {
       // const rawScore =
       //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) * (hiddenTimer / 100);
       const rawScore =
-        pacman.dotsEaten * 5 +
-        pacman.iconsEaten * 50 +
-        pacman.monstersEaten * 150;
+        pacman.dotsEaten * 25 +
+        pacman.iconsEaten * 150 +
+        pacman.monstersEaten * 300;
       roundedScore = Math.ceil(rawScore / 5) * 5;
       setScore(roundedScore);
       tileMap.draw(ctx);
@@ -91,7 +91,7 @@ export default function Game() {
         if (loseTime) {
           loseTime = false;
           // const timeToRemove = 5000;
-          const timeToRemove = 20;
+          const timeToRemove = 5;
           if (hiddenTimer - timeToRemove <= 0) {
             hiddenTimer = 0;
           } else {
