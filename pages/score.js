@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Fullscreen from '../components/fullscreen';
 import router from 'next/router';
 import {
     getDatabase,
@@ -29,7 +28,7 @@ const scoreItems = [
     { user: 'DBI', email: '', score: '12900' },
 ];
 
-export default function Leaderboard() {
+export default function Score() {
     const [scoreItems, setScoreItems] = useState(null);
     const [yourInfo, setYourInfo] = useState([]);
     useEffect(() => {
@@ -80,15 +79,19 @@ export default function Leaderboard() {
                     className={styles.leaderboardIcon}
                 />
                 <div className={styles.grid}>
-                    {/* <div className={`${styles.score} ${styles.left}`}>
+                    <div className={`${styles.score} ${styles.left}`}>
                         <div className={styles.initials}>
+                            {/* <div>M</div> */}
                             <div>{yourInfo[0] && yourInfo[0].split('')[0]}</div>
+                            {/* <div>J</div> */}
                             <div>{yourInfo[0] && yourInfo[0].split('')[1]}</div>
+                            {/* <div>D</div> */}
                             <div>{yourInfo[0] && yourInfo[0].split('')[2]}</div>
                         </div>
                         <h2>YOUR SCORE</h2>
+                        {/* <h1>13770</h1> */}
                         <h1>{yourInfo && yourInfo[1]}</h1>
-                    </div> */}
+                    </div>
                     <BuildLeaderboard type='leaderboard' />
                     {/* <ul className={styles.leaderboard}>
             {scoreItems &&
@@ -115,10 +118,17 @@ export default function Leaderboard() {
                     </div>
                 </div>
             </main>
-            {/* <button className='progressButton' onClick={() => router.push('/')}>
-                Progress
-            </button> */}
-            <Fullscreen />
+            <button
+                className='progressButton'
+                onClick={() => router.push('/')}
+                style={{
+                    padding: '10px 20px',
+                    background: 'white',
+                    border: 'none',
+                }}
+            >
+                Restart
+            </button>
         </div>
     );
 }
