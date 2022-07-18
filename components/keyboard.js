@@ -78,7 +78,53 @@ function getKeyString(key) {
     }
 }
 
+let prevKey = null;
+
 export default function Keyboard() {
+    const [keySelected, setKeySelected] = useState(0);
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        // console.log(keyLayout[keySelected]);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [keySelected]);
+    function handleKeyDown(e) {
+        switch (e.key) {
+            case 'ArrowLeft':
+                if (keySelected - 1 >= 0) setKeySelected(keySelected - 1);
+                break;
+            case 'ArrowRight':
+                if (keySelected + 1 <= keyLayout.length - 1)
+                    setKeySelected(keySelected + 1);
+                break;
+            case 'ArrowUp':
+                if (keySelected === keyLayout.length - 1) {
+                    // setKeySelected(37);
+                    setKeySelected(prevKey);
+                } else if (keySelected === 31) {
+                    setKeySelected(20);
+                } else if (keySelected === 10) {
+                    setKeySelected(10);
+                } else if (keySelected - 10 >= 0) {
+                    setKeySelected(keySelected - 10);
+                }
+                break;
+            case 'ArrowDown':
+                if (keySelected === 0) {
+                    setKeySelected(11);
+                } else if (keySelected === 21) {
+                    setKeySelected(32);
+                } else if (keySelected + 10 <= keyLayout.length - 1) {
+                    prevKey = keySelected;
+                    setKeySelected(keySelected + 10);
+                } else {
+                    prevKey = keySelected;
+                    setKeySelected(keyLayout.length - 1);
+                }
+                break;
+        }
+    }
     return (
         <div className={styles.keyboard}>
             <div className={styles.keyContainer}>
@@ -89,6 +135,10 @@ export default function Keyboard() {
                         <>
                             <button
                                 className={`${styles.key} ${getKeyType(key)}`}
+                                style={{
+                                    border:
+                                        i === keySelected && 'solid white 1px',
+                                }}
                                 // style={{ marginRight: insertLineBreak && 10 }}
                             >
                                 {/* {key} */}
