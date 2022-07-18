@@ -118,7 +118,17 @@ export default function Keyboard({ getValue }) {
                 if (buttonPressed) {
                     allowButtons = false;
                     let str = inputRef.current;
-                    str += `${keyLayout[keySelectedRef.current]}`;
+                    switch (keyLayout[keySelectedRef.current]) {
+                        case 'backspace':
+                            str = str.length > 0 && str.slice(0, 1);
+                            break;
+                        case 'enter':
+                            // submit here
+                            break;
+                        default:
+                            str += `${keyLayout[keySelectedRef.current]}`;
+                            break;
+                    }
                     setInput(str);
                 }
             }
