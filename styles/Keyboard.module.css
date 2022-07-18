@@ -9,6 +9,12 @@
     text-align: center;
 }
 
+.keyboard p {
+    position: fixed;
+    bottom: 500px;
+    color: white;
+}
+
 .keyContainer {
     /* display: flex;
     flex-direction: row; */

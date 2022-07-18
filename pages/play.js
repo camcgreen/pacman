@@ -1,6 +1,12 @@
+import { useEffect, useState } from 'react';
 import Keyboard from '../components/keyboard';
 
 export default function Play() {
+    const [value, setValue] = useState('');
+    function handleGetValue(val) {
+        setValue(val);
+        // console.log(val);
+    }
     return (
         <div
             style={{
@@ -13,8 +19,10 @@ export default function Play() {
                 type='email'
                 id='keyboard-input'
                 style={{ width: 750, height: 30 }}
+                value={value}
+                readOnly
             />
-            <Keyboard />
+            <Keyboard getValue={handleGetValue} />
         </div>
     );
 }

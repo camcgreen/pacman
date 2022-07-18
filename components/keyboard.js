@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import useState from 'react-usestateref';
 import styles from '../styles/Keyboard.module.css';
 
 const keyLayout = [
@@ -23,7 +24,7 @@ const keyLayout = [
     'i',
     'o',
     'p',
-    'caps',
+    // 'caps',
     'a',
     's',
     'd',
@@ -45,7 +46,7 @@ const keyLayout = [
     '@',
     '.',
     '?',
-    'space',
+    // 'space',
 ];
 
 function getKeyType(key) {
@@ -79,17 +80,134 @@ function getKeyString(key) {
 }
 
 let prevKey = null;
+let allowJoystick = true;
+let allowButtons = true;
 
-export default function Keyboard() {
-    const [keySelected, setKeySelected] = useState(0);
+export default function Keyboard({ getValue }) {
+    const [keySelected, setKeySelected, keySelectedRef] = useState(0);
+    const [input, setInput, inputRef] = useState('');
+
+    function handleJoystickInput(keySelected) {
+        const gamepads = navigator.getGamepads();
+        const joystick = gamepads[0];
+        if (joystick) {
+            const left = joystick.axes[0] === -1;
+            const right = joystick.axes[0] === 1;
+            const up = joystick.axes[1] === -1;
+            const down = joystick.axes[1] === 1;
+            const buttonPressed =
+                joystick.buttons[0].pressed ||
+                joystick.buttons[1].pressed ||
+                joystick.buttons[2].pressed ||
+                joystick.buttons[3].pressed;
+
+            if (
+                !joystick.buttons[0].pressed &&
+                !joystick.buttons[1].pressed &&
+                !joystick.buttons[2].pressed &&
+                !joystick.buttons[3].pressed
+            ) {
+                allowButtons = true;
+            }
+
+            if (!left && !right && !up && !down) {
+                allowJoystick = true;
+            }
+
+            if (allowButtons) {
+                if (buttonPressed) {
+                    allowButtons = false;
+                    let str = inputRef.current;
+                    str += `${keyLayout[keySelectedRef.current]}`;
+                    setInput(str);
+                }
+            }
+
+            if (allowJoystick) {
+                if (left) {
+                    allowJoystick = false;
+                    if (keySelectedRef.current - 1 >= 0) {
+                        setKeySelected((keySelected) => keySelected - 1);
+                    }
+                } else if (right) {
+                    allowJoystick = false;
+                    if (keySelectedRef.current + 1 <= keyLayout.length - 1) {
+                        setKeySelected((keySelected) => keySelected + 1);
+                    }
+                } else if (up) {
+                    allowJoystick = false;
+                    // if (keySelectedRef.current === keyLayout.length - 1) {
+                    //     // setKeySelected(37);
+                    //     setKeySelected(prevKey);
+                    // }
+                    // else if (keySelectedRef.current === 31) {
+                    //     setKeySelected(20);
+                    // }
+                    if (keySelectedRef.current === 10) {
+                        setKeySelected(10);
+                    } else if (keySelectedRef.current - 10 >= 0) {
+                        setKeySelected((keySelected) => keySelected - 10);
+                    }
+                } else if (down) {
+                    allowJoystick = false;
+                    if (keySelectedRef.current === 0) {
+                        setKeySelected(11);
+                    }
+                    // else if (keySelectedRef.current === 21) {
+                    //     setKeySelected(32);
+                    // }
+                    else if (
+                        keySelectedRef.current + 10 <=
+                        keyLayout.length - 1
+                    ) {
+                        prevKey = keySelectedRef.current;
+                        setKeySelected((keySelected) => keySelected + 10);
+                    } else {
+                        prevKey = keySelectedRef.current;
+                        setKeySelected(keyLayout.length - 1);
+                    }
+                }
+            }
+            window.requestAnimationFrame(handleJoystickInput);
+        }
+    }
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keydown', handleEnter);
+        window.addEventListener('gamepadconnected', function (e) {
+            window.requestAnimationFrame(handleJoystickInput);
+        });
+        return () => {
+            window.removeEventListener('keydown', handleEnter);
+            window.cancelAnimationFrame(handleJoystickInput);
+            // window.cancelAnimationFrame(handleJoystickInput);
+        };
+    }, []);
+    useEffect(() => {
+        // window.addEventListener('gamepadconnected', function (e) {
+        //     window.requestAnimationFrame(handleJoystickInput);
+        // });
+        // window.addEventListener('keydown', handleEnter);
+        // window.addEventListener('keydown', handleKeyDown);
         // console.log(keyLayout[keySelected]);
         return () => {
-            window.removeEventListener('keydown', handleKeyDown);
+            // window.removeEventListener('keydown', handleKeyDown);
+            // window.removeEventListener('keydown', handleEnter);
+            // window.cancelAnimationFrame(handleJoystickInput);
         };
     }, [keySelected]);
+    useEffect(() => {
+        // setTimeout(() => window.addEventListener('keydown', handleEnter), 1000);
+        // window.addEventListener('keydown', handleEnter);
+        // console.log(keyLayout[keySelected]);
+        // console.log(input);
+        getValue(input);
+        return () => {
+            // window.removeEventListener('keydown', handleEnter);
+        };
+    }, [input]);
     function handleKeyDown(e) {
+        // setKeySelected(0);
+        // setKeySelected(keySelected);
         switch (e.key) {
             case 'ArrowLeft':
                 if (keySelected - 1 >= 0) setKeySelected(keySelected - 1);
@@ -125,6 +243,32 @@ export default function Keyboard() {
                 break;
         }
     }
+    function handleEnter(e) {
+        if (e.key === 'Enter') {
+            console.log('hey');
+            let str = inputRef.current;
+            console.log(str);
+            switch (keyLayout[keySelectedRef.current]) {
+                case 'backspace':
+                    str = str.length > 0 && str.slice(0, 1);
+                    break;
+                // case 'caps':
+                //  break
+                case 'enter':
+                    break;
+
+                // case 'space':
+                //     return '␣';
+                default:
+                    str += `${keyLayout[keySelectedRef.current]}`;
+                    break;
+            }
+
+            // let str = input + `${keyLayout[keySelected]}`;
+            // console.log(str);
+            setInput(str);
+        }
+    }
     return (
         <div className={styles.keyboard}>
             <div className={styles.keyContainer}>
@@ -139,9 +283,7 @@ export default function Keyboard() {
                                     border:
                                         i === keySelected && 'solid white 1px',
                                 }}
-                                // style={{ marginRight: insertLineBreak && 10 }}
                             >
-                                {/* {key} */}
                                 {getKeyString(key)}
                             </button>
                             <br
