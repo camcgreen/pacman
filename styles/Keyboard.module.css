@@ -1,0 +1,47 @@
+.keyboard {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    background: #004134;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.keyContainer {
+    /* display: flex;
+    flex-direction: row; */
+    width: 100%;
+}
+
+.key {
+    height: 45px;
+    width: 6%;
+    max-width: 65px;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+
+.keyWide {
+    width: 12%;
+    max-width: 140px;
+}
+
+.keyExtraWide {
+    width: 36%;
+    max-width: 500px;
+}
