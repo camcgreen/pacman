@@ -35,3 +35,9 @@ a {
   left: 50%;
   transform: translateX(-50%);
 }
+
+input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}

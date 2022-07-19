@@ -56,7 +56,7 @@ function getKeyType(key) {
         case 'caps':
             return `${styles.keyWide} ${styles.keyActivatable}`;
         case 'enter':
-            return `${styles.keyWide}`;
+            return `${styles.keyWide} ${styles.enter}`;
         case 'space':
             return `${styles.keyExtraWide}`;
         default:
@@ -82,10 +82,34 @@ function getKeyString(key) {
 let prevKey = null;
 let allowJoystick = true;
 let allowButtons = true;
+let strings = ['', '', '', ''];
+let string1 = '';
+let string2 = '';
+let string3 = '';
+let string4 = '';
+let check5 = false;
+let check6 = false;
 
-export default function Keyboard({ getValue }) {
+export default function Keyboard({
+    getValue,
+    hideKeyboard,
+    selectedInput,
+    getEnter,
+}) {
     const [keySelected, setKeySelected, keySelectedRef] = useState(0);
-    const [input, setInput, inputRef] = useState('');
+    // const [input, setInput, inputRef] = useState('');
+    const [input, setInput, inputRef] = useState([
+        '',
+        '',
+        '',
+        '',
+        false,
+        false,
+    ]);
+    const [hideKeyboardState, setHideKeyboardState, hideKeyboardStateRef] =
+        useState(true);
+    const [selectedInputState, setSelectedInputState, selectedInputStateRef] =
+        useState(0);
 
     function handleJoystickInput(keySelected) {
         const gamepads = navigator.getGamepads();
@@ -117,19 +141,152 @@ export default function Keyboard({ getValue }) {
             if (allowButtons) {
                 if (buttonPressed) {
                     allowButtons = false;
-                    let str = inputRef.current;
-                    switch (keyLayout[keySelectedRef.current]) {
-                        case 'backspace':
-                            str = str.length > 1 ? str.slice(0, 1) : '';
+                    // strings[selectedInputStateRef.current] = inputRef.current;
+                    // let str = '';
+                    switch (selectedInputStateRef.current) {
+                        case 0:
+                            string1 = inputRef.current[0];
                             break;
-                        case 'enter':
-                            // submit here
+                        case 1:
+                            string2 = inputRef.current[1];
                             break;
-                        default:
-                            str += `${keyLayout[keySelectedRef.current]}`;
+                        case 2:
+                            string3 = inputRef.current[2];
+                            break;
+                        case 3:
+                            string4 = inputRef.current[3];
+                            break;
+                        case 4:
+                            check5 = !check5;
+                            break;
+                        case 5:
+                            check6 = !check6;
                             break;
                     }
-                    setInput(str);
+                    if (!hideKeyboardStateRef.current) {
+                        // if (!hideKeyboard) {
+                        switch (keyLayout[keySelectedRef.current]) {
+                            case 'backspace':
+                                // str = str.length > 1 ? str.slice(0, -1) : '';
+                                // strings[selectedInputStateRef.current] =
+                                //     strings[selectedInputStateRef.current]
+                                //         .length > 1
+                                //         ? strings[
+                                //               selectedInputStateRef.current
+                                //           ].slice(0, -1)
+                                //         : '';
+                                // let stringToBackspace =
+                                //     strings[selectedInputStateRef.current];
+                                // setInput([stringToBackspace, ...strings]);
+
+                                switch (selectedInputStateRef.current) {
+                                    case 0:
+                                        let newString1 = string1
+                                            .toString()
+                                            .replace(/,/g, '');
+                                        newString1 = newString1.slice(0, -1);
+                                        string1 = newString1;
+                                        break;
+                                    case 1:
+                                        let newString2 = string2
+                                            .toString()
+                                            .replace(/,/g, '');
+                                        newString2 = newString2.slice(0, -1);
+                                        string2 = newString2;
+                                        break;
+                                    case 2:
+                                        let newString3 = string3
+                                            .toString()
+                                            .replace(/,/g, '');
+                                        newString3 = newString3.slice(0, -1);
+                                        string3 = newString3;
+                                        break;
+                                    case 3:
+                                        let newString4 = string4
+                                            .toString()
+                                            .replace(/,/g, '');
+                                        newString4 = newString4.slice(0, -1);
+                                        string4 = newString4;
+                                        break;
+                                }
+
+                                break;
+                            case 'enter':
+                                // submit here
+                                // sethideKeyboardState(true);
+                                getEnter();
+                                break;
+                            default:
+                                // str += `${keyLayout[keySelectedRef.current]}`;
+                                switch (selectedInputStateRef.current) {
+                                    case 0:
+                                        string1 += `${
+                                            keyLayout[keySelectedRef.current]
+                                        }`;
+                                        string1 = string1.replace(/,/g, '');
+                                        break;
+                                    case 1:
+                                        string2 += `${
+                                            keyLayout[keySelectedRef.current]
+                                        }`;
+                                        string2 = string2.replace(/,/g, '');
+                                        break;
+                                    case 2:
+                                        string3 += `${
+                                            keyLayout[keySelectedRef.current]
+                                        }`;
+                                        string3 = string3.replace(/,/g, '');
+                                        break;
+                                    case 3:
+                                        string4 += `${
+                                            keyLayout[keySelectedRef.current]
+                                        }`;
+                                        string4 = string4.replace(/,/g, '');
+                                        break;
+                                }
+
+                                // console.log(
+                                //     `currently ${
+                                //         strings[selectedInputStateRef.current]
+                                //     }`
+                                // );
+                                // console.log(
+                                //     `adding ${
+                                //         keyLayout[keySelectedRef.current]
+                                //     }`
+                                // );
+                                // strings[selectedInputStateRef.current] += `${
+                                //     keyLayout[keySelectedRef.current]
+                                // }`;
+                                // let newStr = strings[
+                                //     selectedInputStateRef.current
+                                // ].replace(/,/g, '');
+                                // // console.log(newStr);
+                                // strings[selectedInputStateRef.current] = newStr;
+                                // // strings[selectedInputStateRef.current] =
+                                // //     strings[selectedInputStateRef.current] +
+                                // //     'a';
+                                // // setInput([...strings]);
+                                break;
+                        }
+                        // setInput([...strings]);
+                        // setInput([
+                        //     string1,
+                        //     string2,
+                        //     string3,
+                        //     string4,
+                        //     check5,
+                        //     check6,
+                        // ]);
+                    }
+                    setInput([
+                        string1,
+                        string2,
+                        string3,
+                        string4,
+                        check5,
+                        check6,
+                    ]);
                 }
             }
 
@@ -193,6 +350,13 @@ export default function Keyboard({ getValue }) {
         };
     }, []);
     useEffect(() => {
+        setHideKeyboardState(hideKeyboard);
+        setKeySelected(0);
+    }, [hideKeyboard]);
+    useEffect(() => {
+        setSelectedInputState(selectedInput);
+    }, [selectedInput]);
+    useEffect(() => {
         // window.addEventListener('gamepadconnected', function (e) {
         //     window.requestAnimationFrame(handleJoystickInput);
         // });
@@ -255,12 +419,10 @@ export default function Keyboard({ getValue }) {
     }
     function handleEnter(e) {
         if (e.key === 'Enter') {
-            console.log('hey');
             let str = inputRef.current;
-            console.log(str);
             switch (keyLayout[keySelectedRef.current]) {
                 case 'backspace':
-                    str = str.length > 0 && str.slice(0, 1);
+                    str = str.length > 0 && str.slice(0, -1);
                     break;
                 // case 'caps':
                 //  break
@@ -275,12 +437,16 @@ export default function Keyboard({ getValue }) {
             }
 
             // let str = input + `${keyLayout[keySelected]}`;
-            // console.log(str);
             setInput(str);
         }
     }
     return (
-        <div className={styles.keyboard}>
+        <div
+            className={styles.keyboard}
+            style={{ display: hideKeyboard ? 'none' : 'block' }}
+            // key={hideKeyboard}
+            // style={{ display: 'block' }}
+        >
             <div className={styles.keyContainer}>
                 {keyLayout.map((key, i) => {
                     const insertLineBreak =
@@ -290,8 +456,14 @@ export default function Keyboard({ getValue }) {
                             <button
                                 className={`${styles.key} ${getKeyType(key)}`}
                                 style={{
+                                    // border:
+                                    //     i === keySelected && 'solid white 1px',
                                     border:
-                                        i === keySelected && 'solid white 1px',
+                                        keyLayout[i] === 'enter' &&
+                                        i === keySelected
+                                            ? 'solid black 3px'
+                                            : i === keySelected &&
+                                              'solid white 1px',
                                 }}
                             >
                                 {getKeyString(key)}
