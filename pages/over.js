@@ -21,6 +21,7 @@ const submitForm = (e, score) => {
         addDataToLeaderboard(initials, score, email, communications);
         localStorage.setItem('initials', initials);
     }
+    // localStorage.setItem('reloadTimes', 0);
     router.push('/score');
 };
 
@@ -57,10 +58,10 @@ export default function Over() {
     function handleEnter() {
         setEnterPressed(true);
     }
-    function handleJoystickInput() {
+    function handleJoystickSelection() {
         const gamepads = navigator.getGamepads();
         const joystick = gamepads[0];
-        if (joystick) {
+        if (joystick && router.pathname === '/over') {
             const left = joystick.axes[0] === -1;
             const right = joystick.axes[0] === 1;
             const up = joystick.axes[1] === -1;
@@ -167,20 +168,33 @@ export default function Over() {
                     }
                 }
             }
-            window.requestAnimationFrame(handleJoystickInput);
         }
+        window.requestAnimationFrame(handleJoystickSelection);
     }
     useEffect(() => {
+        let reloadTimes = localStorage.getItem('reloadTimes');
+        console.log(reloadTimes);
+        if (reloadTimes) {
+            if (reloadTimes > 0) {
+                // localStorage.setItem('reloadTimes', 0);
+            } else {
+                console.log('reloading once');
+                reloadTimes++;
+                localStorage.setItem('reloadTimes', reloadTimes);
+                router.reload();
+            }
+        }
         const deviceNumber = localStorage.getItem('device');
         const score = localStorage.getItem('score');
         fireBaseStartApp();
         setDevice(`Device${deviceNumber}`);
         setScore(score);
-        window.addEventListener('gamepadconnected', function (e) {
-            window.requestAnimationFrame(handleJoystickInput);
-        });
+        // window.addEventListener('gamepadconnected', function (e) {
+        window.requestAnimationFrame(handleJoystickSelection);
+        // });
         return () => {
-            window.cancelAnimationFrame(handleJoystickInput);
+            window.cancelAnimationFrame(handleJoystickSelection);
+            localStorage.setItem('reloadTimes', 0);
         };
     }, []);
     return (

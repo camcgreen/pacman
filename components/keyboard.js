@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { router } from 'next/router';
 import useState from 'react-usestateref';
 import styles from '../styles/Keyboard.module.css';
 
@@ -111,10 +112,10 @@ export default function Keyboard({
     const [selectedInputState, setSelectedInputState, selectedInputStateRef] =
         useState(0);
 
-    function handleJoystickInput(keySelected) {
+    function handleJoystickMovement(keySelected) {
         const gamepads = navigator.getGamepads();
         const joystick = gamepads[0];
-        if (joystick) {
+        if (joystick && router.pathname === '/over') {
             const left = joystick.axes[0] === -1;
             const right = joystick.axes[0] === 1;
             const up = joystick.axes[1] === -1;
@@ -335,18 +336,18 @@ export default function Keyboard({
                     }
                 }
             }
-            window.requestAnimationFrame(handleJoystickInput);
         }
+        window.requestAnimationFrame(handleJoystickMovement);
     }
     useEffect(() => {
         window.addEventListener('keydown', handleEnter);
-        window.addEventListener('gamepadconnected', function (e) {
-            window.requestAnimationFrame(handleJoystickInput);
-        });
+        // window.addEventListener('gamepadconnected', function (e) {
+        window.requestAnimationFrame(handleJoystickMovement);
+        // });
         return () => {
             window.removeEventListener('keydown', handleEnter);
-            window.cancelAnimationFrame(handleJoystickInput);
-            // window.cancelAnimationFrame(handleJoystickInput);
+            window.cancelAnimationFrame(handleJoystickMovement);
+            // window.cancelAnimationFrame(handleJoystickMovement);
         };
     }, []);
     useEffect(() => {
@@ -358,7 +359,7 @@ export default function Keyboard({
     }, [selectedInput]);
     useEffect(() => {
         // window.addEventListener('gamepadconnected', function (e) {
-        //     window.requestAnimationFrame(handleJoystickInput);
+        //     window.requestAnimationFrame(handleJoystickMovement);
         // });
         // window.addEventListener('keydown', handleEnter);
         // window.addEventListener('keydown', handleKeyDown);
@@ -366,7 +367,7 @@ export default function Keyboard({
         return () => {
             // window.removeEventListener('keydown', handleKeyDown);
             // window.removeEventListener('keydown', handleEnter);
-            // window.cancelAnimationFrame(handleJoystickInput);
+            // window.cancelAnimationFrame(handleJoystickMovement);
         };
     }, [keySelected]);
     useEffect(() => {
@@ -458,12 +459,15 @@ export default function Keyboard({
                                 style={{
                                     // border:
                                     //     i === keySelected && 'solid white 1px',
-                                    border:
-                                        keyLayout[i] === 'enter' &&
-                                        i === keySelected
-                                            ? 'solid black 3px'
-                                            : i === keySelected &&
-                                              'solid white 1px',
+                                    // border:
+                                    //     keyLayout[i] === 'enter' &&
+                                    //     i === keySelected
+                                    //         ? 'solid black 3px'
+                                    //         : i === keySelected &&
+                                    //           'solid white 1px',
+                                    backgroundColor:
+                                        i === keySelected && 'white',
+                                    color: i === keySelected && 'black',
                                 }}
                             >
                                 {getKeyString(key)}

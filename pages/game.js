@@ -71,7 +71,7 @@ export default function Game() {
                 gameStarted = true;
                 themeAudio.play();
             }
-            pacman.handleJoystickMovement();
+            pacman.handleJoystickPlay();
             // console.log(pacman.iconsEaten);
             // const rawScore =
             //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) *

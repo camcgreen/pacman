@@ -8,7 +8,8 @@ import SetDeviceInput from '../components/setDeviceInput';
 function handleJoystickInput() {
     const gamepads = navigator.getGamepads();
     const joystick = gamepads[0];
-    if (joystick) {
+    // console.log(joystick);
+    if (joystick && router.pathname === '/') {
         const buttonPressed =
             // joystick.axes[0] !== 0 ||
             // joystick.axes[1] !== 0 ||
@@ -17,17 +18,18 @@ function handleJoystickInput() {
             joystick.buttons[2].pressed ||
             joystick.buttons[3].pressed;
         if (buttonPressed) {
-            if (router.pathname === '/') router.push('/game');
+            router.push('/game');
+            // if (router.pathname === '/') router.push('/game');
         }
-        window.requestAnimationFrame(handleJoystickInput);
     }
+    window.requestAnimationFrame(handleJoystickInput);
 }
 
 export default function Home() {
     useEffect(() => {
-        window.addEventListener('gamepadconnected', function (e) {
-            window.requestAnimationFrame(handleJoystickInput);
-        });
+        // window.addEventListener('gamepadconnected', function (e) {
+        window.requestAnimationFrame(handleJoystickInput);
+        // });
         return () => {
             console.log('unmounting');
             window.cancelAnimationFrame(handleJoystickInput);
