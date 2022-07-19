@@ -111,6 +111,7 @@ export default function Keyboard({
         useState(true);
     const [selectedInputState, setSelectedInputState, selectedInputStateRef] =
         useState(0);
+    const animationRef = useRef(0);
 
     function handleJoystickMovement(keySelected) {
         const gamepads = navigator.getGamepads();
@@ -337,17 +338,36 @@ export default function Keyboard({
                 }
             }
         }
-        window.requestAnimationFrame(handleJoystickMovement);
+        // window.requestAnimationFrame(handleJoystickMovement);
+        animationRef.current = window.requestAnimationFrame(
+            handleJoystickMovement
+        );
     }
     useEffect(() => {
+        const formSubmitted = localStorage.getItem('formSubmitted');
+        if (formSubmitted) {
+            localStorage.setItem('formSubmitted', false);
+            string1 = '';
+            string2 = '';
+            string3 = '';
+            string4 = '';
+            check5 = false;
+            check6 = false;
+            setInput([string1, string2, string3, string4, check5, check6]);
+        }
         window.addEventListener('keydown', handleEnter);
         // window.addEventListener('gamepadconnected', function (e) {
-        window.requestAnimationFrame(handleJoystickMovement);
+        // window.requestAnimationFrame(handleJoystickMovement);
+        animationRef.current = window.requestAnimationFrame(
+            handleJoystickMovement
+        );
+
         // });
         return () => {
             window.removeEventListener('keydown', handleEnter);
-            window.cancelAnimationFrame(handleJoystickMovement);
             // window.cancelAnimationFrame(handleJoystickMovement);
+            // window.cancelAnimationFrame(handleJoystickMovement);
+            window.cancelAnimationFrame(animationRef.current);
         };
     }, []);
     useEffect(() => {

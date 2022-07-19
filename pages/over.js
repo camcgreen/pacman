@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import useState from 'react-usestateref';
 import Head from 'next/head';
 import styles from '../styles/Over.module.css';
@@ -20,6 +20,7 @@ const submitForm = (e, score) => {
     if (score) {
         addDataToLeaderboard(initials, score, email, communications);
         localStorage.setItem('initials', initials);
+        localStorage.setItem('formSubmitted', true);
     }
     // localStorage.setItem('reloadTimes', 0);
     router.push('/score');
@@ -52,6 +53,7 @@ export default function Over() {
     const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
     const [values, setValues] = useState('');
     const [enterPressed, setEnterPressed, enterPressedRef] = useState(false);
+    const animationRef = useRef(0);
     function handleGetValue(values) {
         setValues(values);
     }
@@ -169,31 +171,38 @@ export default function Over() {
                 }
             }
         }
-        window.requestAnimationFrame(handleJoystickSelection);
+        // window.requestAnimationFrame(handleJoystickSelection);
+        animationRef.current = window.requestAnimationFrame(
+            handleJoystickSelection
+        );
     }
     useEffect(() => {
-        let reloadTimes = localStorage.getItem('reloadTimes');
-        console.log(reloadTimes);
-        if (reloadTimes) {
-            if (reloadTimes > 0) {
-                // localStorage.setItem('reloadTimes', 0);
-            } else {
-                console.log('reloading once');
-                reloadTimes++;
-                localStorage.setItem('reloadTimes', reloadTimes);
-                router.reload();
-            }
-        }
+        // let reloadTimes = localStorage.getItem('reloadTimes');
+        // console.log(reloadTimes);
+        // if (reloadTimes) {
+        //     if (reloadTimes > 0) {
+        //         // localStorage.setItem('reloadTimes', 0);
+        //     } else {
+        //         console.log('reloading once');
+        //         reloadTimes++;
+        //         localStorage.setItem('reloadTimes', reloadTimes);
+        //         router.reload();
+        //     }
+        // }
         const deviceNumber = localStorage.getItem('device');
         const score = localStorage.getItem('score');
         fireBaseStartApp();
         setDevice(`Device${deviceNumber}`);
         setScore(score);
         // window.addEventListener('gamepadconnected', function (e) {
-        window.requestAnimationFrame(handleJoystickSelection);
+        // window.requestAnimationFrame(handleJoystickSelection);
+        animationRef.current = window.requestAnimationFrame(
+            handleJoystickSelection
+        );
         // });
         return () => {
-            window.cancelAnimationFrame(handleJoystickSelection);
+            // window.cancelAnimationFrame(handleJoystickSelection);
+            window.cancelAnimationFrame(animationRef.current);
             localStorage.setItem('reloadTimes', 0);
         };
     }, []);
