@@ -120,7 +120,7 @@ export default function Keyboard({ getValue }) {
                     let str = inputRef.current;
                     switch (keyLayout[keySelectedRef.current]) {
                         case 'backspace':
-                            str = str.length > 0 && str.slice(0, 1);
+                            str = str.length > 1 ? str.slice(0, 1) : '';
                             break;
                         case 'enter':
                             // submit here
