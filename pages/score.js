@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import router from 'next/router';
 import {
     getDatabase,
@@ -13,7 +13,7 @@ import {
     tableData,
 } from '../components/firebaseComponent';
 import Head from 'next/head';
-import styles from '../styles/Leaderboard.module.css';
+import styles from '../styles/Score.module.css';
 
 const scoreItems = [
     { user: 'AWC', email: '', score: '18355' },
@@ -31,6 +31,28 @@ const scoreItems = [
 export default function Score() {
     const [scoreItems, setScoreItems] = useState(null);
     const [yourInfo, setYourInfo] = useState([]);
+    const animationRef1 = useRef(0);
+    function handleJoystickButton() {
+        const gamepads = navigator.getGamepads();
+        const joystick = gamepads[0];
+        // console.log(joystick);
+        if (joystick && router.pathname === '/score') {
+            const buttonPressed =
+                // joystick.axes[0] !== 0 ||
+                // joystick.axes[1] !== 0 ||
+                joystick.buttons[0].pressed ||
+                joystick.buttons[1].pressed ||
+                joystick.buttons[2].pressed ||
+                joystick.buttons[3].pressed;
+            if (buttonPressed) {
+                router.push('/');
+                // if (router.pathname === '/') router.push('/game');
+            }
+        }
+        // window.requestAnimationFrame(handleJoystickButton);
+        animationRef1.current =
+            window.requestAnimationFrame(handleJoystickButton);
+    }
     useEffect(() => {
         // // setTimeout(() => BuildLeaderboard(), 2000);
         // fireBaseStartApp();
@@ -60,6 +82,13 @@ export default function Score() {
         const yourScore = localStorage.getItem('score');
         setYourInfo([yourInitials, yourScore]);
         // console.log(yourInfo[0].split('')[0]);
+        // window.requestAnimationFrame(handleJoystickButton);
+        animationRef1.current =
+            window.requestAnimationFrame(handleJoystickButton);
+        return () => {
+            // window.cancelAnimationFrame(handleJoystickButton);
+            window.cancelAnimationFrame(animationRef1.current);
+        };
     }, []);
     return (
         <div className={styles.container}>
