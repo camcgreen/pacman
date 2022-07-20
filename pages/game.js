@@ -83,8 +83,8 @@ export default function Game() {
                 pacman.iconsEaten * 150 +
                 pacman.monstersEaten * 300;
             let rawScore;
-            if (addedScore - timesHit * 100 >= 0) {
-                rawScore = addedScore - timesHit * 100;
+            if (addedScore - timesHit * 200 >= 0) {
+                rawScore = addedScore - timesHit * 200;
             } else {
                 rawScore = 0;
                 timesHit = 0;
