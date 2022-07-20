@@ -28,6 +28,8 @@ const scoreItems = [
     { user: 'DBI', email: '', score: '12900' },
 ];
 
+let allowButtons = false;
+
 export default function Score() {
     const [scoreItems, setScoreItems] = useState(null);
     const [yourInfo, setYourInfo] = useState([]);
@@ -37,6 +39,15 @@ export default function Score() {
         const joystick = gamepads[0];
         // console.log(joystick);
         if (joystick && router.pathname === '/score') {
+            if (
+                !joystick.buttons[0].pressed &&
+                !joystick.buttons[1].pressed &&
+                !joystick.buttons[2].pressed &&
+                !joystick.buttons[3].pressed
+            ) {
+                // console.log('allow');
+                allowButtons = true;
+            }
             const buttonPressed =
                 // joystick.axes[0] !== 0 ||
                 // joystick.axes[1] !== 0 ||
@@ -45,7 +56,10 @@ export default function Score() {
                 joystick.buttons[2].pressed ||
                 joystick.buttons[3].pressed;
             if (buttonPressed) {
-                router.push('/');
+                if (allowButtons) {
+                    allowButtons = false;
+                    router.push('/');
+                }
                 // if (router.pathname === '/') router.push('/game');
             }
         }
