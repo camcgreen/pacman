@@ -68,7 +68,8 @@ export default function Game() {
         function gameLoop() {
             if (pacman.madeFirstMove && !gameStarted) {
                 // setTimer(90 * 1000);
-                setTimer(90);
+                // setTimer(90);
+                setTimer(hiddenTimer);
                 gameStarted = true;
                 themeAudio.play();
             }
@@ -102,24 +103,31 @@ export default function Game() {
                 const overlay = document.getElementById('overlay');
                 if (loseTime) {
                     loseTime = false;
-                    // const timeToRemove = 5000;
-                    console.log('hit');
                     timesHit++;
-                    // rawScore;
-                    const timeToRemove = 0;
-                    if (hiddenTimer - timeToRemove <= 0) {
-                        hiddenTimer = 0;
-                    } else {
-                        hiddenTimer -= timeToRemove;
-                    }
+                    // console.log('hit');
+                    // const timeToRemove = 0;
+                    // if (hiddenTimer - timeToRemove <= 0) {
+                    //     hiddenTimer = 0;
+                    // } else {
+                    //     hiddenTimer -= timeToRemove;
+                    // }
                     if (overlay) {
                         overlay.style.opacity = 0.2;
                         setTimeout(() => (overlay.style.opacity = 0), 400);
                     }
+                    loseTimeout = setTimeout(() => {
+                        loseTime = true;
+                        // console.log('---end of iframes---');
+                    }, 2000);
+                } else {
+                    // console.log('iframe');
                 }
                 // setTimeout(() => (loseTime = true), 2000);
-                clearTimeout(loseTimeout);
-                loseTimeout = setTimeout(() => (loseTime = true), 2000);
+                // clearTimeout(loseTimeout);
+                // loseTimeout = setTimeout(() => {
+                //     loseTime = true;
+                //     console.log(`loseTime=${loseTime}`);
+                // }, 2000);
             }
             checkGameOver();
             checkGameWin();
@@ -205,6 +213,7 @@ export default function Game() {
         // setTimeout(() => (gameStarted = true), 2000);
         return () => {
             clearTimeout(loseTimeout);
+            clearInterval(gameInterval);
         };
     }, []);
     useEffect(() => {
