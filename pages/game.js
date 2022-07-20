@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { router } from 'next/router';
+import PlausibleProvider from 'next-plausible';
 import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
 import {
@@ -232,59 +233,61 @@ export default function Game() {
     //   return () => clearInterval(interval);
     // }, [countdownToStart]);
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Samsung Arcade</title>
-                <meta name='description' content='Samsung Arcade' />
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
-            <img src='/bg.svg' className={styles.bg}></img>
-            <main>
-                <div className={styles.time}>
-                    <h4>TIME REMAINING</h4>
-                    {/* <h1>47.07</h1> */}
-                    {/* <h1>{timer ? timer / 1000 : '90.00'}</h1> */}
-                    <h1>{timer ? timer : '90'}</h1>
+        <PlausibleProvider domain='catchghosts.vercel.app'>
+            <div className={styles.container}>
+                <Head>
+                    <title>Samsung Arcade</title>
+                    <meta name='description' content='Samsung Arcade' />
+                    <link rel='icon' href='/favicon.ico' />
+                </Head>
+                <img src='/bg.svg' className={styles.bg}></img>
+                <main>
+                    <div className={styles.time}>
+                        <h4>TIME REMAINING</h4>
+                        {/* <h1>47.07</h1> */}
+                        {/* <h1>{timer ? timer / 1000 : '90.00'}</h1> */}
+                        <h1>{timer ? timer : '90'}</h1>
+                    </div>
+                    <canvas id='gameCanvas'></canvas>
+                    <div className={styles.score}>
+                        <h4>SCORE</h4>
+                        <h1>{score}</h1>
+                        <br />
+                        <br />
+                        <h4>HIGH SCORE</h4>
+                        {/* <h1>18355</h1> */}
+                        {/* <h1>{highScore}</h1> */}
+                        <BuildLeaderboard type='highScore' />
+                        {/* <HighScoreComp /> */}
+                    </div>
+                </main>
+                <div className={styles.overlay} id='overlay'></div>
+                <div className={styles.finishOverlay} id='finish-overlay'></div>
+                <button
+                    className='progressButton'
+                    onClick={() => router.push('/over')}
+                >
+                    Progress
+                </button>
+                {/* <div className={styles.countdownToStart}>{countdownToStart}</div> */}
+                <div
+                    className={`${styles.popup} ${styles.winPopup}`}
+                    id='win-popup'
+                >
+                    {/* <h1>YOU WON</h1> */}
+                    <h1>GAME OVER</h1>
+                    <p>{`Score: ${score}`}</p>
                 </div>
-                <canvas id='gameCanvas'></canvas>
-                <div className={styles.score}>
-                    <h4>SCORE</h4>
-                    <h1>{score}</h1>
-                    <br />
-                    <br />
-                    <h4>HIGH SCORE</h4>
-                    {/* <h1>18355</h1> */}
-                    {/* <h1>{highScore}</h1> */}
-                    <BuildLeaderboard type='highScore' />
-                    {/* <HighScoreComp /> */}
+                <div
+                    className={`${styles.popup} ${styles.losePopup}`}
+                    id='lose-popup'
+                >
+                    <h1>YOU LOST</h1>
                 </div>
-            </main>
-            <div className={styles.overlay} id='overlay'></div>
-            <div className={styles.finishOverlay} id='finish-overlay'></div>
-            <button
-                className='progressButton'
-                onClick={() => router.push('/over')}
-            >
-                Progress
-            </button>
-            {/* <div className={styles.countdownToStart}>{countdownToStart}</div> */}
-            <div
-                className={`${styles.popup} ${styles.winPopup}`}
-                id='win-popup'
-            >
-                {/* <h1>YOU WON</h1> */}
-                <h1>GAME OVER</h1>
-                <p>{`Score: ${score}`}</p>
+                <audio loop style={{ display: 'none' }} id='theme-audio'>
+                    <source src='/sounds/theme.mp3' type='audio/mpeg' />
+                </audio>
             </div>
-            <div
-                className={`${styles.popup} ${styles.losePopup}`}
-                id='lose-popup'
-            >
-                <h1>YOU LOST</h1>
-            </div>
-            <audio loop style={{ display: 'none' }} id='theme-audio'>
-                <source src='/sounds/theme.mp3' type='audio/mpeg' />
-            </audio>
-        </div>
+        </PlausibleProvider>
     );
 }

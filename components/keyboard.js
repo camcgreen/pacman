@@ -226,18 +226,27 @@ export default function Keyboard({
                                             keyLayout[keySelectedRef.current]
                                         }`;
                                         string1 = string1.replace(/,/g, '');
+                                        if (string1.length > 1) {
+                                            string1 = string1.slice(0, 1);
+                                        }
                                         break;
                                     case 1:
                                         string2 += `${
                                             keyLayout[keySelectedRef.current]
                                         }`;
                                         string2 = string2.replace(/,/g, '');
+                                        if (string2.length > 1) {
+                                            string2 = string2.slice(0, 1);
+                                        }
                                         break;
                                     case 2:
                                         string3 += `${
                                             keyLayout[keySelectedRef.current]
                                         }`;
                                         string3 = string3.replace(/,/g, '');
+                                        if (string3.length > 1) {
+                                            string3 = string3.slice(0, 1);
+                                        }
                                         break;
                                     case 3:
                                         string4 += `${
