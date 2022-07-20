@@ -102,17 +102,13 @@ export default function Leaderboard() {
                 );
               })}
           </ul> */}
-                    <div className={`${styles.score} ${styles.right}`}>
+                    {/* <div className={`${styles.score} ${styles.right}`}>
                         <div className={styles.initials}>
-                            {/* <div>{scoreItems && scoreItems[0].Alias.split('')[0]}</div>
-              <div>{scoreItems && scoreItems[0].Alias.split('')[1]}</div>
-              <div>{scoreItems && scoreItems[0].Alias.split('')[2]}</div> */}
                             <BuildLeaderboard type='highInitials' />
                         </div>
                         <h2>HIGH SCORE</h2>
-                        {/* <h1>{scoreItems && scoreItems[0].score}</h1> */}
                         <BuildLeaderboard type='highScore' />
-                    </div>
+                    </div> */}
                 </div>
             </main>
             {/* <button className='progressButton' onClick={() => router.push('/')}>
