@@ -81,7 +81,8 @@ export default function Game() {
             // const rawScore =
             //   (pacman.dotsEaten * 555 + pacman.iconsEaten * 55) * (hiddenTimer / 100);
             let addedScore =
-                pacman.dotsEaten * 25 +
+                // pacman.dotsEaten * 25 +
+                pacman.dotsEaten * 30 +
                 // pacman.iconsEaten * 150 +
                 pacman.iconsEaten * 200 +
                 pacman.monstersEaten * 300;
