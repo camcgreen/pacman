@@ -17,13 +17,21 @@ const submitForm = (e, score) => {
         `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
     const email = e.target[3].value;
     const communications = e.target[4].checked;
-    if (score) {
+    const age = e.target[5].checked;
+    const privacy = e.target[6].checked;
+    if (score && initials && email && age && privacy) {
+        // console.log('proper');
         addDataToLeaderboard(initials, score, email, communications);
         localStorage.setItem('initials', initials);
         localStorage.setItem('formSubmitted', true);
+        router.push('/score');
+    } else {
+        // console.log('improper');
+        localStorage.setItem('formSubmitted', true);
+        router.push('/');
     }
     // localStorage.setItem('reloadTimes', 0);
-    router.push('/score');
+    // router.push('/score');
 };
 
 // const submitForm = (score) => {
@@ -45,13 +53,10 @@ let allowJoystick = true;
 let allowButtons = true;
 
 export default function Over() {
-    // const [score, setScore] = useState(0);
-    const [score, setScore, scoreRef] = useState(0);
-    const [selectedInput, setSelectedInput, selectedInputRef] = useState(0);
-    // const [allowInputChange, setAllowInputChange, allowInputChangeRef] =
-    //     useState(true);
-    const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
-    const [values, setValues] = useState('');
+    const [score, setScore, scoreRef] = useState(7);
+    const [selectedInput, setSelectedInput, selectedInputRef] = useState(7);
+    // const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
+    // const [values, setValues] = useState('');
     const [enterPressed, setEnterPressed, enterPressedRef] = useState(false);
     const animationRef = useRef(0);
     function handleGetValue(values) {
@@ -132,43 +137,43 @@ export default function Over() {
             }
 
             if (allowJoystick) {
-                if (left) {
-                    allowJoystick = false;
-                    if (
-                        selectedInputRef.current - 1 >= 0 &&
-                        // allowInputChangeRef.current
-                        hideKeyboardRef.current
-                    ) {
-                        setSelectedInput((selectedInput) => selectedInput - 1);
-                    }
-                } else if (right) {
-                    allowJoystick = false;
-                    if (
-                        selectedInputRef.current + 1 <= 7 &&
-                        // allowInputChangeRef.current
-                        hideKeyboardRef.current
-                    ) {
-                        setSelectedInput((selectedInput) => selectedInput + 1);
-                    }
-                } else if (up) {
-                    allowJoystick = false;
-                    if (
-                        selectedInputRef.current - 1 >= 0 &&
-                        // allowInputChangeRef.current
-                        hideKeyboardRef.current
-                    ) {
-                        setSelectedInput((selectedInput) => selectedInput - 1);
-                    }
-                } else if (down) {
-                    allowJoystick = false;
-                    if (
-                        selectedInputRef.current + 1 <= 7 &&
-                        // allowInputChangeRef.current
-                        hideKeyboardRef.current
-                    ) {
-                        setSelectedInput((selectedInput) => selectedInput + 1);
-                    }
-                }
+                // if (left) {
+                //     allowJoystick = false;
+                //     if (
+                //         selectedInputRef.current - 1 >= 0 &&
+                //         // allowInputChangeRef.current
+                //         hideKeyboardRef.current
+                //     ) {
+                //         setSelectedInput((selectedInput) => selectedInput - 1);
+                //     }
+                // } else if (right) {
+                //     allowJoystick = false;
+                //     if (
+                //         selectedInputRef.current + 1 <= 7 &&
+                //         // allowInputChangeRef.current
+                //         hideKeyboardRef.current
+                //     ) {
+                //         setSelectedInput((selectedInput) => selectedInput + 1);
+                //     }
+                // } else if (up) {
+                //     allowJoystick = false;
+                //     if (
+                //         selectedInputRef.current - 1 >= 0 &&
+                //         // allowInputChangeRef.current
+                //         hideKeyboardRef.current
+                //     ) {
+                //         setSelectedInput((selectedInput) => selectedInput - 1);
+                //     }
+                // } else if (down) {
+                //     allowJoystick = false;
+                //     if (
+                //         selectedInputRef.current + 1 <= 7 &&
+                //         // allowInputChangeRef.current
+                //         hideKeyboardRef.current
+                //     ) {
+                //         setSelectedInput((selectedInput) => selectedInput + 1);
+                //     }
+                // }
             }
         }
         // window.requestAnimationFrame(handleJoystickSelection);
@@ -237,36 +242,36 @@ export default function Over() {
                             id='initial0'
                             maxLength='1'
                             // readOnly
-                            value={values && values[0]}
-                            required
-                            style={{
-                                border:
-                                    selectedInput === 0 && 'solid #E5007E 2px',
-                            }}
+                            // value={values && values[0]}
+                            // required
+                            // style={{
+                            //     border:
+                            //         selectedInput === 0 && 'solid #E5007E 2px',
+                            // }}
                         />
                         <input
                             type='text'
                             id='initial1'
                             maxLength='1'
-                            value={values && values[1]}
-                            required
+                            // value={values && values[1]}
+                            // required
                             // readOnly
-                            style={{
-                                border:
-                                    selectedInput === 1 && 'solid #E5007E 2px',
-                            }}
+                            // style={{
+                            //     border:
+                            //         selectedInput === 1 && 'solid #E5007E 2px',
+                            // }}
                         />
                         <input
                             type='text'
                             id='initial2'
                             maxLength='1'
-                            value={values && values[2]}
-                            required
+                            // value={values && values[2]}
+                            // required
                             // readOnly
-                            style={{
-                                border:
-                                    selectedInput === 2 && 'solid #E5007E 2px',
-                            }}
+                            // style={{
+                            //     border:
+                            //         selectedInput === 2 && 'solid #E5007E 2px',
+                            // }}
                         />
                     </div>
                     <h2>PLEASE ENTER YOUR EMAIL</h2>
@@ -274,12 +279,12 @@ export default function Over() {
                         type='email'
                         id='email'
                         className={styles.marginBelow}
-                        value={values && values[3]}
-                        required
+                        // value={values && values[3]}
+                        // required
                         // readOnly
-                        style={{
-                            border: selectedInput === 3 && 'solid #E5007E 2px',
-                        }}
+                        // style={{
+                        //     border: selectedInput === 3 && 'solid #E5007E 2px',
+                        // }}
                     />
                     <br />
                     <div className={styles.checkboxes}>
@@ -294,13 +299,13 @@ export default function Over() {
                                 type='checkbox'
                                 id='comms'
                                 name='comms'
-                                checked={values && values[4]}
+                                // checked={values && values[4]}
                                 className={styles.checkbox}
-                                style={{
-                                    border:
-                                        selectedInput === 4 &&
-                                        'solid #E5007E 2px',
-                                }}
+                                // style={{
+                                //     border:
+                                //         selectedInput === 4 &&
+                                //         'solid #E5007E 2px',
+                                // }}
                             />
                             <label htmlFor='comms'>
                                 CHECK THE BOX TO OPT IN TO MARKETING FROM
@@ -319,13 +324,13 @@ export default function Over() {
                                 id='age'
                                 name='age'
                                 className={styles.checkbox}
-                                checked={values && values[5]}
-                                required
-                                style={{
-                                    border:
-                                        selectedInput === 5 &&
-                                        'solid #E5007E 2px',
-                                }}
+                                // checked={values && values[5]}
+                                // required
+                                // style={{
+                                //     border:
+                                //         selectedInput === 5 &&
+                                //         'solid #E5007E 2px',
+                                // }}
                             />
                             <label htmlFor='age'>
                                 BY CHECKING THE BOX, I CONFIRM I AM OVER 18 AND
@@ -345,13 +350,13 @@ export default function Over() {
                                 id='privacy'
                                 name='privacy'
                                 className={styles.checkbox}
-                                checked={values && values[6]}
-                                required
-                                style={{
-                                    border:
-                                        selectedInput === 6 &&
-                                        'solid #E5007E 2px',
-                                }}
+                                // checked={values && values[6]}
+                                // required
+                                // style={{
+                                //     border:
+                                //         selectedInput === 6 &&
+                                //         'solid #E5007E 2px',
+                                // }}
                             />
                             <label htmlFor='privacy'>
                                 BY CHECKING THE BOX, I AGREE TO PRS PRIVACY
@@ -391,7 +396,7 @@ export default function Over() {
                             name='privacy'
                             className={styles.checkbox}
                             checked={values && values[5]}
-                            required
+                            // required
                         />
                     </div> */}
                     <br />
@@ -421,13 +426,13 @@ export default function Over() {
                     <img src='/qr-2.svg' alt='' />
                 </div>
             </main>
-            <Keyboard
+            {/* <Keyboard
                 getValue={handleGetValue}
                 getEnter={handleEnter}
                 selectedInput={selectedInput}
                 hideKeyboard={hideKeyboard}
                 // keyboardInactive={hideKeyboardRef.current}
-            />
+            /> */}
             <button
                 className='progressButton'
                 onClick={() => router.push('/score')}
