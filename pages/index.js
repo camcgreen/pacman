@@ -77,13 +77,29 @@ export default function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <img src='/bg.svg' className={styles.bg}></img>
-            <img src='/bg-icons.svg' className={styles.bgIcons}></img>
+            {/* <img src='/bg-icons.svg' className={styles.bgIcons}></img> */}
+            <img src='/bg-icons-2.svg' className={styles.bgIcons}></img>
             <main>
-                <h3>WELCOME TO THE</h3>
-                <img src='/samsung.png' className={styles.samsung} />
+                {/* <h3>WELCOME TO THE</h3>
+                <img src='/samsung.png' className={styles.samsung} /> */}
                 <img src='/arcade.png' className={styles.arcade} />
-                <img src='/play.png' className={styles.play} />
+                <img src='/zflipchase.png' className={styles.zFlipChase} />
+                {/* <img src='/play.png' className={styles.play} /> */}
                 {/* <h3>MOVE JOYSTICK TO START PLAYING</h3> */}
+                <p>
+                    Score as many points as you can by eating the dots as you
+                    move through the maze.
+                </p>
+                <p>
+                    Eat the flashing pink dots to turn the aliens pink and eat
+                    them to earn bonus points.
+                </p>
+                <p>
+                    Avoid the blue aliens or risk getting eaten and losing
+                    points.
+                </p>
+                <p>Eat the Samsung products to earn bonus points.</p>
+                <p>Be quick – you only have 90 seconds!</p>
                 <h3>PRESS ANY BUTTON TO START PLAYING</h3>
                 {/* <p>
           PLAYERS MUST BE 18 YEARS OLD OR OVER TO BE ELIGIBLE TO WIN A SAMSUNG
