@@ -69,16 +69,21 @@ export default function Leaderboard() {
                 <meta name='description' content='Samsung Arcade' />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <img src='/bg.svg' className={styles.bg}></img>
-            <img src='/bg-icons.svg' className={styles.bgIcons}></img>
+            {/* <img src='/bg.svg' className={styles.bg}></img> */}
+            <img src='/bg-2.svg' className={styles.bg}></img>
+            {/* <img src='/bg-icons.svg' className={styles.bgIcons}></img> */}
             <main>
-                {
-                    // CHANGE THIS TO LEADERBOARD NOT ARCADE
-                }
+                <img src='/zflipchase.png' className={styles.zFlipChase} />
                 <img
                     src='/leaderboard.png'
                     className={styles.leaderboardIcon}
                 />
+                <p className={styles.explain}>
+                    Top the leaderboard for your chance to win a{' '}
+                    <span>
+                        Galaxy Z Flip3 , Buds Pro and Z Flip3 Silicone Cover.*
+                    </span>
+                </p>
                 <div className={styles.grid}>
                     {/* <div className={`${styles.score} ${styles.left}`}>
                         <div className={styles.initials}>

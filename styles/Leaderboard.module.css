@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     font-size: 3rem;
+    /* transform: translateY(-100px); */
 }
 
 .bg {
@@ -12,6 +13,7 @@
     object-fit: cover;
     position: fixed;
     z-index: 1;
+    transform: translateY(125px);
 }
 
 .bgIcons {
@@ -34,11 +36,29 @@
     align-items: center;
 }
 
+.zFlipChase {
+    /* width: 1400px; */
+    /* width: 90%; */
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
 .leaderboardIcon {
     /* width: 50%; */
-    width: 90%;
+    width: 60%;
     /* margin-bottom: 60px; */
-    margin-bottom: 120px;
+    margin-bottom: 80px;
+}
+
+.explain {
+    max-width: 90%;
+    font-size: 3rem;
+    margin-bottom: 80px;
+    font-weight: 500;
+}
+
+.explain span {
+    color: var(--colPink)
 }
 
 .grid {
@@ -113,7 +133,7 @@
 
 .leaderboard {
     /* THIS WILL NEED ADJUSTING AS PROB SHOULDN'T HARD CODE THIS */
-    width: 437px;
+    width: 650px;
     display: grid;
     grid-auto-columns: 1fr;
     grid-row-gap: 10px;
@@ -123,13 +143,19 @@
 
 .leaderboard li {
     display: grid;
-    grid-template-columns: 100px 200px 0px;
+    grid-template-columns: 100px 400px 0px;
     text-align: left;
+    font-size: 4rem;
+    font-weight: 700;
 }
 
 .leaderboard li p:first-of-type {
     /* margin-right: 20px; */
     text-align: left;
+}
+
+.leaderboard li:last-of-type {
+    margin-bottom: 100px;
 }
 
 .leaderboard li p:nth-of-type(2) {
