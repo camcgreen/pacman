@@ -133,7 +133,7 @@ export default function Score() {
                         {/* <h1>13770</h1> */}
                         <h1>{yourInfo && yourInfo[1]}</h1>
                     </div>
-                    <BuildLeaderboard type='leaderboard' />
+                    <BuildLeaderboard type='leaderboard' screen='score' />
                     {/* <ul className={styles.leaderboard}>
             {scoreItems &&
               scoreItems.map((scoreItem, i) => {

@@ -94,7 +94,7 @@ export default function Leaderboard() {
                         <h2>YOUR SCORE</h2>
                         <h1>{yourInfo && yourInfo[1]}</h1>
                     </div> */}
-                    <BuildLeaderboard type='leaderboard' />
+                    <BuildLeaderboard type='leaderboard' screen='leaderboard' />
                     {/* <ul className={styles.leaderboard}>
             {scoreItems &&
               scoreItems.map((scoreItem, i) => {
