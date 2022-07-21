@@ -417,7 +417,8 @@ export default function Over() {
                         years old or over and are UK residents. For full Terms
                         and Conditions and our Privacy Policy, scan the QR code:
                     </p>
-                    <img src='/qr.png' alt='' />
+                    {/* <img src='/qr.png' alt='' /> */}
+                    <img src='/qr-2.svg' alt='' />
                 </div>
             </main>
             <Keyboard
