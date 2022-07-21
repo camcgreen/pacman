@@ -9,4 +9,5 @@
   border: none;
   cursor: pointer;
   z-index: 5;
+  transition: opacity 0.2s ease-in-out;
 }

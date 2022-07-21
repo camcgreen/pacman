@@ -3,4 +3,5 @@
   bottom: 25px;
   left: 25px;
   z-index: 7;
+  transition: opacity 0.2s ease-in-out;
 }

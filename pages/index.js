@@ -92,12 +92,12 @@ export default function Home() {
             </main>
             <Fullscreen />
             <SetDeviceInput />
-            <button
+            {/* <button
                 className='progressButton'
                 onClick={() => router.push('/game')}
             >
                 Progress
-            </button>
+            </button> */}
         </div>
     );
 }

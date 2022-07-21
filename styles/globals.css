@@ -32,8 +32,10 @@ a {
   position: fixed;
   z-index: 7;
   bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 25px;
+  opacity: 0.025;
+  /* left: 50%;
+  transform: translateX(-50%); */
 }
 
 input {

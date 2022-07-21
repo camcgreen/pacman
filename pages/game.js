@@ -242,7 +242,7 @@ export default function Game() {
     //   return () => clearInterval(interval);
     // }, [countdownToStart]);
     return (
-        <PlausibleProvider domain='catchghosts.vercel.app'>
+        <PlausibleProvider domain='zflipchase.vercel.app'>
             <div className={styles.container}>
                 <Head>
                     <title>Samsung Arcade</title>

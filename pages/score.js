@@ -161,7 +161,7 @@ export default function Score() {
                     </div>
                 </div>
             </main>
-            <button
+            {/* <button
                 className='progressButton'
                 onClick={() => router.push('/')}
                 style={{
@@ -171,6 +171,9 @@ export default function Score() {
                 }}
             >
                 Restart
+            </button> */}
+            <button className='progressButton' onClick={() => router.push('/')}>
+                Progress
             </button>
         </div>
     );
