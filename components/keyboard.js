@@ -90,6 +90,7 @@ let string3 = '';
 let string4 = '';
 let check5 = false;
 let check6 = false;
+let check7 = false;
 
 export default function Keyboard({
     getValue,
@@ -163,6 +164,9 @@ export default function Keyboard({
                             break;
                         case 5:
                             check6 = !check6;
+                            break;
+                        case 6:
+                            check7 = !check7;
                             break;
                     }
                     if (!hideKeyboardStateRef.current) {
@@ -297,6 +301,7 @@ export default function Keyboard({
                         string4,
                         check5,
                         check6,
+                        check7,
                     ]);
                 }
             }
@@ -362,7 +367,16 @@ export default function Keyboard({
             string4 = '';
             check5 = false;
             check6 = false;
-            setInput([string1, string2, string3, string4, check5, check6]);
+            check7 = false;
+            setInput([
+                string1,
+                string2,
+                string3,
+                string4,
+                check5,
+                check6,
+                check7,
+            ]);
         }
         window.addEventListener('keydown', handleEnter);
         // window.addEventListener('gamepadconnected', function (e) {

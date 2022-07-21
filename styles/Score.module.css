@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     /* font-size: 3rem; */
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .bg {
@@ -35,10 +35,17 @@
     align-items: center;
 }
 
+.zFlipChase {
+    /* width: 1400px; */
+    /* width: 90%; */
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
 .leaderboardIcon {
     /* width: 50%; */
     /* width: 90%; */
-    width: 65%;
+    width: 45%;
     /* margin-bottom: 120px; */
     margin-bottom: 60px;
 }
@@ -127,6 +134,10 @@
     display: grid;
     grid-template-columns: 100px 200px 0px;
     text-align: left;
+}
+
+.leaderboard li p {
+    font-weight: 600 !important;
 }
 
 .leaderboard li p:first-of-type {

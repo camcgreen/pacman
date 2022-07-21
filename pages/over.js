@@ -96,7 +96,7 @@ export default function Over() {
                     } else {
                         if (selectedInputRef.current < 4) {
                             setHideKeyboard(false);
-                        } else if (selectedInputRef.current === 6) {
+                        } else if (selectedInputRef.current === 7) {
                             // console.log('submit form');
                             // submitForm(scoreRef.current);
                             // const gameForm =
@@ -144,7 +144,7 @@ export default function Over() {
                 } else if (right) {
                     allowJoystick = false;
                     if (
-                        selectedInputRef.current + 1 <= 6 &&
+                        selectedInputRef.current + 1 <= 7 &&
                         // allowInputChangeRef.current
                         hideKeyboardRef.current
                     ) {
@@ -162,7 +162,7 @@ export default function Over() {
                 } else if (down) {
                     allowJoystick = false;
                     if (
-                        selectedInputRef.current + 1 <= 6 &&
+                        selectedInputRef.current + 1 <= 7 &&
                         // allowInputChangeRef.current
                         hideKeyboardRef.current
                     ) {
@@ -214,15 +214,23 @@ export default function Over() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <img src='/bg.svg' className={styles.bg}></img>
-            <img src='/bg-icons.svg' className={styles.bgIcons}></img>
+            {/* <img src='/bg-icons.svg' className={styles.bgIcons}></img> */}
+            <img src='/bg-icons-3.svg' className={styles.bgIcons}></img>
             <main>
                 <img src='/over.png' className={styles.over} />
-                <h3>SCORE</h3>
+                <h2>SCORE</h2>
                 {/* <p>{`hideKeyboard = ${hideKeyboard}`}</p> */}
                 {/* <h2>13770</h2> */}
                 <h2 className={styles.marginBelow}>{score}</h2>
-                <form onSubmit={(e) => submitForm(e, score)} id='game-form'>
-                    <h2>PLEASE ENTER YOUR INITIALS</h2>
+                <form
+                    onSubmit={(e) => submitForm(e, score)}
+                    id='game-form'
+                    className={styles.gameForm}
+                >
+                    <h2>
+                        PLEASE ENTER YOUR INITIALS TO BE ADDED TO THE
+                        LEADERBOARD
+                    </h2>
                     <div className={`${styles.inputs} ${styles.marginBelow}`}>
                         <input
                             type='text'
@@ -274,7 +282,84 @@ export default function Over() {
                         }}
                     />
                     <br />
-                    <div
+                    <div className={styles.checkboxes}>
+                        <div
+                            className={styles.checkboxColumn}
+                            // style={{
+                            //     border:
+                            //         selectedInput === 4 && 'solid #E5007E 2px',
+                            // }}
+                        >
+                            <input
+                                type='checkbox'
+                                id='comms'
+                                name='comms'
+                                checked={values && values[4]}
+                                className={styles.checkbox}
+                                style={{
+                                    border:
+                                        selectedInput === 4 &&
+                                        'solid #E5007E 2px',
+                                }}
+                            />
+                            <label htmlFor='comms'>
+                                CHECK THE BOX TO OPT IN TO MARKETING FROM
+                                PARTNER RETAIL SERVICES (PRS&)
+                            </label>
+                        </div>
+                        <div
+                            className={styles.checkboxColumn}
+                            // style={{
+                            //     border:
+                            //         selectedInput === 5 && 'solid #E5007E 2px',
+                            // }}
+                        >
+                            <input
+                                type='checkbox'
+                                id='age'
+                                name='age'
+                                className={styles.checkbox}
+                                checked={values && values[5]}
+                                required
+                                style={{
+                                    border:
+                                        selectedInput === 5 &&
+                                        'solid #E5007E 2px',
+                                }}
+                            />
+                            <label htmlFor='age'>
+                                BY CHECKING THE BOX, I CONFIRM I AM OVER 18 AND
+                                ELIGIBLE TO ENTER THE COMPETITION TO WIN THE
+                                <strong> GALAXY Z FLIP3</strong> PRIZE PACK*
+                            </label>
+                        </div>
+                        <div
+                            className={styles.checkboxColumn}
+                            // style={{
+                            //     border:
+                            //         selectedInput === 6 && 'solid #E5007E 2px',
+                            // }}
+                        >
+                            <input
+                                type='checkbox'
+                                id='privacy'
+                                name='privacy'
+                                className={styles.checkbox}
+                                checked={values && values[6]}
+                                required
+                                style={{
+                                    border:
+                                        selectedInput === 6 &&
+                                        'solid #E5007E 2px',
+                                }}
+                            />
+                            <label htmlFor='privacy'>
+                                BY CHECKING THE BOX, I AGREE TO PRS PRIVACY
+                                POLICY
+                            </label>
+                        </div>
+                    </div>
+                    {/* <div
                         className={styles.checkboxRow}
                         style={{
                             border: selectedInput === 4 && 'solid #E5007E 2px',
@@ -288,11 +373,9 @@ export default function Over() {
                             id='comms'
                             name='comms'
                             checked={values && values[4]}
-                            // readOnly
                             className={styles.checkbox}
                         />
                     </div>
-                    {/* <br /> */}
                     <div
                         className={styles.checkboxRow}
                         style={{
@@ -308,10 +391,9 @@ export default function Over() {
                             name='privacy'
                             className={styles.checkbox}
                             checked={values && values[5]}
-                            // readOnly
                             required
                         />
-                    </div>
+                    </div> */}
                     <br />
                     <input
                         className={`${styles.submit} ${styles.marginBelow}`}
@@ -319,15 +401,24 @@ export default function Over() {
                         value='SUBMIT'
                         id='submit-button'
                         style={{
-                            border: selectedInput === 6 && 'solid #E5007E 2px',
+                            border: selectedInput === 7 && 'solid #E5007E 2px',
                         }}
                     />
                 </form>
-                <h2>COLLECT YOUR TOKENS BELOW</h2>
-                <p>
-                    PLAYERS MUST BE 18 YEARS OLD OR OVER TO BE ELIGIBLE TO WIN A
-                    SAMSUNG HANDSET
-                </p>
+                <h2>COLLECT YOUR TICKETS BELOW</h2>
+                <img src='/downArrow.svg' className={styles.downArrow} alt='' />
+                <div className={styles.conditions}>
+                    <p>
+                        Terms and Conditions apply. By playing the game and
+                        entering the competition, you are agreeing to the Terms
+                        and Conditions and consent to the use of your data in
+                        accordance with our Privacy Policy. The Main Prize is
+                        only available to be won by participants who are 18
+                        years old or over and are UK residents. For full Terms
+                        and Conditions and our Privacy Policy, scan the QR code:
+                    </p>
+                    <img src='/qr.png' alt='' />
+                </div>
             </main>
             <Keyboard
                 getValue={handleGetValue}

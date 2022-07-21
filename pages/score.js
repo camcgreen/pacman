@@ -112,25 +112,23 @@ export default function Score() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <img src='/bg.svg' className={styles.bg}></img>
-            <img src='/bg-icons.svg' className={styles.bgIcons}></img>
+            <img src='/bg-icons-3.svg' className={styles.bgIcons}></img>
             <main>
                 {
                     // CHANGE THIS TO LEADERBOARD NOT ARCADE
                 }
+                <img src='/zflipchase.png' className={styles.zFlipChase} />
                 <img
                     src='/leaderboard.png'
                     className={styles.leaderboardIcon}
                 />
                 <div className={styles.grid}>
                     <div className={`${styles.score} ${styles.left}`}>
-                        <div className={styles.initials}>
-                            {/* <div>M</div> */}
+                        {/* <div className={styles.initials}>
                             <div>{yourInfo[0] && yourInfo[0].split('')[0]}</div>
-                            {/* <div>J</div> */}
                             <div>{yourInfo[0] && yourInfo[0].split('')[1]}</div>
-                            {/* <div>D</div> */}
                             <div>{yourInfo[0] && yourInfo[0].split('')[2]}</div>
-                        </div>
+                        </div> */}
                         <h2>YOUR SCORE</h2>
                         {/* <h1>13770</h1> */}
                         <h1>{yourInfo && yourInfo[1]}</h1>
@@ -153,7 +151,7 @@ export default function Score() {
                             {/* <div>{scoreItems && scoreItems[0].Alias.split('')[0]}</div>
               <div>{scoreItems && scoreItems[0].Alias.split('')[1]}</div>
               <div>{scoreItems && scoreItems[0].Alias.split('')[2]}</div> */}
-                            <BuildLeaderboard type='highInitials' />
+                            {/* <BuildLeaderboard type='highInitials' /> */}
                         </div>
                         <h2>HIGH SCORE</h2>
                         {/* <h1>{scoreItems && scoreItems[0].score}</h1> */}
