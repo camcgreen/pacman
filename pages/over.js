@@ -223,24 +223,39 @@ export default function Over() {
             <img src='/bg-icons-3.svg' className={styles.bgIcons}></img>
             <main>
                 <img src='/over.png' className={styles.over} />
-                <h2>SCORE</h2>
-                {/* <p>{`hideKeyboard = ${hideKeyboard}`}</p> */}
-                {/* <h2>13770</h2> */}
-                <h2 className={styles.marginBelow}>{score}</h2>
+                <div className={styles.scoreContainer}>
+                    <h2>Score</h2>
+                    {/* <p>{`hideKeyboard = ${hideKeyboard}`}</p> */}
+                    {/* <h2>13770</h2> */}
+                    {/* <h2 className={styles.marginBelow}>{score}</h2> */}
+                    <h2>{score}</h2>
+                </div>
                 <form
                     onSubmit={(e) => submitForm(e, score)}
                     id='game-form'
                     className={styles.gameForm}
+                    autoComplete='off'
                 >
+                    <input
+                        style={{ display: 'none' }}
+                        type='text'
+                        name='fakeusername'
+                    />
+                    <input
+                        style={{ display: 'none' }}
+                        type='password'
+                        name='fakepassword'
+                    />
                     <h2>
-                        PLEASE ENTER YOUR INITIALS TO BE ADDED TO THE
-                        LEADERBOARD
+                        Please enter your initials to be added to the
+                        leaderboard
                     </h2>
                     <div className={`${styles.inputs} ${styles.marginBelow}`}>
                         <input
                             type='text'
                             id='initial0'
                             maxLength='1'
+                            autoComplete='new-password'
                             // readOnly
                             // value={values && values[0]}
                             // required
@@ -253,6 +268,7 @@ export default function Over() {
                             type='text'
                             id='initial1'
                             maxLength='1'
+                            autoComplete='new-password'
                             // value={values && values[1]}
                             // required
                             // readOnly
@@ -265,6 +281,7 @@ export default function Over() {
                             type='text'
                             id='initial2'
                             maxLength='1'
+                            autoComplete='new-password'
                             // value={values && values[2]}
                             // required
                             // readOnly
@@ -274,11 +291,14 @@ export default function Over() {
                             // }}
                         />
                     </div>
-                    <h2>PLEASE ENTER YOUR EMAIL</h2>
+                    <h2>Please enter your email</h2>
                     <input
                         type='email'
+                        // type='text'
                         id='email'
                         className={styles.marginBelow}
+                        // autoComplete='off'
+                        autoComplete='new-password'
                         // value={values && values[3]}
                         // required
                         // readOnly
@@ -301,6 +321,7 @@ export default function Over() {
                                 name='comms'
                                 // checked={values && values[4]}
                                 className={styles.checkbox}
+                                autoComplete='on'
                                 // style={{
                                 //     border:
                                 //         selectedInput === 4 &&
@@ -308,8 +329,8 @@ export default function Over() {
                                 // }}
                             />
                             <label htmlFor='comms'>
-                                CHECK THE BOX TO OPT IN TO MARKETING FROM
-                                PARTNER RETAIL SERVICES (PRS&)
+                                Check the box to opt in to marketing from
+                                Partner Retail Services (PRS&)
                             </label>
                         </div>
                         <div
@@ -333,9 +354,9 @@ export default function Over() {
                                 // }}
                             />
                             <label htmlFor='age'>
-                                BY CHECKING THE BOX, I CONFIRM I AM OVER 18 AND
-                                ELIGIBLE TO ENTER THE COMPETITION TO WIN THE
-                                <strong> GALAXY Z FLIP3</strong> PRIZE PACK*
+                                By checking the box, I confirm I am over 18 and
+                                eligible to enter the competition to win the
+                                <strong> Galaxy Z Flip3</strong> prize pack*
                             </label>
                         </div>
                         <div
@@ -359,8 +380,8 @@ export default function Over() {
                                 // }}
                             />
                             <label htmlFor='privacy'>
-                                BY CHECKING THE BOX, I AGREE TO PRS PRIVACY
-                                POLICY
+                                By checking the box, I agree to the PRS privacy
+                                policy.
                             </label>
                         </div>
                     </div>
@@ -403,14 +424,15 @@ export default function Over() {
                     <input
                         className={`${styles.submit} ${styles.marginBelow}`}
                         type='submit'
-                        value='SUBMIT'
+                        value='Submit'
                         id='submit-button'
                         style={{
                             border: selectedInput === 7 && 'solid #E5007E 2px',
+                            fontFamily: 'Outfit, sans-serif',
                         }}
                     />
                 </form>
-                <h2>COLLECT YOUR TICKETS BELOW</h2>
+                <h2>Collect your tickets below</h2>
                 <img src='/downArrow.svg' className={styles.downArrow} alt='' />
                 <div className={styles.conditions}>
                     <p>
@@ -420,10 +442,10 @@ export default function Over() {
                         accordance with our Privacy Policy. The Main Prize is
                         only available to be won by participants who are 18
                         years old or over and are UK residents. For full Terms
-                        and Conditions and our Privacy Policy, scan the QR code:
+                        and Conditions and our Privacy Policy, see in store.
                     </p>
                     {/* <img src='/qr.png' alt='' /> */}
-                    <img src='/qr-2.svg' alt='' />
+                    {/* <img src='/qr-2.svg' alt='' /> */}
                 </div>
             </main>
             {/* <Keyboard

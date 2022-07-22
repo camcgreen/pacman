@@ -262,7 +262,7 @@ export default function Game() {
                     <canvas id='gameCanvas'></canvas>
                     <div className={styles.score}>
                         <h4>SCORE</h4>
-                        <h1>{score}</h1>
+                        <h1 className='yourScore'>{score}</h1>
                         <br />
                         <br />
                         <h4>HIGH SCORE</h4>

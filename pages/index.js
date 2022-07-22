@@ -86,20 +86,41 @@ export default function Home() {
                 <img src='/zflipchase.png' className={styles.zFlipChase} />
                 {/* <img src='/play.png' className={styles.play} /> */}
                 {/* <h3>MOVE JOYSTICK TO START PLAYING</h3> */}
-                <p>
-                    Score as many points as you can by eating the dots as you
-                    move through the maze.
-                </p>
-                <p>
-                    Eat the flashing pink dots to turn the aliens pink and eat
-                    them to earn bonus points.
-                </p>
-                <p>
-                    Avoid the blue aliens or risk getting eaten and losing
-                    points.
-                </p>
-                <p>Eat the Samsung products to earn bonus points.</p>
-                <p>Be quick – you only have 90 seconds!</p>
+                <ol className={styles.instructions}>
+                    <li>
+                        <div className={styles.instructionsNumber}>1</div>
+                        <p>
+                            Score as many points as you can by eating the dots
+                            as you move through the maze.
+                        </p>
+                    </li>
+                    <li>
+                        <div className={styles.instructionsNumber}>2</div>
+                        <p>
+                            The flashing pink dots turn the Aliens pink – eat
+                            them to earn bonus points.
+                        </p>
+                    </li>
+                    <li>
+                        <div className={styles.instructionsNumber}>3</div>
+                        <p>
+                            Avoid the blue Aliens or risk losing points if you
+                            cross paths. The Samsung products will also earn you
+                            bonus points.
+                        </p>
+                    </li>
+                    <li>
+                        <div className={styles.instructionsNumber}>4</div>
+                        <p>Be quick – you only have 90 seconds!</p>
+                    </li>
+                    <li>
+                        <div className={styles.instructionsNumber}>5</div>
+                        <p>
+                            Don’t forget to enter your details at the end by
+                            touching the screen.
+                        </p>
+                    </li>
+                </ol>
                 <h3>PRESS ANY BUTTON TO START PLAYING</h3>
                 {/* <p>
           PLAYERS MUST BE 18 YEARS OLD OR OVER TO BE ELIGIBLE TO WIN A SAMSUNG

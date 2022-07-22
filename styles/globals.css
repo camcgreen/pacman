@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html {
   --colPink: #E6007E;
   --colBlue: #5BC5F2;
@@ -6,7 +8,7 @@ html {
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Outfit',-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: black;
   color: white;
@@ -42,4 +44,14 @@ input {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+.highScore {
+    color: var(--colBlue);
+    font-size: 2.5rem;
+}
+
+.yourScore {
+    color: var(--colPink);
+    font-size: 2.5rem;
 }

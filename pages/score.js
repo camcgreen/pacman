@@ -131,7 +131,7 @@ export default function Score() {
                         </div> */}
                         <h2>YOUR SCORE</h2>
                         {/* <h1>13770</h1> */}
-                        <h1>{yourInfo && yourInfo[1]}</h1>
+                        <h1 className='yourScore'>{yourInfo && yourInfo[1]}</h1>
                     </div>
                     <BuildLeaderboard type='leaderboard' screen='score' />
                     {/* <ul className={styles.leaderboard}>
@@ -170,9 +170,18 @@ export default function Score() {
             >
                 Restart
             </button> */}
-            <button className='progressButton' onClick={() => router.push('/')}>
+            <p className={styles.conditions}>
+                Terms and Conditions apply. By playing the game and entering the
+                competition, you are agreeing to the Terms and Conditions and
+                consent to the use of your data in accordance with our Privacy
+                Policy. The Main Prize is only available to be won by
+                participants who are 18 years old or over and are UK residents.
+                For full Terms and Conditions and our Privacy Policy, see in
+                store.
+            </p>
+            {/* <button className='progressButton' onClick={() => router.push('/')}>
                 Progress
-            </button>
+            </button> */}
         </div>
     );
 }

@@ -81,7 +81,8 @@ export default function Leaderboard() {
                 <p className={styles.explain}>
                     Top the leaderboard for your chance to win a{' '}
                     <span>
-                        Galaxy Z Flip3 , Buds Pro and Z Flip3 Silicone Cover.*
+                        Galaxy Z Flip3 , Buds Pro and Z Flip3 Silicone Cover.
+                        <sup>1</sup>
                     </span>
                 </p>
                 <div className={styles.grid}>
@@ -115,6 +116,15 @@ export default function Leaderboard() {
                         <BuildLeaderboard type='highScore' />
                     </div> */}
                 </div>
+                <p className={styles.conditions}>
+                    <sup>1</sup>Terms and Conditions apply. By playing the game
+                    and entering the competition, you are agreeing to the Terms
+                    and Conditions and consent to the use of your data in
+                    accordance with our Privacy Policy. The Main Prize is only
+                    available to be won by participants who are 18 years old or
+                    over and are UK residents. For full Terms and Conditions and
+                    our Privacy Policy, see in store.
+                </p>
             </main>
             {/* <button className='progressButton' onClick={() => router.push('/')}>
                 Progress

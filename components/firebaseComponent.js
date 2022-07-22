@@ -201,7 +201,9 @@ function BuildLeaderboard({ type, screen }) {
                     </ul>
                 );
             case 'highScore':
-                return <h1>{Table[0] && Table[0].Score}</h1>;
+                return (
+                    <h1 className='highScore'>{Table[0] && Table[0].Score}</h1>
+                );
             case 'highInitials':
                 return (
                     <>
