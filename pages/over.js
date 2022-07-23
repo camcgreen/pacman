@@ -13,19 +13,29 @@ import Keyboard from '../components/keyboard';
 const submitForm = (e, score) => {
     e.preventDefault();
     // console.log('submitting');
-    const initials =
-        `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
-    const email = e.target[3].value;
-    const communications = e.target[4].checked;
-    const age = e.target[5].checked;
-    const privacy = e.target[6].checked;
+    // const initials =
+    //     `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
+    const initials0 = document.getElementById('initial0').value.toUpperCase();
+    const initials1 = document.getElementById('initial1').value.toUpperCase();
+    const initials2 = document.getElementById('initial2').value.toUpperCase();
+    const initials = `${initials0}${initials1}${initials2}`;
+    const email = document.getElementById('email').value;
+    const communications = document.getElementById('comms').checked;
+    const age = document.getElementById('age').checked;
+    const privacy = document.getElementById('privacy').checked;
+    // const email = e.target[3].value;
+    // const communications = e.target[4].checked;
+    // const age = e.target[5].checked;
+    // const privacy = e.target[6].checked;
     if (score && initials && email && age && privacy) {
         // console.log('proper');
+        // console.log(score, initials, email, communications, age, privacy);
         addDataToLeaderboard(initials, score, email, communications);
         localStorage.setItem('initials', initials);
         localStorage.setItem('formSubmitted', true);
         router.push('/score');
     } else {
+        // console.log(score, initials, email, communications, age, privacy);
         // console.log('improper');
         localStorage.setItem('formSubmitted', true);
         router.push('/');
@@ -35,12 +45,12 @@ const submitForm = (e, score) => {
 };
 
 // const submitForm = (score) => {
-//     const initials0 = document.getElementById('initial0').value.toUpperCase();
-//     const initials1 = document.getElementById('initial1').value.toUpperCase();
-//     const initials2 = document.getElementById('initial2').value.toUpperCase();
+// const initials0 = document.getElementById('initial0').value.toUpperCase();
+// const initials1 = document.getElementById('initial1').value.toUpperCase();
+// const initials2 = document.getElementById('initial2').value.toUpperCase();
 //     const initials = `${initials0}${initials1}${initials2}`;
-//     const email = document.getElementById('email').value;
-//     const communications = document.getElementById('comms').checked;
+// const email = document.getElementById('email').value;
+// const communications = document.getElementById('comms').checked;
 //     // handle input validation
 //     // if (score) {
 //     //     addDataToLeaderboard(initials, score, email, communications);
@@ -204,6 +214,8 @@ export default function Over() {
         animationRef.current = window.requestAnimationFrame(
             handleJoystickSelection
         );
+        // document.querySelector("input[type='text']").focus();
+        // $("input[type='text']").focus(function () { $(this).removeAttr("autocomplete").attr("autocomplete", "new-password"); });
         // });
         return () => {
             // window.cancelAnimationFrame(handleJoystickSelection);
