@@ -47,8 +47,8 @@ export default function Game() {
         //   setHighScore(highScoreVal.HighScore);
         // };
         // getHighScore();
-        // hiddenTimer = 90;
-        hiddenTimer = 5;
+        hiddenTimer = 90;
+        // hiddenTimer = 5;
         roundedScore = 0;
         const themeAudio = document.getElementById('theme-audio');
         // console.log(hiddenTimer);
