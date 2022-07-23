@@ -6,15 +6,35 @@ const Fullscreen = () => {
     const toggleFullScreen = (setShowIcon) => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
+            localStorage.setItem('isFullscreen', true);
             setShowIcon(false);
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
+                localStorage.setItem('isFullscreen', false);
                 setShowIcon(true);
             }
         }
     };
     useEffect(() => {
+        const isFullscreenStored = localStorage.getItem('isFullscreen');
+        if (isFullscreenStored !== null) {
+            console.log(`isFullscreenStored: ${isFullscreenStored}`);
+            if (isFullscreenStored === 'false') {
+                setShowIcon(true);
+                console.log('displaying icon');
+                // } else if (isFullscreenStored === 'true') {
+            } else {
+                setShowIcon(false);
+                console.log('not displaying icon');
+            }
+            // else {
+            //     console.log('wtf');
+            // }
+        } else {
+            localStorage.setItem('isFullscreen', false);
+            setShowIcon(true);
+        }
         document.addEventListener(
             'fullscreenchange',
             () => {
@@ -23,9 +43,10 @@ const Fullscreen = () => {
                     !document.mozFullScreen &&
                     !document.msFullscreenElement
                 ) {
-                    console.log('exited');
+                    localStorage.setItem('isFullscreen', false);
                     setShowIcon(true);
                 } else {
+                    localStorage.setItem('isFullscreen', true);
                     setShowIcon(false);
                 }
             },

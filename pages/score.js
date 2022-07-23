@@ -14,6 +14,7 @@ import {
 } from '../components/firebaseComponent';
 import Head from 'next/head';
 import styles from '../styles/Score.module.css';
+import Fullscreen from '../components/fullscreen';
 
 const scoreItems = [
     { user: 'AWC', email: '', score: '18355' },
@@ -97,8 +98,24 @@ export default function Score() {
         setYourInfo([yourInitials, yourScore]);
         // console.log(yourInfo[0].split('')[0]);
         // window.requestAnimationFrame(handleJoystickButton);
-        animationRef1.current =
-            window.requestAnimationFrame(handleJoystickButton);
+        // animationRef1.current =
+        //     window.requestAnimationFrame(handleJoystickButton);
+
+        const gamepads = navigator.getGamepads();
+        const joystick = gamepads[0];
+        if (joystick) {
+            animationRef1.current =
+                window.requestAnimationFrame(handleJoystickButton);
+        } else {
+            window.addEventListener('gamepadconnected', function (e) {
+                // window.requestAnimationFrame(handleJoystickInput);
+                // animationRef.current =
+                //     window.requestAnimationFrame(handleJoystickInput);
+                animationRef1.current =
+                    window.requestAnimationFrame(handleJoystickButton);
+                router.push('/');
+            });
+        }
         return () => {
             // window.cancelAnimationFrame(handleJoystickButton);
             window.cancelAnimationFrame(animationRef1.current);
@@ -182,6 +199,7 @@ export default function Score() {
             {/* <button className='progressButton' onClick={() => router.push('/')}>
                 Progress
             </button> */}
+            <Fullscreen />
         </div>
     );
 }

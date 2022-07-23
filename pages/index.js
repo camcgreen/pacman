@@ -56,6 +56,7 @@ export default function Home() {
                 // window.requestAnimationFrame(handleJoystickInput);
                 animationRef.current =
                     window.requestAnimationFrame(handleJoystickInput);
+                router.push('/game');
             });
         }
         // window.addEventListener('gamepadconnected', function (e) {

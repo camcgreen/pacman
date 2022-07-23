@@ -9,6 +9,7 @@ import {
     addDataToLeaderboard,
 } from '../components/firebaseComponent';
 import Keyboard from '../components/keyboard';
+import Fullscreen from '../components/fullscreen';
 
 const submitForm = (e, score) => {
     e.preventDefault();
@@ -68,7 +69,13 @@ export default function Over() {
     // const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
     // const [values, setValues] = useState('');
     const [enterPressed, setEnterPressed, enterPressedRef] = useState(false);
+    const [input1, setInput1] = useState('');
+    const [input2, setInput2] = useState('');
+    const [input3, setInput3] = useState('');
     const animationRef = useRef(0);
+    // const input1 = useRef(null);
+    // const input2 = useRef(null);
+    // const input3 = useRef(null);
     function handleGetValue(values) {
         setValues(values);
     }
@@ -191,6 +198,21 @@ export default function Over() {
             handleJoystickSelection
         );
     }
+    function handleChange(e, inputNum, setInput1, setInput2, setInput3) {
+        if (inputNum === 0) {
+            if (e.target.value.length < 2) {
+                setInput1(e.target.value);
+            }
+        } else if (inputNum === 1) {
+            if (e.target.value.length < 2) {
+                setInput2(e.target.value);
+            }
+        } else {
+            if (e.target.value.length < 2) {
+                setInput3(e.target.value);
+            }
+        }
+    }
     useEffect(() => {
         // let reloadTimes = localStorage.getItem('reloadTimes');
         // console.log(reloadTimes);
@@ -204,6 +226,18 @@ export default function Over() {
         //         router.reload();
         //     }
         // }
+        // const input1 = document.getElementById('initials0');
+        // const input2 = document.getElementById('initials1');
+        // const input3 = document.getElementById('initials2');
+        // input1.current.addEventListener('keydown', function (event) {
+        //     event.target.value = event.target.value.substring(0, 1);
+        // });
+        // input2.current.addEventListener('keyup', function (event) {
+        //     event.target.value = event.target.value.substring(0, 1);
+        // });
+        // input3.current.addEventListener('keyup', function (event) {
+        //     event.target.value = event.target.value.substring(0, 1);
+        // });
         const deviceNumber = localStorage.getItem('device');
         const score = localStorage.getItem('score');
         fireBaseStartApp();
@@ -248,16 +282,6 @@ export default function Over() {
                     className={styles.gameForm}
                     autoComplete='off'
                 >
-                    <input
-                        style={{ display: 'none' }}
-                        type='text'
-                        name='fakeusername'
-                    />
-                    <input
-                        style={{ display: 'none' }}
-                        type='password'
-                        name='fakepassword'
-                    />
                     <h2>
                         Please enter your initials to be added to the
                         leaderboard
@@ -266,11 +290,22 @@ export default function Over() {
                         <input
                             type='text'
                             id='initial0'
-                            maxLength='1'
+                            // ref={input1}
+                            // maxLength='1'
                             autoComplete='new-password'
                             // readOnly
                             // value={values && values[0]}
-                            // required
+                            required
+                            onChange={(e) =>
+                                handleChange(
+                                    e,
+                                    0,
+                                    setInput1,
+                                    setInput2,
+                                    setInput3
+                                )
+                            }
+                            value={input1}
                             // style={{
                             //     border:
                             //         selectedInput === 0 && 'solid #E5007E 2px',
@@ -279,10 +314,21 @@ export default function Over() {
                         <input
                             type='text'
                             id='initial1'
-                            maxLength='1'
+                            // ref={input2}
+                            // maxLength='1'
                             autoComplete='new-password'
                             // value={values && values[1]}
-                            // required
+                            required
+                            onChange={(e) =>
+                                handleChange(
+                                    e,
+                                    1,
+                                    setInput1,
+                                    setInput2,
+                                    setInput3
+                                )
+                            }
+                            value={input2}
                             // readOnly
                             // style={{
                             //     border:
@@ -292,10 +338,21 @@ export default function Over() {
                         <input
                             type='text'
                             id='initial2'
-                            maxLength='1'
+                            // ref={input3}
+                            // maxLength='1'
                             autoComplete='new-password'
                             // value={values && values[2]}
-                            // required
+                            required
+                            onChange={(e) =>
+                                handleChange(
+                                    e,
+                                    2,
+                                    setInput1,
+                                    setInput2,
+                                    setInput3
+                                )
+                            }
+                            value={input3}
                             // readOnly
                             // style={{
                             //     border:
@@ -312,7 +369,7 @@ export default function Over() {
                         // autoComplete='off'
                         autoComplete='new-password'
                         // value={values && values[3]}
-                        // required
+                        required
                         // readOnly
                         // style={{
                         //     border: selectedInput === 3 && 'solid #E5007E 2px',
@@ -358,7 +415,7 @@ export default function Over() {
                                 name='age'
                                 className={styles.checkbox}
                                 // checked={values && values[5]}
-                                // required
+                                required
                                 // style={{
                                 //     border:
                                 //         selectedInput === 5 &&
@@ -384,7 +441,7 @@ export default function Over() {
                                 name='privacy'
                                 className={styles.checkbox}
                                 // checked={values && values[6]}
-                                // required
+                                required
                                 // style={{
                                 //     border:
                                 //         selectedInput === 6 &&
@@ -439,7 +496,7 @@ export default function Over() {
                         value='Submit'
                         id='submit-button'
                         style={{
-                            border: selectedInput === 7 && 'solid #E5007E 2px',
+                            // border: selectedInput === 7 && 'solid #E5007E 2px',
                             fontFamily: 'Outfit, sans-serif',
                         }}
                     />
@@ -467,12 +524,13 @@ export default function Over() {
                 hideKeyboard={hideKeyboard}
                 // keyboardInactive={hideKeyboardRef.current}
             /> */}
-            <button
+            {/* <button
                 className='progressButton'
                 onClick={() => router.push('/score')}
             >
                 Progress
-            </button>
+            </button> */}
+            <Fullscreen />
         </div>
     );
 }

@@ -4,6 +4,7 @@ import { router } from 'next/router';
 import PlausibleProvider from 'next-plausible';
 import styles from '../styles/Game.module.css';
 import TileMap from '../logic/TileMap';
+import Fullscreen from '../components/fullscreen';
 import {
     // fireBaseStartApp,
     // ListenDatabaseAndGetLeaderboard,
@@ -46,7 +47,8 @@ export default function Game() {
         //   setHighScore(highScoreVal.HighScore);
         // };
         // getHighScore();
-        hiddenTimer = 90;
+        // hiddenTimer = 90;
+        hiddenTimer = 5;
         roundedScore = 0;
         const themeAudio = document.getElementById('theme-audio');
         // console.log(hiddenTimer);
@@ -298,6 +300,7 @@ export default function Game() {
                 <audio loop style={{ display: 'none' }} id='theme-audio'>
                     <source src='/sounds/theme.mp3' type='audio/mpeg' />
                 </audio>
+                <Fullscreen />
             </div>
         </PlausibleProvider>
     );
