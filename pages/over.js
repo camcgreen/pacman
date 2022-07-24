@@ -23,7 +23,6 @@ const submitForm = (e, score, setHideKeyboard, setIsReadOnly) => {
     const initials2 = document.getElementById('initial2').value.toUpperCase();
     const initials = `${initials0}${initials1}${initials2}`;
     const email = document.getElementById('email').value;
-    email.removeAttr('readOnly');
     const communications = document.getElementById('comms').checked;
     const age = document.getElementById('age').checked;
     const privacy = document.getElementById('privacy').checked;
