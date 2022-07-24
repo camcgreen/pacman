@@ -112,250 +112,348 @@ export default function Keyboard({
         useState(true);
     const [selectedInputState, setSelectedInputState, selectedInputStateRef] =
         useState(0);
+    const [clicked, setClicked] = useState(false);
     const animationRef = useRef(0);
 
-    function handleJoystickMovement(keySelected) {
-        const gamepads = navigator.getGamepads();
-        const joystick = gamepads[0];
-        if (joystick && router.pathname === '/over') {
-            const left = joystick.axes[0] === -1;
-            const right = joystick.axes[0] === 1;
-            const up = joystick.axes[1] === -1;
-            const down = joystick.axes[1] === 1;
-            const buttonPressed =
-                joystick.buttons[0].pressed ||
-                joystick.buttons[1].pressed ||
-                joystick.buttons[2].pressed ||
-                joystick.buttons[3].pressed;
+    // function handleJoystickMovement(keySelected) {
+    //     const gamepads = navigator.getGamepads();
+    //     const joystick = gamepads[0];
+    //     if (joystick && router.pathname === '/over') {
+    //         const left = joystick.axes[0] === -1;
+    //         const right = joystick.axes[0] === 1;
+    //         const up = joystick.axes[1] === -1;
+    //         const down = joystick.axes[1] === 1;
+    //         const buttonPressed =
+    //             joystick.buttons[0].pressed ||
+    //             joystick.buttons[1].pressed ||
+    //             joystick.buttons[2].pressed ||
+    //             joystick.buttons[3].pressed;
 
-            if (
-                !joystick.buttons[0].pressed &&
-                !joystick.buttons[1].pressed &&
-                !joystick.buttons[2].pressed &&
-                !joystick.buttons[3].pressed
-            ) {
-                allowButtons = true;
-            }
+    //         if (
+    //             !joystick.buttons[0].pressed &&
+    //             !joystick.buttons[1].pressed &&
+    //             !joystick.buttons[2].pressed &&
+    //             !joystick.buttons[3].pressed
+    //         ) {
+    //             allowButtons = true;
+    //         }
 
-            if (!left && !right && !up && !down) {
-                allowJoystick = true;
-            }
+    //         if (!left && !right && !up && !down) {
+    //             allowJoystick = true;
+    //         }
 
-            if (allowButtons) {
-                if (buttonPressed) {
-                    allowButtons = false;
-                    // strings[selectedInputStateRef.current] = inputRef.current;
-                    // let str = '';
+    //         if (allowButtons) {
+    //             if (buttonPressed) {
+    //                 allowButtons = false;
+    //                 // strings[selectedInputStateRef.current] = inputRef.current;
+    //                 // let str = '';
+    //                 switch (selectedInputStateRef.current) {
+    //                     case 0:
+    //                         string1 = inputRef.current[0];
+    //                         break;
+    //                     case 1:
+    //                         string2 = inputRef.current[1];
+    //                         break;
+    //                     case 2:
+    //                         string3 = inputRef.current[2];
+    //                         break;
+    //                     case 3:
+    //                         string4 = inputRef.current[3];
+    //                         break;
+    //                     case 4:
+    //                         check5 = !check5;
+    //                         break;
+    //                     case 5:
+    //                         check6 = !check6;
+    //                         break;
+    //                     case 6:
+    //                         check7 = !check7;
+    //                         break;
+    //                 }
+    //                 if (!hideKeyboardStateRef.current) {
+    //                     // if (!hideKeyboard) {
+    //                     switch (keyLayout[keySelectedRef.current]) {
+    //                         case 'backspace':
+    //                             // str = str.length > 1 ? str.slice(0, -1) : '';
+    //                             // strings[selectedInputStateRef.current] =
+    //                             //     strings[selectedInputStateRef.current]
+    //                             //         .length > 1
+    //                             //         ? strings[
+    //                             //               selectedInputStateRef.current
+    //                             //           ].slice(0, -1)
+    //                             //         : '';
+    //                             // let stringToBackspace =
+    //                             //     strings[selectedInputStateRef.current];
+    //                             // setInput([stringToBackspace, ...strings]);
+
+    //                             switch (selectedInputStateRef.current) {
+    //                                 case 0:
+    //                                     let newString1 = string1
+    //                                         .toString()
+    //                                         .replace(/,/g, '');
+    //                                     newString1 = newString1.slice(0, -1);
+    //                                     string1 = newString1;
+    //                                     break;
+    //                                 case 1:
+    //                                     let newString2 = string2
+    //                                         .toString()
+    //                                         .replace(/,/g, '');
+    //                                     newString2 = newString2.slice(0, -1);
+    //                                     string2 = newString2;
+    //                                     break;
+    //                                 case 2:
+    //                                     let newString3 = string3
+    //                                         .toString()
+    //                                         .replace(/,/g, '');
+    //                                     newString3 = newString3.slice(0, -1);
+    //                                     string3 = newString3;
+    //                                     break;
+    //                                 case 3:
+    //                                     let newString4 = string4
+    //                                         .toString()
+    //                                         .replace(/,/g, '');
+    //                                     newString4 = newString4.slice(0, -1);
+    //                                     string4 = newString4;
+    //                                     break;
+    //                             }
+
+    //                             break;
+    //                         case 'enter':
+    //                             // submit here
+    //                             // sethideKeyboardState(true);
+    //                             getEnter();
+    //                             break;
+    //                         default:
+    //                             // str += `${keyLayout[keySelectedRef.current]}`;
+    //                             switch (selectedInputStateRef.current) {
+    //                                 case 0:
+    //                                     string1 += `${
+    //                                         keyLayout[keySelectedRef.current]
+    //                                     }`;
+    //                                     string1 = string1.replace(/,/g, '');
+    //                                     if (string1.length > 1) {
+    //                                         string1 = string1.slice(0, 1);
+    //                                     }
+    //                                     break;
+    //                                 case 1:
+    //                                     string2 += `${
+    //                                         keyLayout[keySelectedRef.current]
+    //                                     }`;
+    //                                     string2 = string2.replace(/,/g, '');
+    //                                     if (string2.length > 1) {
+    //                                         string2 = string2.slice(0, 1);
+    //                                     }
+    //                                     break;
+    //                                 case 2:
+    //                                     string3 += `${
+    //                                         keyLayout[keySelectedRef.current]
+    //                                     }`;
+    //                                     string3 = string3.replace(/,/g, '');
+    //                                     if (string3.length > 1) {
+    //                                         string3 = string3.slice(0, 1);
+    //                                     }
+    //                                     break;
+    //                                 case 3:
+    //                                     string4 += `${
+    //                                         keyLayout[keySelectedRef.current]
+    //                                     }`;
+    //                                     string4 = string4.replace(/,/g, '');
+    //                                     break;
+    //                             }
+
+    //                             // console.log(
+    //                             //     `currently ${
+    //                             //         strings[selectedInputStateRef.current]
+    //                             //     }`
+    //                             // );
+    //                             // console.log(
+    //                             //     `adding ${
+    //                             //         keyLayout[keySelectedRef.current]
+    //                             //     }`
+    //                             // );
+    //                             // strings[selectedInputStateRef.current] += `${
+    //                             //     keyLayout[keySelectedRef.current]
+    //                             // }`;
+    //                             // let newStr = strings[
+    //                             //     selectedInputStateRef.current
+    //                             // ].replace(/,/g, '');
+    //                             // // console.log(newStr);
+    //                             // strings[selectedInputStateRef.current] = newStr;
+    //                             // // strings[selectedInputStateRef.current] =
+    //                             // //     strings[selectedInputStateRef.current] +
+    //                             // //     'a';
+    //                             // // setInput([...strings]);
+    //                             break;
+    //                     }
+    //                     // setInput([...strings]);
+    //                     // setInput([
+    //                     //     string1,
+    //                     //     string2,
+    //                     //     string3,
+    //                     //     string4,
+    //                     //     check5,
+    //                     //     check6,
+    //                     // ]);
+    //                 }
+    //                 setInput([
+    //                     string1,
+    //                     string2,
+    //                     string3,
+    //                     string4,
+    //                     check5,
+    //                     check6,
+    //                     check7,
+    //                 ]);
+    //             }
+    //         }
+
+    //         if (allowJoystick) {
+    //             if (left) {
+    //                 allowJoystick = false;
+    //                 if (keySelectedRef.current - 1 >= 0) {
+    //                     setKeySelected((keySelected) => keySelected - 1);
+    //                 }
+    //             } else if (right) {
+    //                 allowJoystick = false;
+    //                 if (keySelectedRef.current + 1 <= keyLayout.length - 1) {
+    //                     setKeySelected((keySelected) => keySelected + 1);
+    //                 }
+    //             } else if (up) {
+    //                 allowJoystick = false;
+    //                 // if (keySelectedRef.current === keyLayout.length - 1) {
+    //                 //     // setKeySelected(37);
+    //                 //     setKeySelected(prevKey);
+    //                 // }
+    //                 // else if (keySelectedRef.current === 31) {
+    //                 //     setKeySelected(20);
+    //                 // }
+    //                 if (keySelectedRef.current === 10) {
+    //                     setKeySelected(10);
+    //                 } else if (keySelectedRef.current - 10 >= 0) {
+    //                     setKeySelected((keySelected) => keySelected - 10);
+    //                 }
+    //             } else if (down) {
+    //                 allowJoystick = false;
+    //                 if (keySelectedRef.current === 0) {
+    //                     setKeySelected(11);
+    //                 }
+    //                 // else if (keySelectedRef.current === 21) {
+    //                 //     setKeySelected(32);
+    //                 // }
+    //                 else if (
+    //                     keySelectedRef.current + 10 <=
+    //                     keyLayout.length - 1
+    //                 ) {
+    //                     prevKey = keySelectedRef.current;
+    //                     setKeySelected((keySelected) => keySelected + 10);
+    //                 } else {
+    //                     prevKey = keySelectedRef.current;
+    //                     setKeySelected(keyLayout.length - 1);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     // window.requestAnimationFrame(handleJoystickMovement);
+    //     animationRef.current = window.requestAnimationFrame(
+    //         handleJoystickMovement
+    //     );
+    // }
+    function handleTouchInput() {
+        console.log(keyLayout[keySelectedRef.current]);
+        switch (selectedInputStateRef.current) {
+            case 0:
+                string1 = inputRef.current[0];
+                break;
+            case 1:
+                string2 = inputRef.current[1];
+                break;
+            case 2:
+                string3 = inputRef.current[2];
+                break;
+            case 3:
+                string4 = inputRef.current[3];
+                break;
+            case 4:
+                check5 = !check5;
+                break;
+            case 5:
+                check6 = !check6;
+                break;
+            case 6:
+                check7 = !check7;
+                break;
+        }
+
+        if (!hideKeyboardStateRef.current) {
+            switch (keyLayout[keySelectedRef.current]) {
+                case 'backspace':
                     switch (selectedInputStateRef.current) {
                         case 0:
-                            string1 = inputRef.current[0];
+                            let newString1 = string1
+                                .toString()
+                                .replace(/,/g, '');
+                            newString1 = newString1.slice(0, -1);
+                            string1 = newString1;
                             break;
                         case 1:
-                            string2 = inputRef.current[1];
+                            let newString2 = string2
+                                .toString()
+                                .replace(/,/g, '');
+                            newString2 = newString2.slice(0, -1);
+                            string2 = newString2;
                             break;
                         case 2:
-                            string3 = inputRef.current[2];
+                            let newString3 = string3
+                                .toString()
+                                .replace(/,/g, '');
+                            newString3 = newString3.slice(0, -1);
+                            string3 = newString3;
                             break;
                         case 3:
-                            string4 = inputRef.current[3];
-                            break;
-                        case 4:
-                            check5 = !check5;
-                            break;
-                        case 5:
-                            check6 = !check6;
-                            break;
-                        case 6:
-                            check7 = !check7;
+                            let newString4 = string4
+                                .toString()
+                                .replace(/,/g, '');
+                            newString4 = newString4.slice(0, -1);
+                            string4 = newString4;
                             break;
                     }
-                    if (!hideKeyboardStateRef.current) {
-                        // if (!hideKeyboard) {
-                        switch (keyLayout[keySelectedRef.current]) {
-                            case 'backspace':
-                                // str = str.length > 1 ? str.slice(0, -1) : '';
-                                // strings[selectedInputStateRef.current] =
-                                //     strings[selectedInputStateRef.current]
-                                //         .length > 1
-                                //         ? strings[
-                                //               selectedInputStateRef.current
-                                //           ].slice(0, -1)
-                                //         : '';
-                                // let stringToBackspace =
-                                //     strings[selectedInputStateRef.current];
-                                // setInput([stringToBackspace, ...strings]);
 
-                                switch (selectedInputStateRef.current) {
-                                    case 0:
-                                        let newString1 = string1
-                                            .toString()
-                                            .replace(/,/g, '');
-                                        newString1 = newString1.slice(0, -1);
-                                        string1 = newString1;
-                                        break;
-                                    case 1:
-                                        let newString2 = string2
-                                            .toString()
-                                            .replace(/,/g, '');
-                                        newString2 = newString2.slice(0, -1);
-                                        string2 = newString2;
-                                        break;
-                                    case 2:
-                                        let newString3 = string3
-                                            .toString()
-                                            .replace(/,/g, '');
-                                        newString3 = newString3.slice(0, -1);
-                                        string3 = newString3;
-                                        break;
-                                    case 3:
-                                        let newString4 = string4
-                                            .toString()
-                                            .replace(/,/g, '');
-                                        newString4 = newString4.slice(0, -1);
-                                        string4 = newString4;
-                                        break;
-                                }
-
-                                break;
-                            case 'enter':
-                                // submit here
-                                // sethideKeyboardState(true);
-                                getEnter();
-                                break;
-                            default:
-                                // str += `${keyLayout[keySelectedRef.current]}`;
-                                switch (selectedInputStateRef.current) {
-                                    case 0:
-                                        string1 += `${
-                                            keyLayout[keySelectedRef.current]
-                                        }`;
-                                        string1 = string1.replace(/,/g, '');
-                                        if (string1.length > 1) {
-                                            string1 = string1.slice(0, 1);
-                                        }
-                                        break;
-                                    case 1:
-                                        string2 += `${
-                                            keyLayout[keySelectedRef.current]
-                                        }`;
-                                        string2 = string2.replace(/,/g, '');
-                                        if (string2.length > 1) {
-                                            string2 = string2.slice(0, 1);
-                                        }
-                                        break;
-                                    case 2:
-                                        string3 += `${
-                                            keyLayout[keySelectedRef.current]
-                                        }`;
-                                        string3 = string3.replace(/,/g, '');
-                                        if (string3.length > 1) {
-                                            string3 = string3.slice(0, 1);
-                                        }
-                                        break;
-                                    case 3:
-                                        string4 += `${
-                                            keyLayout[keySelectedRef.current]
-                                        }`;
-                                        string4 = string4.replace(/,/g, '');
-                                        break;
-                                }
-
-                                // console.log(
-                                //     `currently ${
-                                //         strings[selectedInputStateRef.current]
-                                //     }`
-                                // );
-                                // console.log(
-                                //     `adding ${
-                                //         keyLayout[keySelectedRef.current]
-                                //     }`
-                                // );
-                                // strings[selectedInputStateRef.current] += `${
-                                //     keyLayout[keySelectedRef.current]
-                                // }`;
-                                // let newStr = strings[
-                                //     selectedInputStateRef.current
-                                // ].replace(/,/g, '');
-                                // // console.log(newStr);
-                                // strings[selectedInputStateRef.current] = newStr;
-                                // // strings[selectedInputStateRef.current] =
-                                // //     strings[selectedInputStateRef.current] +
-                                // //     'a';
-                                // // setInput([...strings]);
-                                break;
-                        }
-                        // setInput([...strings]);
-                        // setInput([
-                        //     string1,
-                        //     string2,
-                        //     string3,
-                        //     string4,
-                        //     check5,
-                        //     check6,
-                        // ]);
+                    break;
+                case 'enter':
+                    getEnter();
+                    break;
+                default:
+                    switch (selectedInputStateRef.current) {
+                        case 0:
+                            string1 += `${keyLayout[keySelectedRef.current]}`;
+                            // string1 = string1.replace(/,/g, '');
+                            if (string1.length > 1) {
+                                string1 = string1.slice(0, 1);
+                            }
+                            console.log(string1);
+                            break;
+                        case 1:
+                            string2 += `${keyLayout[keySelectedRef.current]}`;
+                            // string2 = string2.replace(/,/g, '');
+                            if (string2.length > 1) {
+                                string2 = string2.slice(0, 1);
+                            }
+                            break;
+                        case 2:
+                            string3 += `${keyLayout[keySelectedRef.current]}`;
+                            // string3 = string3.replace(/,/g, '');
+                            if (string3.length > 1) {
+                                string3 = string3.slice(0, 1);
+                            }
+                            break;
+                        case 3:
+                            string4 += `${keyLayout[keySelectedRef.current]}`;
+                            // string4 = string4.replace(/,/g, '');
+                            break;
                     }
-                    setInput([
-                        string1,
-                        string2,
-                        string3,
-                        string4,
-                        check5,
-                        check6,
-                        check7,
-                    ]);
-                }
-            }
-
-            if (allowJoystick) {
-                if (left) {
-                    allowJoystick = false;
-                    if (keySelectedRef.current - 1 >= 0) {
-                        setKeySelected((keySelected) => keySelected - 1);
-                    }
-                } else if (right) {
-                    allowJoystick = false;
-                    if (keySelectedRef.current + 1 <= keyLayout.length - 1) {
-                        setKeySelected((keySelected) => keySelected + 1);
-                    }
-                } else if (up) {
-                    allowJoystick = false;
-                    // if (keySelectedRef.current === keyLayout.length - 1) {
-                    //     // setKeySelected(37);
-                    //     setKeySelected(prevKey);
-                    // }
-                    // else if (keySelectedRef.current === 31) {
-                    //     setKeySelected(20);
-                    // }
-                    if (keySelectedRef.current === 10) {
-                        setKeySelected(10);
-                    } else if (keySelectedRef.current - 10 >= 0) {
-                        setKeySelected((keySelected) => keySelected - 10);
-                    }
-                } else if (down) {
-                    allowJoystick = false;
-                    if (keySelectedRef.current === 0) {
-                        setKeySelected(11);
-                    }
-                    // else if (keySelectedRef.current === 21) {
-                    //     setKeySelected(32);
-                    // }
-                    else if (
-                        keySelectedRef.current + 10 <=
-                        keyLayout.length - 1
-                    ) {
-                        prevKey = keySelectedRef.current;
-                        setKeySelected((keySelected) => keySelected + 10);
-                    } else {
-                        prevKey = keySelectedRef.current;
-                        setKeySelected(keyLayout.length - 1);
-                    }
-                }
             }
         }
-        // window.requestAnimationFrame(handleJoystickMovement);
-        animationRef.current = window.requestAnimationFrame(
-            handleJoystickMovement
-        );
+        setInput([string1, string2, string3, string4, check5, check6, check7]);
     }
     useEffect(() => {
         const formSubmitted = localStorage.getItem('formSubmitted');
@@ -381,16 +479,16 @@ export default function Keyboard({
         window.addEventListener('keydown', handleEnter);
         // window.addEventListener('gamepadconnected', function (e) {
         // window.requestAnimationFrame(handleJoystickMovement);
-        animationRef.current = window.requestAnimationFrame(
-            handleJoystickMovement
-        );
+        // animationRef.current = window.requestAnimationFrame(
+        //     handleJoystickMovement
+        // );
 
         // });
         return () => {
             window.removeEventListener('keydown', handleEnter);
             // window.cancelAnimationFrame(handleJoystickMovement);
             // window.cancelAnimationFrame(handleJoystickMovement);
-            window.cancelAnimationFrame(animationRef.current);
+            // window.cancelAnimationFrame(animationRef.current);
         };
     }, []);
     useEffect(() => {
@@ -509,8 +607,15 @@ export default function Keyboard({
                                     //         : i === keySelected &&
                                     //           'solid white 1px',
                                     backgroundColor:
-                                        i === keySelected && 'white',
-                                    color: i === keySelected && 'black',
+                                        i === keySelected && clicked && 'white',
+                                    color:
+                                        i === keySelected && clicked && 'black',
+                                }}
+                                onClick={() => {
+                                    setKeySelected(i);
+                                    handleTouchInput();
+                                    setClicked(true);
+                                    setTimeout(() => setClicked(false), 200);
                                 }}
                             >
                                 {getKeyString(key)}

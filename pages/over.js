@@ -65,14 +65,14 @@ let allowButtons = true;
 
 export default function Over() {
     const [score, setScore, scoreRef] = useState(7);
-    // const [selectedInput, setSelectedInput, selectedInputRef] = useState(7);
-    // const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
-    // const [values, setValues] = useState('');
+    const [selectedInput, setSelectedInput, selectedInputRef] = useState(null);
+    const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
+    const [values, setValues] = useState('');
     const [enterPressed, setEnterPressed, enterPressedRef] = useState(false);
     const [input1, setInput1] = useState('');
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
-    const animationRef = useRef(0);
+    // const animationRef = useRef(0);
     // const input1 = useRef(null);
     // const input2 = useRef(null);
     // const input3 = useRef(null);
@@ -80,124 +80,125 @@ export default function Over() {
         setValues(values);
     }
     function handleEnter() {
+        setHideKeyboard(true);
         setEnterPressed(true);
     }
-    function handleJoystickSelection() {
-        const gamepads = navigator.getGamepads();
-        const joystick = gamepads[0];
-        if (joystick && router.pathname === '/over') {
-            const left = joystick.axes[0] === -1;
-            const right = joystick.axes[0] === 1;
-            const up = joystick.axes[1] === -1;
-            const down = joystick.axes[1] === 1;
-            const buttonPressed =
-                joystick.buttons[0].pressed ||
-                joystick.buttons[1].pressed ||
-                joystick.buttons[2].pressed ||
-                joystick.buttons[3].pressed;
+    // function handleJoystickSelection() {
+    //     const gamepads = navigator.getGamepads();
+    //     const joystick = gamepads[0];
+    //     if (joystick && router.pathname === '/over') {
+    //         const left = joystick.axes[0] === -1;
+    //         const right = joystick.axes[0] === 1;
+    //         const up = joystick.axes[1] === -1;
+    //         const down = joystick.axes[1] === 1;
+    //         const buttonPressed =
+    //             joystick.buttons[0].pressed ||
+    //             joystick.buttons[1].pressed ||
+    //             joystick.buttons[2].pressed ||
+    //             joystick.buttons[3].pressed;
 
-            if (
-                !joystick.buttons[0].pressed &&
-                !joystick.buttons[1].pressed &&
-                !joystick.buttons[2].pressed &&
-                !joystick.buttons[3].pressed
-            ) {
-                allowButtons = true;
-            }
+    //         if (
+    //             !joystick.buttons[0].pressed &&
+    //             !joystick.buttons[1].pressed &&
+    //             !joystick.buttons[2].pressed &&
+    //             !joystick.buttons[3].pressed
+    //         ) {
+    //             allowButtons = true;
+    //         }
 
-            if (!left && !right && !up && !down) {
-                allowJoystick = true;
-            }
+    //         if (!left && !right && !up && !down) {
+    //             allowJoystick = true;
+    //         }
 
-            if (allowButtons) {
-                if (buttonPressed) {
-                    allowButtons = false;
-                    if (enterPressedRef.current) {
-                        setHideKeyboard(true);
-                        setEnterPressed(false);
-                    } else {
-                        if (selectedInputRef.current < 4) {
-                            setHideKeyboard(false);
-                        } else if (selectedInputRef.current === 7) {
-                            // console.log('submit form');
-                            // submitForm(scoreRef.current);
-                            // const gameForm =
-                            //     document.getElementById('game-form');
-                            // gameForm.submit();
-                            // gameForm.dispatchEvent(
-                            //     new Event('submit', {
-                            //         cancelable: true,
-                            //         bubbles: true,
-                            //     })
-                            // );
-                            const submitButton =
-                                document.getElementById('submit-button');
-                            submitButton.click();
-                        }
-                    }
+    //         if (allowButtons) {
+    //             if (buttonPressed) {
+    //                 allowButtons = false;
+    //                 if (enterPressedRef.current) {
+    //                     setHideKeyboard(true);
+    //                     setEnterPressed(false);
+    //                 } else {
+    //                     if (selectedInputRef.current < 4) {
+    //                         setHideKeyboard(false);
+    //                     } else if (selectedInputRef.current === 7) {
+    //                         // console.log('submit form');
+    //                         // submitForm(scoreRef.current);
+    //                         // const gameForm =
+    //                         //     document.getElementById('game-form');
+    //                         // gameForm.submit();
+    //                         // gameForm.dispatchEvent(
+    //                         //     new Event('submit', {
+    //                         //         cancelable: true,
+    //                         //         bubbles: true,
+    //                         //     })
+    //                         // );
+    //                         const submitButton =
+    //                             document.getElementById('submit-button');
+    //                         submitButton.click();
+    //                     }
+    //                 }
 
-                    // if (selectedInputRef.current < 4) {
-                    //     // if (allowInputChangeRef.current) {
-                    //     if (enterPressedRef.current) {
-                    //         setEnterPressed(false);
-                    //         setHideKeyboard(true);
-                    //     } else {
-                    //         if (hideKeyboardRef.current) {
-                    //             setHideKeyboard(false);
-                    //         }
-                    //     }
-                    // } else if (selectedInputRef.current === 6) {
-                    //     // const gameForm = document.getElementById('game-form');
-                    //     // gameForm.submit();
-                    // }
-                }
-            }
+    //                 // if (selectedInputRef.current < 4) {
+    //                 //     // if (allowInputChangeRef.current) {
+    //                 //     if (enterPressedRef.current) {
+    //                 //         setEnterPressed(false);
+    //                 //         setHideKeyboard(true);
+    //                 //     } else {
+    //                 //         if (hideKeyboardRef.current) {
+    //                 //             setHideKeyboard(false);
+    //                 //         }
+    //                 //     }
+    //                 // } else if (selectedInputRef.current === 6) {
+    //                 //     // const gameForm = document.getElementById('game-form');
+    //                 //     // gameForm.submit();
+    //                 // }
+    //             }
+    //         }
 
-            if (allowJoystick) {
-                // if (left) {
-                //     allowJoystick = false;
-                //     if (
-                //         selectedInputRef.current - 1 >= 0 &&
-                //         // allowInputChangeRef.current
-                //         hideKeyboardRef.current
-                //     ) {
-                //         setSelectedInput((selectedInput) => selectedInput - 1);
-                //     }
-                // } else if (right) {
-                //     allowJoystick = false;
-                //     if (
-                //         selectedInputRef.current + 1 <= 7 &&
-                //         // allowInputChangeRef.current
-                //         hideKeyboardRef.current
-                //     ) {
-                //         setSelectedInput((selectedInput) => selectedInput + 1);
-                //     }
-                // } else if (up) {
-                //     allowJoystick = false;
-                //     if (
-                //         selectedInputRef.current - 1 >= 0 &&
-                //         // allowInputChangeRef.current
-                //         hideKeyboardRef.current
-                //     ) {
-                //         setSelectedInput((selectedInput) => selectedInput - 1);
-                //     }
-                // } else if (down) {
-                //     allowJoystick = false;
-                //     if (
-                //         selectedInputRef.current + 1 <= 7 &&
-                //         // allowInputChangeRef.current
-                //         hideKeyboardRef.current
-                //     ) {
-                //         setSelectedInput((selectedInput) => selectedInput + 1);
-                //     }
-                // }
-            }
-        }
-        // window.requestAnimationFrame(handleJoystickSelection);
-        animationRef.current = window.requestAnimationFrame(
-            handleJoystickSelection
-        );
-    }
+    //         if (allowJoystick) {
+    //             // if (left) {
+    //             //     allowJoystick = false;
+    //             //     if (
+    //             //         selectedInputRef.current - 1 >= 0 &&
+    //             //         // allowInputChangeRef.current
+    //             //         hideKeyboardRef.current
+    //             //     ) {
+    //             //         setSelectedInput((selectedInput) => selectedInput - 1);
+    //             //     }
+    //             // } else if (right) {
+    //             //     allowJoystick = false;
+    //             //     if (
+    //             //         selectedInputRef.current + 1 <= 7 &&
+    //             //         // allowInputChangeRef.current
+    //             //         hideKeyboardRef.current
+    //             //     ) {
+    //             //         setSelectedInput((selectedInput) => selectedInput + 1);
+    //             //     }
+    //             // } else if (up) {
+    //             //     allowJoystick = false;
+    //             //     if (
+    //             //         selectedInputRef.current - 1 >= 0 &&
+    //             //         // allowInputChangeRef.current
+    //             //         hideKeyboardRef.current
+    //             //     ) {
+    //             //         setSelectedInput((selectedInput) => selectedInput - 1);
+    //             //     }
+    //             // } else if (down) {
+    //             //     allowJoystick = false;
+    //             //     if (
+    //             //         selectedInputRef.current + 1 <= 7 &&
+    //             //         // allowInputChangeRef.current
+    //             //         hideKeyboardRef.current
+    //             //     ) {
+    //             //         setSelectedInput((selectedInput) => selectedInput + 1);
+    //             //     }
+    //             // }
+    //         }
+    //     }
+    //     // window.requestAnimationFrame(handleJoystickSelection);
+    //     animationRef.current = window.requestAnimationFrame(
+    //         handleJoystickSelection
+    //     );
+    // }
     function handleChange(e, inputNum, setInput1, setInput2, setInput3) {
         if (inputNum === 0) {
             if (e.target.value.length < 2) {
@@ -245,18 +246,23 @@ export default function Over() {
         setScore(score);
         // window.addEventListener('gamepadconnected', function (e) {
         // window.requestAnimationFrame(handleJoystickSelection);
-        animationRef.current = window.requestAnimationFrame(
-            handleJoystickSelection
-        );
+        // animationRef.current = window.requestAnimationFrame(
+        //     handleJoystickSelection
+        // );
         // document.querySelector("input[type='text']").focus();
         // $("input[type='text']").focus(function () { $(this).removeAttr("autocomplete").attr("autocomplete", "new-password"); });
         // });
         return () => {
             // window.cancelAnimationFrame(handleJoystickSelection);
-            window.cancelAnimationFrame(animationRef.current);
+            // window.cancelAnimationFrame(animationRef.current);
             localStorage.setItem('reloadTimes', 0);
         };
     }, []);
+    useEffect(() => {
+        if (selectedInput === null) {
+            // setHideKeyboard(true);
+        }
+    }, [selectedInput]);
     return (
         <div className={styles.container}>
             <Head>
@@ -295,22 +301,27 @@ export default function Over() {
                             autoComplete='new-password'
                             // readOnly
                             required
-                            onChange={(e) =>
-                                handleChange(
-                                    e,
-                                    0,
-                                    setInput1,
-                                    setInput2,
-                                    setInput3
-                                )
-                            }
-                            value={input1}
-                            // onFocus={console.log('focus1')}
-                            // value={values && values[0]}
-                            // style={{
-                            //     border:
-                            //         selectedInput === 0 && 'solid #E5007E 2px',
-                            // }}
+                            // onChange={(e) =>
+                            //     handleChange(
+                            //         e,
+                            //         0,
+                            //         setInput1,
+                            //         setInput2,
+                            //         setInput3
+                            //     )
+                            // }
+                            // value={input1}
+                            // onFocus={() => console.log('focus1')}
+                            // onBlur={() => setSelectedInput(null)}
+                            onFocus={() => {
+                                setHideKeyboard(false);
+                                setSelectedInput(0);
+                            }}
+                            value={values && values[0]}
+                            style={{
+                                border:
+                                    selectedInput === 0 && 'solid #E5007E 2px',
+                            }}
                         />
                         <input
                             type='text'
@@ -320,21 +331,27 @@ export default function Over() {
                             autoComplete='new-password'
                             // value={values && values[1]}
                             required
-                            onChange={(e) =>
-                                handleChange(
-                                    e,
-                                    1,
-                                    setInput1,
-                                    setInput2,
-                                    setInput3
-                                )
-                            }
-                            value={input2}
+                            // onChange={(e) =>
+                            //     handleChange(
+                            //         e,
+                            //         1,
+                            //         setInput1,
+                            //         setInput2,
+                            //         setInput3
+                            //     )
+                            // }
+                            // value={input2}
+                            // onBlur={() => setSelectedInput(null)}
+                            onFocus={() => {
+                                setHideKeyboard(false);
+                                setSelectedInput(1);
+                            }}
+                            value={values && values[1]}
                             // readOnly
-                            // style={{
-                            //     border:
-                            //         selectedInput === 1 && 'solid #E5007E 2px',
-                            // }}
+                            style={{
+                                border:
+                                    selectedInput === 1 && 'solid #E5007E 2px',
+                            }}
                         />
                         <input
                             type='text'
@@ -344,21 +361,27 @@ export default function Over() {
                             autoComplete='new-password'
                             // value={values && values[2]}
                             required
-                            onChange={(e) =>
-                                handleChange(
-                                    e,
-                                    2,
-                                    setInput1,
-                                    setInput2,
-                                    setInput3
-                                )
-                            }
-                            value={input3}
+                            // onChange={(e) =>
+                            //     handleChange(
+                            //         e,
+                            //         2,
+                            //         setInput1,
+                            //         setInput2,
+                            //         setInput3
+                            //     )
+                            // }
+                            // value={input3}
+                            // onBlur={() => setSelectedInput(null)}
+                            onFocus={() => {
+                                setHideKeyboard(false);
+                                setSelectedInput(2);
+                            }}
+                            value={values && values[2]}
                             // readOnly
-                            // style={{
-                            //     border:
-                            //         selectedInput === 2 && 'solid #E5007E 2px',
-                            // }}
+                            style={{
+                                border:
+                                    selectedInput === 2 && 'solid #E5007E 2px',
+                            }}
                         />
                     </div>
                     <h2>Please enter your email</h2>
@@ -371,10 +394,16 @@ export default function Over() {
                         autoComplete='new-password'
                         // value={values && values[3]}
                         required
+                        // onBlur={() => setSelectedInput(null)}
+                        onFocus={() => {
+                            setHideKeyboard(false);
+                            setSelectedInput(3);
+                        }}
+                        value={values && values[3]}
                         // readOnly
-                        // style={{
-                        //     border: selectedInput === 3 && 'solid #E5007E 2px',
-                        // }}
+                        style={{
+                            border: selectedInput === 3 && 'solid #E5007E 2px',
+                        }}
                     />
                     <br />
                     <div className={styles.checkboxes}>
@@ -392,6 +421,10 @@ export default function Over() {
                                 // checked={values && values[4]}
                                 className={styles.checkbox}
                                 autoComplete='on'
+                                onFocus={() => {
+                                    setHideKeyboard(true);
+                                    // setSelectedInput(4);
+                                }}
                                 // style={{
                                 //     border:
                                 //         selectedInput === 4 &&
@@ -417,6 +450,10 @@ export default function Over() {
                                 className={styles.checkbox}
                                 // checked={values && values[5]}
                                 required
+                                onFocus={() => {
+                                    setHideKeyboard(true);
+                                    // setSelectedInput(4);
+                                }}
                                 // style={{
                                 //     border:
                                 //         selectedInput === 5 &&
@@ -443,6 +480,10 @@ export default function Over() {
                                 className={styles.checkbox}
                                 // checked={values && values[6]}
                                 required
+                                onFocus={() => {
+                                    setHideKeyboard(true);
+                                    // setSelectedInput(4);
+                                }}
                                 // style={{
                                 //     border:
                                 //         selectedInput === 6 &&
@@ -518,13 +559,13 @@ export default function Over() {
                     {/* <img src='/qr-2.svg' alt='' /> */}
                 </div>
             </main>
-            {/* <Keyboard
+            <Keyboard
                 getValue={handleGetValue}
                 getEnter={handleEnter}
                 selectedInput={selectedInput}
                 hideKeyboard={hideKeyboard}
                 // keyboardInactive={hideKeyboardRef.current}
-            /> */}
+            />
             {/* <button
                 className='progressButton'
                 onClick={() => router.push('/score')}
