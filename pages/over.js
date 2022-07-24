@@ -65,7 +65,7 @@ let allowButtons = true;
 
 export default function Over() {
     const [score, setScore, scoreRef] = useState(7);
-    const [selectedInput, setSelectedInput, selectedInputRef] = useState(7);
+    // const [selectedInput, setSelectedInput, selectedInputRef] = useState(7);
     // const [hideKeyboard, setHideKeyboard, hideKeyboardRef] = useState(true);
     // const [values, setValues] = useState('');
     const [enterPressed, setEnterPressed, enterPressedRef] = useState(false);
@@ -294,7 +294,6 @@ export default function Over() {
                             // maxLength='1'
                             autoComplete='new-password'
                             // readOnly
-                            // value={values && values[0]}
                             required
                             onChange={(e) =>
                                 handleChange(
@@ -306,6 +305,8 @@ export default function Over() {
                                 )
                             }
                             value={input1}
+                            // onFocus={console.log('focus1')}
+                            // value={values && values[0]}
                             // style={{
                             //     border:
                             //         selectedInput === 0 && 'solid #E5007E 2px',
