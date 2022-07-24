@@ -299,7 +299,7 @@ export default function Over() {
                             // ref={input1}
                             // maxLength='1'
                             autoComplete='new-password'
-                            // readOnly
+                            readOnly
                             required
                             // onChange={(e) =>
                             //     handleChange(
@@ -347,7 +347,7 @@ export default function Over() {
                                 setSelectedInput(1);
                             }}
                             value={values && values[1]}
-                            // readOnly
+                            readOnly
                             style={{
                                 border:
                                     selectedInput === 1 && 'solid #E5007E 2px',
@@ -377,7 +377,7 @@ export default function Over() {
                                 setSelectedInput(2);
                             }}
                             value={values && values[2]}
-                            // readOnly
+                            readOnly
                             style={{
                                 border:
                                     selectedInput === 2 && 'solid #E5007E 2px',
@@ -400,7 +400,7 @@ export default function Over() {
                             setSelectedInput(3);
                         }}
                         value={values && values[3]}
-                        // readOnly
+                        readOnly
                         style={{
                             border: selectedInput === 3 && 'solid #E5007E 2px',
                         }}
