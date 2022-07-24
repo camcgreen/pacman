@@ -11,8 +11,10 @@ import {
 import Keyboard from '../components/keyboard';
 import Fullscreen from '../components/fullscreen';
 
-const submitForm = (e, score) => {
+const submitForm = (e, score, setHideKeyboard, setIsReadOnly) => {
     e.preventDefault();
+    // setHideKeyboard(true);
+    // setIsReadOnly(false);
     // console.log('submitting');
     // const initials =
     //     `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
@@ -21,6 +23,7 @@ const submitForm = (e, score) => {
     const initials2 = document.getElementById('initial2').value.toUpperCase();
     const initials = `${initials0}${initials1}${initials2}`;
     const email = document.getElementById('email').value;
+    email.removeAttr('readOnly');
     const communications = document.getElementById('comms').checked;
     const age = document.getElementById('age').checked;
     const privacy = document.getElementById('privacy').checked;
@@ -72,6 +75,7 @@ export default function Over() {
     const [input1, setInput1] = useState('');
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
+    const [isReadOnly, setIsReadOnly] = useState(true);
     // const animationRef = useRef(0);
     // const input1 = useRef(null);
     // const input2 = useRef(null);
@@ -283,7 +287,10 @@ export default function Over() {
                     <h2>{score}</h2>
                 </div>
                 <form
-                    onSubmit={(e) => submitForm(e, score)}
+                    onSubmit={(e) => {
+                        setIsReadOnly(() => false);
+                        submitForm(e, score, setHideKeyboard, setIsReadOnly);
+                    }}
                     id='game-form'
                     className={styles.gameForm}
                     autoComplete='off'
@@ -299,7 +306,9 @@ export default function Over() {
                             // ref={input1}
                             // maxLength='1'
                             autoComplete='new-password'
-                            readOnly
+                            // readOnly
+                            // readOnly={isReadOnly}
+                            inputMode='none'
                             required
                             // onChange={(e) =>
                             //     handleChange(
@@ -331,6 +340,7 @@ export default function Over() {
                             autoComplete='new-password'
                             // value={values && values[1]}
                             required
+                            inputMode='none'
                             // onChange={(e) =>
                             //     handleChange(
                             //         e,
@@ -347,7 +357,8 @@ export default function Over() {
                                 setSelectedInput(1);
                             }}
                             value={values && values[1]}
-                            readOnly
+                            // readOnly
+                            // readOnly={isReadOnly}
                             style={{
                                 border:
                                     selectedInput === 1 && 'solid #E5007E 2px',
@@ -361,6 +372,7 @@ export default function Over() {
                             autoComplete='new-password'
                             // value={values && values[2]}
                             required
+                            inputMode='none'
                             // onChange={(e) =>
                             //     handleChange(
                             //         e,
@@ -377,7 +389,8 @@ export default function Over() {
                                 setSelectedInput(2);
                             }}
                             value={values && values[2]}
-                            readOnly
+                            // readOnly
+                            // readOnly={isReadOnly}
                             style={{
                                 border:
                                     selectedInput === 2 && 'solid #E5007E 2px',
@@ -386,21 +399,23 @@ export default function Over() {
                     </div>
                     <h2>Please enter your email</h2>
                     <input
-                        type='email'
-                        // type='text'
+                        // type='email'
+                        type='text'
                         id='email'
                         className={styles.marginBelow}
                         // autoComplete='off'
                         autoComplete='new-password'
                         // value={values && values[3]}
                         required
+                        inputMode='none'
                         // onBlur={() => setSelectedInput(null)}
                         onFocus={() => {
                             setHideKeyboard(false);
                             setSelectedInput(3);
                         }}
                         value={values && values[3]}
-                        readOnly
+                        // readOnly
+                        // readOnly={isReadOnly}
                         style={{
                             border: selectedInput === 3 && 'solid #E5007E 2px',
                         }}
