@@ -34,40 +34,40 @@ let allowButtons = false;
 export default function Score() {
     const [scoreItems, setScoreItems] = useState(null);
     const [yourInfo, setYourInfo] = useState([]);
-    const animationRef1 = useRef(0);
-    function handleJoystickButton() {
-        const gamepads = navigator.getGamepads();
-        const joystick = gamepads[0];
-        // console.log(joystick);
-        if (joystick && router.pathname === '/score') {
-            if (
-                !joystick.buttons[0].pressed &&
-                !joystick.buttons[1].pressed &&
-                !joystick.buttons[2].pressed &&
-                !joystick.buttons[3].pressed
-            ) {
-                // console.log('allow');
-                allowButtons = true;
-            }
-            const buttonPressed =
-                // joystick.axes[0] !== 0 ||
-                // joystick.axes[1] !== 0 ||
-                joystick.buttons[0].pressed ||
-                joystick.buttons[1].pressed ||
-                joystick.buttons[2].pressed ||
-                joystick.buttons[3].pressed;
-            if (buttonPressed) {
-                if (allowButtons) {
-                    allowButtons = false;
-                    router.push('/');
-                }
-                // if (router.pathname === '/') router.push('/game');
-            }
-        }
-        // window.requestAnimationFrame(handleJoystickButton);
-        animationRef1.current =
-            window.requestAnimationFrame(handleJoystickButton);
-    }
+    // const animationRef1 = useRef(0);
+    // function handleJoystickButton() {
+    //     const gamepads = navigator.getGamepads();
+    //     const joystick = gamepads[0];
+    //     // console.log(joystick);
+    //     if (joystick && router.pathname === '/score') {
+    //         if (
+    //             !joystick.buttons[0].pressed &&
+    //             !joystick.buttons[1].pressed &&
+    //             !joystick.buttons[2].pressed &&
+    //             !joystick.buttons[3].pressed
+    //         ) {
+    //             // console.log('allow');
+    //             allowButtons = true;
+    //         }
+    //         const buttonPressed =
+    //             // joystick.axes[0] !== 0 ||
+    //             // joystick.axes[1] !== 0 ||
+    //             joystick.buttons[0].pressed ||
+    //             joystick.buttons[1].pressed ||
+    //             joystick.buttons[2].pressed ||
+    //             joystick.buttons[3].pressed;
+    //         if (buttonPressed) {
+    //             if (allowButtons) {
+    //                 allowButtons = false;
+    //                 router.push('/');
+    //             }
+    //             // if (router.pathname === '/') router.push('/game');
+    //         }
+    //     }
+    //     // window.requestAnimationFrame(handleJoystickButton);
+    //     animationRef1.current =
+    //         window.requestAnimationFrame(handleJoystickButton);
+    // }
     useEffect(() => {
         // // setTimeout(() => BuildLeaderboard(), 2000);
         // fireBaseStartApp();
@@ -101,24 +101,26 @@ export default function Score() {
         // animationRef1.current =
         //     window.requestAnimationFrame(handleJoystickButton);
 
-        const gamepads = navigator.getGamepads();
-        const joystick = gamepads[0];
-        if (joystick) {
-            animationRef1.current =
-                window.requestAnimationFrame(handleJoystickButton);
-        } else {
-            window.addEventListener('gamepadconnected', function (e) {
-                // window.requestAnimationFrame(handleJoystickInput);
-                // animationRef.current =
-                //     window.requestAnimationFrame(handleJoystickInput);
-                animationRef1.current =
-                    window.requestAnimationFrame(handleJoystickButton);
-                router.push('/');
-            });
-        }
+        // const gamepads = navigator.getGamepads();
+        // const joystick = gamepads[0];
+        // if (joystick) {
+        //     animationRef1.current =
+        //         window.requestAnimationFrame(handleJoystickButton);
+        // } else {
+        //     window.addEventListener('gamepadconnected', function (e) {
+        //         // window.requestAnimationFrame(handleJoystickInput);
+        //         // animationRef.current =
+        //         //     window.requestAnimationFrame(handleJoystickInput);
+        //         animationRef1.current =
+        //             window.requestAnimationFrame(handleJoystickButton);
+        //         router.push('/');
+        //     });
+        // }
+
+        setTimeout(() => router.push('/'), 5000);
         return () => {
             // window.cancelAnimationFrame(handleJoystickButton);
-            window.cancelAnimationFrame(animationRef1.current);
+            // window.cancelAnimationFrame(animationRef1.current);
         };
     }, []);
     return (
