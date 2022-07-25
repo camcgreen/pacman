@@ -463,7 +463,7 @@ export default function Over() {
                                 name='age'
                                 className={styles.checkbox}
                                 // checked={values && values[5]}
-                                required
+                                // required
                                 onFocus={() => {
                                     setHideKeyboard(true);
                                     // setSelectedInput(4);
