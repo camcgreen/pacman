@@ -30,7 +30,8 @@ const submitForm = (e, score, setHideKeyboard, setIsReadOnly) => {
     // const communications = e.target[4].checked;
     // const age = e.target[5].checked;
     // const privacy = e.target[6].checked;
-    if (score && initials && email && age && privacy) {
+    // if (score && initials && email && age && privacy) {
+    if (score && initials && email && privacy) {
         // console.log('proper');
         // console.log(score, initials, email, communications, age, privacy);
         addDataToLeaderboard(initials, score, email, communications);
