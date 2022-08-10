@@ -37,8 +37,10 @@
 }
 
 .container main h2 {
-  font-weight: 600;
-  max-width: 51%;
+  /* font-weight: 600; */
+  font-weight: 500;
+  /* max-width: 51%; */
+  max-width: 50%;
   line-height: 1em;
   margin-bottom: 10px;
 }
@@ -149,11 +151,12 @@
 }
 
 .checkboxColumn label {
-    font-weight: 200;
+    font-weight: 100;
     text-align: left;
     margin-left: 10px;
     font-size: 0.75rem;
-    max-width: 200px;
+    /* max-width: 200px; */
+    max-width: 170px;
 }
 
 .checkboxRow label, .checkboxRow input {

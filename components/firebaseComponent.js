@@ -259,7 +259,7 @@ function HighScoreComp() {
 // BuildLeaderboard();
 
 //Add data to the Leaderboard Array
-async function addDataToLeaderboard(Alias, Score, Email, Communications) {
+async function addDataToLeaderboard(Alias, Score, Email, Communications, Age) {
     const db = getFirestore(app);
 
     const dbRef = doc(db, 'LeaderboardsAndParameters', device);
@@ -269,6 +269,7 @@ async function addDataToLeaderboard(Alias, Score, Email, Communications) {
         Score: Score,
         Email: Email,
         Communications: Communications,
+        Age: Age,
     };
     await updateDoc(dbRef, {
         Leaderboard: arrayUnion(newData),

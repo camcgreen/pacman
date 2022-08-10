@@ -34,7 +34,8 @@ const submitForm = (e, score, setHideKeyboard, setIsReadOnly) => {
     if (score && initials && email && privacy) {
         // console.log('proper');
         // console.log(score, initials, email, communications, age, privacy);
-        addDataToLeaderboard(initials, score, email, communications); // ADD AGE HERE
+        // addDataToLeaderboard(initials, score, email, communications); // ADD AGE HERE
+        addDataToLeaderboard(initials, score, email, communications, age); // UNCOMMENT THIS AND CHECK WORKS BEFORE PUSHING
         localStorage.setItem('initials', initials);
         localStorage.setItem('formSubmitted', true);
         router.push('/score');

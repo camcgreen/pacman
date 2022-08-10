@@ -78,13 +78,24 @@ export default function Leaderboard() {
                     src='/leaderboard.png'
                     className={styles.leaderboardIcon}
                 />
-                <p className={styles.explain}>
+                {/* <p className={styles.explain}>
                     Top the leaderboard for your chance to win a{' '}
                     <span>
                         Galaxy Z Flip3 , Buds Pro and Z Flip3 Silicone Cover.
                         <sup>1</sup>
                     </span>
+                </p> */}
+                <p className={styles.explain}>
+                    Top the leaderboard for your chance to{' '}
+                    <strong>win a brand new</strong>{' '}
                 </p>
+                <div className={styles.banner}>
+                    <p>Galaxy Z Flip4,</p>
+                    <p>
+                        Buds2 Pro and a Z Flip4 Silicone Cover.
+                        <sup>1</sup>
+                    </p>
+                </div>
                 <div className={styles.grid}>
                     {/* <div className={`${styles.score} ${styles.left}`}>
                         <div className={styles.initials}>
