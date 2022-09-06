@@ -434,8 +434,11 @@ export default function Keyboard({
                         case 0:
                             string1 += `${keyLayout[keySelectedRef.current]}`;
                             // string1 = string1.replace(/,/g, '');
-                            if (string1.length > 1) {
-                                string1 = string1.slice(0, 1);
+                            // if (string1.length > 1) {
+                            //     string1 = string1.slice(0, 1);
+                            // }
+                            if (string1.length > 9) {
+                                string1 = string1.slice(0, 9);
                             }
                             console.log(string1);
                             break;

@@ -19,29 +19,27 @@ const submitForm = (e, score, setHideKeyboard, setIsReadOnly) => {
     // const initials =
     //     `${e.target[0].value}${e.target[1].value}${e.target[2].value}`.toUpperCase();
     const initials0 = document.getElementById('initial0').value.toUpperCase();
-    const initials1 = document.getElementById('initial1').value.toUpperCase();
-    const initials2 = document.getElementById('initial2').value.toUpperCase();
-    const initials = `${initials0}${initials1}${initials2}`;
-    const email = document.getElementById('email').value;
-    const communications = document.getElementById('comms').checked;
-    const age = document.getElementById('age').checked;
-    const privacy = document.getElementById('privacy').checked;
+    // const initials1 = document.getElementById('initial1').value.toUpperCase();
+    // const initials2 = document.getElementById('initial2').value.toUpperCase();
+    // const initials = `${initials0}${initials1}${initials2}`;
+    // const email = document.getElementById('email').value;
+    // const communications = document.getElementById('comms').checked;
+    // const age = document.getElementById('age').checked;
+    // const privacy = document.getElementById('privacy').checked;
     // const email = e.target[3].value;
     // const communications = e.target[4].checked;
     // const age = e.target[5].checked;
     // const privacy = e.target[6].checked;
     // if (score && initials && email && age && privacy) {
-    if (score && initials && email && privacy) {
-        // console.log('proper');
-        // console.log(score, initials, email, communications, age, privacy);
-        // addDataToLeaderboard(initials, score, email, communications); // ADD AGE HERE
-        addDataToLeaderboard(initials, score, email, communications, age); // UNCOMMENT THIS AND CHECK WORKS BEFORE PUSHING
-        localStorage.setItem('initials', initials);
+    // if (score && initials && email && privacy) {
+    if (score && initials0) {
+        // addDataToLeaderboard(initials, score, email, communications, age); // UNCOMMENT THIS AND CHECK WORKS BEFORE PUSHING
+        addDataToLeaderboard(initials0, score); // UNCOMMENT THIS AND CHECK WORKS BEFORE PUSHING
+        // localStorage.setItem('initials', initials);
+        localStorage.setItem('initials', initials0);
         localStorage.setItem('formSubmitted', true);
         router.push('/score');
     } else {
-        // console.log(score, initials, email, communications, age, privacy);
-        // console.log('improper');
         localStorage.setItem('formSubmitted', true);
         router.push('/');
     }
@@ -296,10 +294,8 @@ export default function Over() {
                     className={styles.gameForm}
                     autoComplete='off'
                 >
-                    <h2>
-                        Please enter your initials to be added to the
-                        leaderboard
-                    </h2>
+                    <h2>Please enter your name below</h2>
+                    <h3>(Up to nine characters)</h3>
                     <div className={`${styles.inputs} ${styles.marginBelow}`}>
                         <input
                             type='text'
@@ -333,7 +329,7 @@ export default function Over() {
                                     selectedInput === 0 && 'solid #E5007E 2px',
                             }}
                         />
-                        <input
+                        {/* <input
                             type='text'
                             id='initial1'
                             // ref={input2}
@@ -396,9 +392,9 @@ export default function Over() {
                                 border:
                                     selectedInput === 2 && 'solid #E5007E 2px',
                             }}
-                        />
+                        /> */}
                     </div>
-                    <h2>Please enter your email</h2>
+                    {/* <h2>Please enter your email</h2>
                     <input
                         // type='email'
                         type='text'
@@ -421,8 +417,8 @@ export default function Over() {
                             border: selectedInput === 3 && 'solid #E5007E 2px',
                         }}
                     />
-                    <br />
-                    <div className={styles.checkboxes}>
+                    <br /> */}
+                    {/* <div className={styles.checkboxes}>
                         <div
                             className={styles.checkboxColumn}
                             // style={{
@@ -511,7 +507,7 @@ export default function Over() {
                                 policy.
                             </label>
                         </div>
-                    </div>
+                    </div> */}
                     {/* <div
                         className={styles.checkboxRow}
                         style={{

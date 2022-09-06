@@ -1,48 +1,54 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  /* font-size: 2rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* font-size: 2rem; */
 }
 
 .bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: fixed;
-  z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    z-index: 1;
 }
 
 .bgIcons {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: fixed;
-  z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    z-index: 2;
 }
 
 .container main {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container main * {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .container main h2 {
-  /* font-weight: 600; */
-  font-weight: 500;
-  /* max-width: 51%; */
-  max-width: 50%;
-  line-height: 1em;
-  margin-bottom: 10px;
+    /* font-weight: 600; */
+    font-weight: 500;
+    /* max-width: 51%; */
+    /* max-width: 50%; */
+    line-height: 1em;
+    /* margin-bottom: 5px; */
+}
+
+.container main h3 {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .scoreContainer {
@@ -81,8 +87,8 @@
 }
 
 .container main p {
-  font-size: 0.5rem;
-  margin-right: 20px;
+    font-size: 0.5rem;
+    margin-right: 20px;
 }
 
 .conditions img {
@@ -97,18 +103,18 @@
 }
 
 .container main input {
-  /* width: 750px; */
-  width: 500px;
-  height: 50px;
-  border: none;
-  outline: none;
-  /* display: flex;
+    /* width: 750px; */
+    width: 500px;
+    height: 50px;
+    border: none;
+    outline: none;
+    /* display: flex;
   justify-content: center;
   align-items: center; */
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--colNavy);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--colNavy);
 }
 
 /* .checkboxRow {
@@ -138,10 +144,10 @@
 }
 
 .checkbox {
-    -webkit-appearance:none;
+    -webkit-appearance: none;
     width: 30px !important;
     height: 40px !important;
-    background:white;
+    background: white;
     /* border-radius:5px; */
     border: 2px solid #555;
 }
@@ -159,48 +165,50 @@
     max-width: 170px;
 }
 
-.checkboxRow label, .checkboxRow input {
+.checkboxRow label,
+.checkboxRow input {
     margin-bottom: 0;
-  }
+}
 
 .container main input:focus {
-  border: var(--colPink);
+    border: var(--colPink);
 }
 
 .inputs input {
-  width: 40px !important;
-  /* height: 100px; */
-  margin-right: 20px;
-  text-transform: uppercase;
+    width: 100%;
+    /* width: 40px !important; */
+    /* height: 100px; */
+    /* margin-right: 20px; */
+    text-transform: uppercase;
 }
 
 .inputs input:first-of-type {
-  color: var(--colPink);
+    color: var(--colPink);
 }
 
 .inputs input:nth-of-type(2) {
-  color: var(--colNavy);
+    color: var(--colNavy);
 }
 
 .inputs input:last-of-type {
-  color: var(--colBlue);
+    color: var(--colBlue);
 }
 
 .submit {
-  background-color: var(--colBlue);
-  color: white !important;
-  width: 325px !important;
-  font-size: 1.5rem !important;
-  font-weight: 400 !important;
-  height: 40px !important;
+    background-color: var(--colBlue);
+    color: white !important;
+    width: 325px !important;
+    font-size: 1.5rem !important;
+    font-weight: 400 !important;
+    height: 40px !important;
 }
 
 .over {
-  /* width: 90%; */
-  width: 70%;
-  margin-bottom: 20px !important;
+    /* width: 90%; */
+    width: 70%;
+    margin-bottom: 20px !important;
 }
 
 .marginBelow {
-  margin-bottom: 20px !important;
+    margin-bottom: 20px !important;
 }

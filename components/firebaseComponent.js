@@ -267,9 +267,9 @@ async function addDataToLeaderboard(Alias, Score, Email, Communications, Age) {
     const newData = {
         Alias: Alias,
         Score: Score,
-        Email: Email,
-        Communications: Communications,
-        Age: Age,
+        // Email: Email,
+        // Communications: Communications,
+        // Age: Age,
     };
     await updateDoc(dbRef, {
         Leaderboard: arrayUnion(newData),
