@@ -189,7 +189,7 @@ export default function Score() {
             >
                 Restart
             </button> */}
-            <p className={styles.conditions}>
+            {/* <p className={styles.conditions}>
                 Terms and Conditions apply. By playing the game and entering the
                 competition, you are agreeing to the Terms and Conditions and
                 consent to the use of your data in accordance with our Privacy
@@ -197,7 +197,7 @@ export default function Score() {
                 participants who are 18 years old or over and are UK residents.
                 For full Terms and Conditions and our Privacy Policy, see in
                 store.
-            </p>
+            </p> */}
             {/* <button className='progressButton' onClick={() => router.push('/')}>
                 Progress
             </button> */}
