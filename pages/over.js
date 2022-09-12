@@ -557,7 +557,7 @@ export default function Over() {
                 </form>
                 <h2>Collect your tickets below</h2>
                 <img src='/downArrow.svg' className={styles.downArrow} alt='' />
-                <div className={styles.conditions}>
+                {/* <div className={styles.conditions}>
                     <p>
                         Terms and Conditions apply. By playing the game and
                         entering the competition, you are agreeing to the Terms
@@ -567,9 +567,7 @@ export default function Over() {
                         years old or over and are UK residents. For full Terms
                         and Conditions and our Privacy Policy, see in store.
                     </p>
-                    {/* <img src='/qr.png' alt='' /> */}
-                    {/* <img src='/qr-2.svg' alt='' /> */}
-                </div>
+                </div> */}
             </main>
             <Keyboard
                 getValue={handleGetValue}

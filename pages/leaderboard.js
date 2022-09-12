@@ -85,7 +85,7 @@ export default function Leaderboard() {
                         <sup>1</sup>
                     </span>
                 </p> */}
-                <p className={styles.explain}>
+                {/* <p className={styles.explain}>
                     Top the leaderboard for your chance to{' '}
                     <strong>win a brand new</strong>{' '}
                 </p>
@@ -95,7 +95,7 @@ export default function Leaderboard() {
                         Buds2 Pro and a Z Flip4 Silicone Cover.
                         <sup>1</sup>
                     </p>
-                </div>
+                </div> */}
                 <div className={styles.grid}>
                     {/* <div className={`${styles.score} ${styles.left}`}>
                         <div className={styles.initials}>
@@ -127,7 +127,7 @@ export default function Leaderboard() {
                         <BuildLeaderboard type='highScore' />
                     </div> */}
                 </div>
-                <p className={styles.conditions}>
+                {/* <p className={styles.conditions}>
                     <sup>1</sup>Terms and Conditions apply. By playing the game
                     and entering the competition, you are agreeing to the Terms
                     and Conditions and consent to the use of your data in
@@ -135,7 +135,7 @@ export default function Leaderboard() {
                     available to be won by participants who are 18 years old or
                     over and are UK residents. For full Terms and Conditions and
                     our Privacy Policy, see in store.
-                </p>
+                </p> */}
             </main>
             {/* <button className='progressButton' onClick={() => router.push('/')}>
                 Progress
